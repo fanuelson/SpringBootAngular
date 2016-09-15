@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+	
+	<script th:src="@{webjars/jquery/3.1.0/jquery.min.js}"></script>
+	<script th:src="@{webjars/angularjs/1.4.9/angular.min.js}"></script>
+	<script th:src="@{ui-framework/semantic.min.js}" ></script>
+	<link rel="stylesheet" type="text/css" th:href="@{ui-framework/semantic.min.css}" ></link>
+	<link rel="stylesheet" type="text/css" th:href="@{ui-framework/icon.min.css}" ></link>
+</head>
+<body ng-app="demoApp" >
+	<header>
+		<div class="ui top attached demo menu">
+		  <a class="item">
+		   <i class="sidebar icon"></i>
+		    Menu
+		  </a>
+		</div>
+	</header>
+	<div class="ui bottom attached segment pushable">
+	  <div id="menuSideBar" class="ui inverted labeled icon left inline vertical sidebar menu">
+	    <a class="item">
+	      <i class="home icon"></i>
+	      Home
+	    </a>
+	    <a class="item">
+	      <i class="block layout icon"></i>
+	      Topics
+	    </a>
+	    <a class="item">
+	      <i class="smile icon"></i>
+	      Friends
+	    </a>
+	    <a class="item">
+	      <i class="calendar icon"></i>
+	      History
+	    </a>
+	  </div>
+	  <div class="pusher">
+	    <div class="ui basic segment" ng-controller="PessoaController" >
+	      	<h3 class="ui header">Application Content</h3>
+	      	<h4 class="ui header">{{welcomeMessage}}</h4>
+	      	<div ng-repeat="pessoa in pessoas" >
+	      		Nome: {{pessoa.nome}} - Idade: {{pessoa.idade}}
+	      	</div>
+	      	<p th:text="${welcome}" />
+			<button class="ui inverted green button">Green</button>
+			<button class="ui inverted red button">red</button>
+	    </div>
+	  </div>
+	</div>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#menuSideBar').sidebar({
+		    context: $(' .bottom.segment')
+		}).sidebar('attach events', ' .menu .item');
+	});
+	
+	</script>
+	
+	 <!-- Modules -->
+    <script src="js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/PessoaController.js"></script>
+    
+    <!-- Services -->
+    <script src="js/services/PessoaService.js"></script>
+	
+</body>
+</html>
