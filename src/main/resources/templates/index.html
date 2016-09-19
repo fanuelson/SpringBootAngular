@@ -4,11 +4,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Insert title here</title>
 	
-	<script th:src="@{webjars/jquery/3.1.0/jquery.min.js}"></script>
-	<script th:src="@{webjars/angularjs/1.4.9/angular.min.js}"></script>
-	<script th:src="@{ui-framework/semantic.min.js}" ></script>
-	<link rel="stylesheet" type="text/css" th:href="@{ui-framework/semantic.min.css}" ></link>
-	<link rel="stylesheet" type="text/css" th:href="@{ui-framework/icon.min.css}" ></link>
+	<script src="webjars/jquery/3.1.0/jquery.min.js"></script>
+	<script src="webjars/angularjs/1.4.9/angular.min.js"></script>
+	<script src="ui-framework/semantic.min.js" ></script>
+	<link rel="stylesheet" type="text/css" th:href="ui-framework/semantic.min.css" ></link>
+	<link rel="stylesheet" type="text/css" th:href="ui-framework/icon.min.css" ></link>
 </head>
 <body ng-app="demoApp" >
 	<header>
@@ -39,13 +39,12 @@
 	    </a>
 	  </div>
 	  <div class="pusher">
-	    <div class="ui basic segment" ng-controller="PessoaController" >
-	      	<h3 class="ui header">Application Content</h3>
-	      	<h4 class="ui header">{{welcomeMessage}}</h4>
-	      	<div ng-repeat="pessoa in pessoas" >
-	      		Nome: {{pessoa.nome}} - Idade: {{pessoa.idade}}
+	    <div class="ui basic segment" ng-controller="ProdutoController" >
+	      	
+	      	<h4 class="ui header">{{headerMessage}}</h4>
+	      	<div ng-repeat="produto in produtos" >
+	      		Nome: {{produto.nome}}
 	      	</div>
-	      	<p th:text="${welcome}" />
 			<button class="ui inverted green button">Green</button>
 			<button class="ui inverted red button">red</button>
 	    </div>
@@ -66,9 +65,11 @@
 
     <!-- Controllers -->
     <script src="js/controllers/PessoaController.js"></script>
+    <script src="js/controllers/ProdutoController.js"></script>
     
     <!-- Services -->
     <script src="js/services/PessoaService.js"></script>
+    <script src="js/services/ProdutoService.js"></script>
 	
 </body>
 </html>
