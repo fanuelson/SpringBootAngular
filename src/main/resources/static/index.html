@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+
+	<script src="webjars/jquery/3.1.0/jquery.min.js"></script>
+	<script src="webjars/angularjs/1.5.8/angular.min.js"></script>
+	<script src="ui-framework/semantic.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="ui-framework/semantic.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="ui-framework/icon.min.css"></link>
+	
+</head>
+<body ng-app="demoApp">
+	<header> </header>
+	<div class="ui basic segment" ng-controller="produtoController">
+		<div class="ui raised card">
+			<div class="content">
+				<div class="header">{{headerMessage}}</div>
+				<table class="ui selectable celled table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="produto in produtos">
+							<td>{{produto.id}}</td>
+							<td>{{produto.nome}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<button class="ui inverted green button right floated">Adicionar</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modules -->
+	<script src="app.js"></script>
+
+	<!-- Services -->
+	<script src="usuario/UsuarioService.js"></script>
+	<script src="produto/ProdutoService.js"></script>
+
+	<!-- Controllers -->
+	<script src="usuario/UsuarioController.js"></script>
+	<script src="produto/ProdutoController.js"></script>
+
+
+</body>
+</html>
