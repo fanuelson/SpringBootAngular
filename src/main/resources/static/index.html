@@ -10,6 +10,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="ui-framework/semantic.min.css"></link>
 	<link rel="stylesheet" type="text/css" href="ui-framework/icon.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css"></link>
 	
 </head>
 <body ng-app="demoApp">
@@ -17,8 +18,8 @@
 	<div class="ui basic segment" ng-controller="produtoController">
 		<div class="ui raised card">
 			<div class="content">
-				<div class="header">{{headerMessage}}</div>
-				<table class="ui selectable celled table">
+				<div class="header font-14">{{headerMessage}}</div>
+				<table class="ui selectable celled table font-12">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -32,7 +33,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<button class="ui inverted green button right floated">Adicionar</button>
+				<button class="ui inverted green button right floated font-12">Adicionar</button>
 			</div>
 		</div>
 	</div>
