@@ -2,13 +2,17 @@ function produtoService($http, APP_CONFIG) {
 	
 	var rest_url = APP_CONFIG.REST_BASE_URL;
 	
-	this.findAll = function() {
-		return $http.get(rest_url + '/produtos');
-	};
-	
 	this.findAllPage = function(page, size) {
 		var pageParams = "?page="+page+"&size="+size;
 		return $http.get(rest_url + '/produtos/page' + pageParams);
+	};
+	
+	this.save = function(produto) {
+		return $http.post(rest_url + '/produtos', produto);
+	};
+	
+	this.del = function(produto) {
+		return $http.delete(rest_url + "/produtos/" + produto.id);
 	};
 	
 };
