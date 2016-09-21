@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title>Insert title here</title>
 	<script src="webjars/jquery/3.1.0/jquery.min.js"></script>
 	<script src="webjars/angularjs/1.5.8/angular.min.js"></script>
 	<script src="ui-framework/semantic.min.js"></script>
@@ -16,24 +16,46 @@
 <body ng-app="demoApp">
 	<header> </header>
 	<div class="ui basic segment" ng-controller="produtoController">
-		<div class="ui raised card">
-			<div class="content">
-				<div class="header font-14">{{headerMessage}}</div>
-				<table class="ui selectable celled table font-12">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Nome</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="produto in produtos">
-							<td>{{produto.id}}</td>
-							<td>{{produto.nome}}</td>
-						</tr>
-					</tbody>
-				</table>
-				<button class="ui inverted green button right floated font-12">Adicionar</button>
+		<div class="ui grid" >
+			<div class="sixteen wide mobile eight wide computer eight wide tablet column" >
+				<div class="ui fluid raised card">
+					<div class="content">
+						<div class="header font-14">{{headerMessage}}</div>
+						<table class="ui selectable celled table font-12">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Nome</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="produto in produtosPage.content">
+									<td>{{produto.id}}</td>
+									<td>{{produto.nome}}</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th colspan="2">
+										<div class="ui pagination menu font-12">
+									        <a ng-click="findAllProductsPage(produtosPage.number-1)" class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a ng-repeat="pagina in getPages(produtosPage.totalPages) track by $index"
+									        	ng-click="findAllProductsPage($index)"
+									        	ng-class=" $index == produtosPage.number ? 'active' : ''"
+									        	class="item">{{$index + 1}}</a>
+									        <a ng-click="findAllProductsPage(produtosPage.number+1)" class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+								      </div>
+									</th>
+								</tr>
+							</tfoot>
+						</table>
+						<button class="ui inverted green button right floated font-12">Adicionar</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

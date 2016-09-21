@@ -6,6 +6,11 @@ function produtoService($http, APP_CONFIG) {
 		return $http.get(rest_url + '/produtos');
 	};
 	
+	this.findAllPage = function(page, size) {
+		var pageParams = "?page="+page+"&size="+size;
+		return $http.get(rest_url + '/produtos/page' + pageParams);
+	};
+	
 };
 
 var depends = [
