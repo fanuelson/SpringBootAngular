@@ -3,6 +3,7 @@ package com.foundation.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,5 +21,10 @@ public class ProdutoController {
 	@RequestMapping(path = "/page", method = RequestMethod.GET)
 	public Page<Produto> findAll(Pageable page) {
 		return produtoService.findAll(page);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public Produto save(@RequestBody Produto produto) {
+		return produtoService.save(produto);
 	}
 }

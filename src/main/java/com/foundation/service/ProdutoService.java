@@ -17,4 +17,8 @@ public class ProdutoService {
 	public Page<Produto> findAll(Pageable page) {
 		return produtoDAO.findAll(page);
 	}
+	
+	public Produto save(Produto produto) {
+		return produtoDAO.save(produto);
+	}
 }
