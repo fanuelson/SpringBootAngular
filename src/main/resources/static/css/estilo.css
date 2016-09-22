@@ -6,6 +6,18 @@
 	font-size: 14px !important;
 }
 
+.float-right {
+	float: right;
+}
+
+.text-align-right {
+	text-align: right;
+}
+
+.text-align-left {
+	text-align: left;
+}
+
 /* material icons SIZE */
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
