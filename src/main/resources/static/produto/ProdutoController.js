@@ -6,30 +6,35 @@ function produtoController($scope, APP_CONFIG ,produtoService) {
 	
 	$scope.produto = {};
 	
+	$scope.produtoExclusao = {};
+	$scope.setProdutoExclusao = function(produto) {
+		$scope.produtoExclusao = produto;
+	}
+	
 	$scope.findAllProductsPage = function(page) {
-		if(isPageValid(page)){
 			$promisePage = produtoService.findAllPage(page, $scope.pageSize);
 			$promisePage.success(function(data) {
 				$scope.produtosPage = data;
 			});
-		}
 	}
 	
 	$scope.save = function() {
 		$promiseSave = produtoService.save($scope.produto);
 		$promiseSave
 			.success(function(data) {
+				
 				$scope.findAllProductsPage($scope.produtosPage.number);
 				$scope.messageError = null;
 			})
 			.error(function(data){
 				$scope.messageError = data.message;
 			});
+		$scope.findAllProductsPage($scope.produtosPage.number);
 		$scope.produto = {};
 	}
 	
-	$scope.del = function(produto) {
-		$promiseDelete = produtoService.del(produto);
+	$scope.del = function() {
+		$promiseDelete = produtoService.del($scope.produtoExclusao);
 		$promiseDelete
 			.success(function(data) {
 				$scope.findAllProductsPage($scope.produtosPage.number);
@@ -40,11 +45,6 @@ function produtoController($scope, APP_CONFIG ,produtoService) {
 			});
 	}
 	
-	
-	var isPageValid = function(page) {
-		return page != -1 
-				&& page != $scope.produtosPage.totalPages;
-	}
 	
 	var setPageSize = function(pageSize) {
 		$scope.pageSize = pageSize;
