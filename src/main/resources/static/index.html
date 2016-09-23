@@ -8,12 +8,12 @@
 	<script src="webjars/angularjs/1.5.8/angular.min.js"></script>
 	<script src="webjars/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
 	<script src="ui-framework/semantic.min.js"></script>
-	
+
 	<link rel="stylesheet" type="text/css" href="ui-framework/semantic.min.css"></link>
 	<link rel="stylesheet" type="text/css" href="ui-framework/icon.min.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/estilo.css"></link>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
-	
+
 </head>
 <body ng-controller="produtoController">
 	<header> </header>
@@ -32,20 +32,24 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-show="produtosPage.totalElements === 0" class="ui negative" ><td colspan="3" >Nenhum registro encontrado</td></tr>
-							<tr ng-show="produtosPage.totalElements > 0" ng-repeat="produto in produtosPage.content">
+							<tr ng-if="produtosPage.totalElements == 0" class="ui negative" ><td colspan="3" >Nenhum registro encontrado</td></tr>
+							<tr ng-if="produtosPage.totalElements > 0" ng-repeat="produto in produtosPage.content">
 								<td>{{produto.id}}</td>
 								<td>{{produto.nome}}</td>
 								<td>
-									<a href="" ng-click="setProdutoExclusao(produto)" onclick="abrirModal()" data-tooltip="Excluir" data-position="left center"
-										class="ui float-right btnExcluir">
-										<i class="material-icons md-red" >cancel</i>
-									</a>
+								<div class="ui right aligned grid" >
+									<div class="sixteen wide column" >
+										<a href="" ng-click="setProdutoExclusao(produto)" onclick="abrirModal()" data-tooltip="Excluir" data-position="left center"
+											class="ui btnExcluir">
+											<i class="material-icons md-red" >cancel</i>
+										</a>
+									</div>
+								</div>
 								</td>
 							</tr>
 						</tbody>
 						<tfoot>
-							<tr ng-show="produtosPage.totalPages > 1" >
+							<tr ng-if="produtosPage.totalPages > 1" >
 								<th colspan="3">
 									<div class="ui pagination menu font-12">
 								        <a ng-click="findAllProductsPage(produtosPage.number-1)" class="icon item">
@@ -65,37 +69,42 @@
 					</table>
    				</div>
 			</div>
-			<div class="sixteen wide mobile three wide computer three wide tablet column" >
+			<div class="sixteen wide mobile six wide tablet column four wide computer" >
 				 <div class="ui raised segment">
    					<a class="ui blue ribbon label">Cadastro de Produto</a>
    					<div class="ui hidden divider"></div>
 					<form id="formCadastroProduto" name="formCadastroProduto" class="ui form" >
 						<div class="field" >
 							<label>Nome *</label>
-							<div ng-show="messageError != null" class="ui pointing below red basic label">
+							<div ng-if="messageError != null" class="ui pointing below red basic label">
 						      {{messageError}}
 						    </div>
-							<input type="text" placeholder="Nome" ng-model="produto.nome" />
+						    <div>
+								<input type="text" placeholder="Nome" ng-model="produto.nome" />
+							</div>
 						</div>
 						<div class="text-align-right" >
-							<button ng-click="limparCampos()"
-								class="ui button font-12">
-								Limpar
-							</button>
-							<button ng-click="save()" type="submit"
-								class="ui inverted green animated button font-12">
-								  <div class="hidden content">
-								    <i class="material-icons md-18">add_circle_outline</i>
-								  </div>
-								  <div class="visible content">Adicionar</div>
-							</button>
+							<div class="ui right aligned grid" >
+								<div class="right floated sixteen wide column" >
+									<button ng-click="limparCampos()"
+										class="ui button font-12">
+										Limpar
+									</button>
+									<button ng-click="save()" type="submit"
+										class="ui inverted green animated button font-12">
+										  <div class="hidden content">
+										    <i class="material-icons md-18">add_circle_outline</i>
+										  </div>
+										  <div class="visible content">Adicionar</div>
+									</button>
+								</div>
+							</div>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 		<div id="modalConfirmacao" class="ui small basic modal">
-			<i class="close icon"></i>
 			<div class="ui icon header">
 				<i class="trash icon"></i>
 				<p class="blue">Confirmação</p>
@@ -113,7 +122,7 @@
 			</div>
 		</div>
 	</div>
-		
+
 
 	<!-- Modules -->
 	<script src="app.js"></script>
@@ -125,14 +134,14 @@
 	<!-- Controllers -->
 	<script src="usuario/UsuarioController.js"></script>
 	<script src="produto/ProdutoController.js"></script>
-	
+
 	<script type="text/javascript">
 
 			function abrirModal() {
 				$('#modalConfirmacao').modal('show');
 			}
-	
+
 	</script>
-	
+
 </body>
 </html>
