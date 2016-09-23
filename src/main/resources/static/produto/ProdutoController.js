@@ -38,11 +38,15 @@ function produtoController($scope, APP_CONFIG ,produtoService) {
 		$promiseDelete
 			.success(function(data) {
 				$scope.findAllProductsPage($scope.produtosPage.number);
-				$scope.messageError = null;
 			})
 			.error(function(data){
 				$scope.messageError = data.message;
 			});
+	}
+	
+	$scope.limparCampos = function() {
+		$scope.produto = {};
+		$scope.messageError = null;
 	}
 	
 	
