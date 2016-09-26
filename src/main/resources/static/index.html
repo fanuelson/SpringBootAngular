@@ -32,12 +32,22 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-show="produtosPage.totalElements === 0" class="ui negative" ><td colspan="3" >Nenhum registro encontrado</td></tr>
-							<tr ng-show="produtosPage.totalElements > 0" ng-repeat="produto in produtosPage.content">
+							<tr ng-show="produtosPage.totalElements === 0" 
+								class="ui negative" >
+								<td colspan="3" >
+									Nenhum registro encontrado
+								</td>
+							</tr>
+							<tr ng-show="produtosPage.totalElements > 0" 
+								ng-repeat="produto in produtosPage.content">
 								<td>{{produto.id}}</td>
 								<td>{{produto.nome}}</td>
 								<td>
-									<a href="" ng-click="setProdutoExclusao(produto)" onclick="abrirModal()" data-tooltip="Excluir" data-position="left center"
+									<a	href="" 
+										ng-click="setProdutoExclusao(produto)" 
+										onclick="abrirModal()" 
+										data-tooltip="Excluir" 
+										data-position="left center"
 										class="ui float-right btnExcluir">
 										<i class="material-icons md-red" >cancel</i>
 									</a>
@@ -71,24 +81,34 @@
    					<div class="ui hidden divider"></div>
 					<form id="formCadastroProduto" name="formCadastroProduto" class="ui form" >
 						<div class="field" >
+						
 							<label>Nome *</label>
+							
 							<div ng-show="messageError != null" class="ui pointing below red basic label">
 						      {{messageError}}
 						    </div>
-							<input type="text" placeholder="Nome" ng-model="produto.nome" />
+						    
+							<input type="text" 
+								placeholder="Nome" 
+								ng-model="produto.nome" />
 						</div>
+						
 						<div class="text-align-right" >
+						
 							<button ng-click="limparCampos()"
 								class="ui button font-12">
 								Limpar
 							</button>
-							<button ng-click="save()" type="submit"
+							
+							<button ng-click="save()" 
+								type="submit"
 								class="ui inverted green animated button font-12">
 								  <div class="hidden content">
 								    <i class="material-icons md-18">add_circle_outline</i>
 								  </div>
 								  <div class="visible content">Adicionar</div>
 							</button>
+							
 						</div>
 					</form>
 				</div>
