@@ -22,6 +22,10 @@
 	text-align: center;
 }
 
+.input-search {
+	background: rgb(255, 255, 128) !important;
+}
+
 /* material icons SIZE */
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
