@@ -18,6 +18,10 @@
 	text-align: left;
 }
 
+.text-align-center {
+	text-align: center;
+}
+
 /* material icons SIZE */
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
