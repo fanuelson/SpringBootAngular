@@ -17,9 +17,6 @@ var routeConfig = function($stateProvider, $urlRouterProvider) {
 	    .state("home", {
 		      url: "/",
 		      views: {
-		          "menuContent":{
-		              templateUrl: "menu.html",
-		          },
 		          "starterContent":{
 		              template: "<h1>HELLO<h1/>",
 		          },
@@ -31,9 +28,6 @@ var routeConfig = function($stateProvider, $urlRouterProvider) {
 	    .state("produtos", {
 	      url: "/produtos",
 	      views: {
-	          "menuContent":{
-	              templateUrl: "menu.html",
-	          },
 	          "starterContent":{
 	              templateUrl: "produto/produto.html",
 	          },
