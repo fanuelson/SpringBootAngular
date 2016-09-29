@@ -1,0 +1,53 @@
+<div class="item">
+	<a class="header menu" ui-sref="home" >
+		<i class="home large blue icon"></i>
+		Home
+	</a>
+</div>
+<div class="item">
+	<div class="header">Produtos</div>
+	<div class="menu">
+		<a class="item" ui-sref="produtos" >
+			<div>
+				<i class="blue large angle double right icon"></i>
+				Consultar
+			</div>
+		</a> 
+		<a class="item">
+			<div>
+				<i class="blue large angle double right icon"></i>
+				Consumer
+			</div>
+		</a>
+	</div>
+</div>
+<div class="item">
+	<div class="header">CMS Solutions</div>
+	<div class="menu">
+		<a class="item">Rails</a>
+		<a class="item">Python</a>
+		<a class="item">PHP</a>
+	</div>
+</div>
+<div class="item">
+	<div class="header">Hosting</div>
+	<div class="menu">
+		<a class="item">Shared</a> 
+		<a class="item">Dedicated</a>
+	</div>
+</div>
+<div class="item">
+	<div class="header">Support</div>
+	<div class="menu">
+		<a class="item">E-mail Support</a> 
+		<a class="item">FAQs</a>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('.ui.sidebar')
+		  .sidebar({
+		    context: $(' .bottom.segment')
+		  }).sidebar('attach events', ' a.item, a.menu');
+	});
+</script>

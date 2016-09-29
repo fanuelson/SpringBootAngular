@@ -16,9 +16,47 @@
 
 </head>
 <body>
-	<header></header>
 	
-	<div ui-view="starterContent" ></div>
+	<header>
+		<div  class="ui top attached inverted demo menu">
+			<a id="menuOpener" class="item">
+		    	<i class="sidebar icon"></i>
+		    	Menu
+		    </a>
+		</div>
+	</header>
+	
+	<div class="ui bottom attached segment pushable">
+		
+		<!-- MENU -->
+		<div class="ui inverted labeled left inline vertical sidebar menu menu-closer">
+			<div ui-view="menuContent" ></div>
+		</div>
+		
+		<!-- CONTENT -->
+		<div class="pusher">
+			<div class="ui basic segment">
+				<div ui-view="starterContent" >
+					<div style="background: red; height: 1000px" >
+						Carregando...
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+	$(document).ready(function(){
+		$('.ui.sidebar')
+		  .sidebar({
+		    context: $('.bottom.segment')
+		  });
+	});
+	</script>
+
+		
+	<div ui-view="footerContent" ></div>
 
 	<!-- Modules -->
 	<script src="app.js"></script>
