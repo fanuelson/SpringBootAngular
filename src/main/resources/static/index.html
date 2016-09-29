@@ -30,17 +30,14 @@
 		
 		<!-- MENU -->
 		<div class="ui inverted labeled left inline vertical sidebar menu menu-closer">
-			<div ui-view="menuContent" ></div>
+			<div ng-include="'menu.html'" ></div>
 		</div>
 		
 		<!-- CONTENT -->
 		<div class="pusher">
 			<div class="ui basic segment">
 				<div ui-view="starterContent" >
-					<div style="background: red; height: 1000px" >
 						Carregando...
-					</div>
-					
 				</div>
 			</div>
 		</div>
