@@ -1,7 +1,8 @@
 <div ng-controller="produtoController" class="ui basic segment" >
 	<div class="ui grid" >
 		<div class="sixteen wide mobile eight wide computer eight wide tablet column" >
-			 <div class="ui raised segment">
+			 <div ng-class="{ 'loading' : tabelaProdutoLoading }" 
+			 	class="ui raised segment">
   					<a class="ui blue ribbon label">Produtos</a>
   					<div class="ui hidden divider"></div>
 				<table class="ui selectable celled table font-12">
@@ -61,7 +62,8 @@
   				</div>
 		</div>
 		<div class="sixteen wide mobile six wide tablet column four wide computer" >
-			 <div class="ui raised segment">
+			 <div ng-class="{ 'loading' : formProdutoLoading }" 
+			 	class="ui raised segment">
 			 
 				<a class="ui blue ribbon label">Cadastro de Produto</a>
 				<div class="ui hidden divider"></div>
