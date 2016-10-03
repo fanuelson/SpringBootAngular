@@ -4,14 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dao.ProdutoDAO;
+import com.foundation.model.Composicao;
 import com.foundation.model.Produto;
+import com.foundation.validador.ValidacoesComposicao;
+import com.foundation.validador.ValidacoesProduto;
 
 @Service
+@RequestScope
 public class ProdutoService {
 
+	@Autowired
+	private ValidacoesProduto validacoesProduto;
+	
+	@Autowired
+	private ValidacoesComposicao validacoesComposicao;
+	
 	@Autowired
 	private ProdutoDAO produtoDAO;
 
@@ -20,17 +30,26 @@ public class ProdutoService {
 	}
 
 	public Produto save(Produto produto) {
-		validate(produto);
+		montarParametros(produto);
+		validacoesProduto.validarSalvar(produto);
+		validacoesComposicao.validarSalvar(produto.getComposicoes());
 		return produtoDAO.save(produto);
 	}
 
 	public void delete(Long id) {
 		produtoDAO.delete(id);
 	}
-
-	private void validate(Produto produto) {
-		if (produto.getNome() == null || StringUtils.isEmpty(produto.getNome().trim())) {
-			throw new RuntimeException("Campo Nome Obrigatório.");
+	
+	public void delete(Produto produto) {
+		produtoDAO.delete(produto);
+	}
+	
+	private void montarParametros(Produto produto) {
+		if(produto.getComposicoes() != null) {
+			for (Composicao composicao : produto.getComposicoes()) {
+				composicao.setProduto(produto);
+			}
 		}
 	}
+
 }

@@ -1,25 +1,37 @@
 package com.foundation.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.springframework.hateoas.ResourceSupport;
 
 @Entity
-public class Produto {
+public class Produto extends ResourceSupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@Column(name = "id")
+	private Long idProduto;
 
+	@Column(name = "nome")
 	private String nome;
+	
+	@OneToMany(mappedBy = "produto", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
+	private List<Composicao> composicoes;
 
-	public Long getId() {
-		return id;
+	public Long getIdProduto() {
+		return idProduto;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdProduto(Long idProduto) {
+		this.idProduto = idProduto;
 	}
 
 	public String getNome() {
@@ -29,12 +41,20 @@ public class Produto {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public List<Composicao> getComposicoes() {
+		return composicoes;
+	}
+
+	public void setComposicoes(List<Composicao> composicoes) {
+		this.composicoes = composicoes;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((idProduto == null) ? 0 : idProduto.hashCode());
 		return result;
 	}
 
@@ -47,10 +67,10 @@ public class Produto {
 		if (getClass() != obj.getClass())
 			return false;
 		Produto other = (Produto) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (idProduto == null) {
+			if (other.idProduto != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!idProduto.equals(other.idProduto))
 			return false;
 		return true;
 	}

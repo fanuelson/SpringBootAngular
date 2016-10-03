@@ -1,0 +1,92 @@
+<div ng-controller="consultaProdutosController" class="ui basic segment" >
+	<div class="ui grid" >
+		<div class="sixteen wide mobile eight wide computer eight wide tablet column" >
+			 <div ng-class="{ 'loading' : tabelaProdutoLoading }" 
+			 	class="ui raised segment">
+  					<a class="ui blue ribbon label">Produtos</a>
+  					<div class="ui hidden divider"></div>
+				<table class="ui selectable celled table font-12">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-if="produtosPage.totalElements === 0" 
+							class="ui negative" >
+							<td colspan="3" >
+								Nenhum registro encontrado
+							</td>
+						</tr>
+						<tr ng-if="produtosPage.totalElements > 0" 
+							ng-repeat="produto in produtosPage.content">
+							<td>{{produto.idProduto}}</td>
+							<td>{{produto.nome}}</td>
+							<td>
+								<div class="ui right aligned grid" >
+									<div class="sixteen wide column" >
+										<a	href="" 
+											ng-click="setProdutoExclusao(produto)" 
+											onclick="abrirModalConfirmacao()" 
+											data-tooltip="Excluir" 
+											data-position="left center"
+											class="ui float-right btnExcluir">
+											<i class="material-icons md-red" >cancel</i>
+										</a>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr ng-if="produtosPage.totalPages > 1" >
+							<th colspan="3">
+								<div class="ui pagination menu font-12">
+							        <a ng-click="findAllProductsPage(produtosPage.number-1)" class="icon item">
+							          <i class="left chevron icon"></i>
+							        </a>
+							        <a ng-repeat="pagina in getPages(produtosPage.totalPages) track by $index"
+							        	ng-click="findAllProductsPage($index)"
+							        	ng-class=" $index == produtosPage.number ? 'active' : ''"
+							        	class="item">{{$index + 1}}</a>
+							        <a ng-click="findAllProductsPage(produtosPage.number+1)" class="icon item">
+							          <i class="right chevron icon"></i>
+							        </a>
+						      </div>
+							</th>
+						</tr>
+					</tfoot>
+				</table>
+  				</div>
+		</div>
+	</div>
+	
+	<div id="modalConfirmacao" class="ui small basic modal">
+		<div class="ui icon header">
+			<i class="trash icon"></i>
+			<p class="blue">Confirmação</p>
+		</div>
+		<div class="ui centered text-align-center">
+			<p>Tem certeza que deseja excluir o registro?</p>
+		</div>
+		<div class="actions">
+			<div class="ui cancel red basic inverted  button">
+				<i class="remove icon"></i> Não
+			</div>
+			<div ng-click="del()" class="ui ok green inverted button">
+				<i class="checkmark icon"></i> Sim
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+
+			function abrirModalConfirmacao() {
+				$('#modalConfirmacao').modal('show');
+			}
+
+	</script>
+	
+</div>

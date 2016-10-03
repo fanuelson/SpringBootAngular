@@ -1,0 +1,105 @@
+<div ng-controller="cadastroInsumoController" class="ui basic segment">
+	<div class="ui grid">
+		<div class="sixteen wide mobile twelve wide tablet nine wide computer column">
+			<div ng-class="{'loading': formInsumoLoading}" class="ui raised segment">
+
+				<a class="ui blue ribbon label">{{headerMessage}}</a>
+				
+				<div class="ui hidden divider"></div>
+				
+				<div ng-if="retornoSucesso.mensagem" 
+					class="ui success message">
+				  <p>{{retornoSucesso.mensagem}}</p>
+				</div>
+				
+				<div class="ui hidden divider"></div>
+
+				<form id="formCadastroInsumo" name="formCadastroInsumo" class="ui form">
+					
+					<div ng-class="{'error': getValidatorMessageForCampoObrigatorio('nome')}" class="field">
+						
+						<label>Nome *</label>
+
+						<div ng-if="getValidatorMessageForCampoObrigatorio('nome')"
+							ng-class="{'error': getValidatorMessageForCampoObrigatorio('nome')}" 
+							class="ui pointing below red basic label">
+								{{getValidatorMessageForCampoObrigatorio('nome')}}
+						</div>
+						
+						<div>
+							<input type="text" placeholder="Nome" ng-model="insumo.nome" />
+						</div>
+					</div>
+					
+					<div class="field">
+						<label>Descrição</label>
+
+						<textarea placeholder="Descrição" ng-model="insumo.descricao" ></textarea>
+					</div>
+					
+					<div class="two fields" >
+						<div ng-class="{'error': getValidatorMessageForCampoObrigatorio('quantidade')}" class="field five wide computer column">
+							<label>Quantidade *</label>
+	
+							<div>
+								<input type="text" placeholder="Quantidade" ng-model="insumo.quantidade" ui-number-mask />
+							</div>
+							
+							<div ng-if="getValidatorMessageForCampoObrigatorio('quantidade')"
+								ng-class="{'error': getValidatorMessageForCampoObrigatorio('quantidade')}" 
+								class="ui pointing under red basic label">
+									{{getValidatorMessageForCampoObrigatorio('quantidade')}}
+							</div>
+							
+						</div>
+						
+						<div ng-class="{'error': getValidatorMessageForCampoObrigatorio('medida')}" class="field six wide computer column">
+							<label>Medida *</label>
+	
+							<div>
+								<select id="medidaSelection" 
+									class="ui fluid dropdown" 
+									ng-model="insumo.medida">
+						          <option value="" class="default text">Selecione...</option>
+					              <option ng-repeat="medida in medidas" 
+					              	class="item" 
+					              	value="{{medida}}">
+					              		{{medida}}
+					              </option>
+						      </select>
+							</div>
+							
+							<div ng-if="getValidatorMessageForCampoObrigatorio('medida')"
+								ng-class="{'error': getValidatorMessageForCampoObrigatorio('medida')}" 
+								class="ui pointing under red basic label">
+									{{getValidatorMessageForCampoObrigatorio('medida')}}
+							</div>
+							
+						</div>
+					</div>
+
+					<div class="text-align-right">
+
+						<div class="ui right aligned grid">
+							<div class="right floated sixteen wide column">
+								<button ng-click="limparCampos()" class="ui button font-12">Limpar</button>
+								<button ng-click="save()" type="submit" class="ui inverted green animated button font-12">
+									<div class="hidden content">
+										<i style="position: relative; bottom: 2px;" class="material-icons md-18">add_circle_outline</i>
+									</div>
+									<div class="visible content">Cadastrar</div>
+								</button>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" >
+		$('#medidaSelection').dropdown();
+	</script>
+
+</div>

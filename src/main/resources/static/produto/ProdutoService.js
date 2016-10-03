@@ -12,7 +12,7 @@ function produtoService($http, APP_CONFIG) {
 	};
 	
 	this.del = function(produto) {
-		return $http.delete(rest_url + "/produtos/" + produto.id);
+		return $http.delete(rest_url + "/produtos/" + produto.idProduto);
 	};
 	
 };

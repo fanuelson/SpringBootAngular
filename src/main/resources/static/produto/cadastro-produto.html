@@ -1,0 +1,207 @@
+<div ng-controller="cadastroProdutoController" class="ui basic segment" >
+	<div class="ui grid" >
+		<div class="sixteen wide mobile nine sixteen tablet column twelve wide computer" >
+			 <div ng-class="{ 'loading' : formProdutoLoading }" 
+			 	class="ui raised segment">
+			 
+				<a class="ui blue ribbon label">Cadastro de Produto</a>
+				<div class="ui hidden divider"></div>
+				
+					<div ng-if="retornoSucesso.mensagem" 
+						class="ui success message">
+					  <p>{{retornoSucesso.mensagem}}</p>
+					</div>
+				
+				
+	  				<div ng-if="error.validacoes" class="ui error message">
+					  <ul class="list">
+					    <li ng-repeat="validacao in error.validacoes" >{{validacao.mensagem}}</li>
+					  </ul>
+					</div>
+				<div class="ui hidden divider"></div>
+				<form id="formCadastroProduto" 
+					name="formCadastroProduto" 
+					class="ui form" >
+					
+					<div ng-class="{ 'error' : getValidatorMessageFor('nome') }" class="field" >
+					
+						<label>Nome *</label>
+						
+						<div ng-if="getValidatorMessageFor('nome')" class="ui pointing below red basic label">
+					      {{getValidatorMessageFor('nome')}}
+					    </div>
+					    <div>
+							<input type="text" 
+								placeholder="Nome" 
+								ng-model="produto.nome" />
+						</div>
+					</div>
+					
+					<div class="ui hidden divider"></div>
+					<h4 class="ui horizontal divider header">
+					  <i class="add square icon"></i>
+					  Adicionar Insumo
+					</h4>
+					
+					<div class="three fields" >
+						
+						<div ng-class ="{'error': getValidatorMessageFor('insumo')}" class="five wide field" >
+							<label>Insumo *</label>
+
+							<div ng-if="getValidatorMessageFor('insumo')" class="ui pointing below red basic label">
+						      {{getValidatorMessageFor('insumo')}}
+						    </div>
+							
+							<div id="insumoSelection" class="ui dropdown labeled icon button">
+							  <i class="filter icon"></i>
+							  <span class="text">Selecionar Insumo...</span>
+							  <div class="menu">
+							    <div class="ui icon search input">
+							      <i class="search icon"></i>
+							      <input ng-model="insumoSelecionado" type="text" placeholder="Search tags...">
+							    </div>
+							    <div class="divider"></div>
+							    <div class="header">
+							      <i class="tags icon"></i>
+							      Insumos
+							    </div>
+							    <div class="scrolling menu">
+							      <div ng-repeat="insumo in insumos track by insumo.id"
+							      	ng-click="setInsumoSelecionado(insumo)"
+							      	class="item" >
+							        <div class="ui red empty circular label"></div>
+							        	{{insumo.nome}}
+							      </div>
+							    </div>
+							  </div>
+							</div>
+						</div>
+						
+						<div ng-class="{'error' : getValidatorMessageFor('gasto')}" class="four wide field" >
+							<label>Gasto por unidade do produto *</label>
+						
+							<div ng-if="getValidatorMessageFor('gasto')" class="ui pointing below red basic label">
+						      {{getValidatorMessageFor('gasto')}}
+						    </div>
+						    
+						    <div>
+								<input type="text" 
+									placeholder="Gasto" 
+									ng-model="composicao.gasto" maxlength="10" ui-number-mask  />
+							</div>
+						</div>
+						
+						<div class="disabled three wide field" >
+							<label>Medida</label>
+						    
+						    <div>
+								<input value="{{composicao.insumo.medida}}" >  </input>
+							</div>
+						</div>
+						
+						
+					</div>
+					<div class="field text-align-right" >
+						<label>  </label>
+						<button ng-click="adicionarComposicao()" class="ui inverted green animated button font-12">
+							  <div class="hidden content">
+							    <i style="position: relative; bottom: 2px;" class="material-icons md-18">add_circle_outline</i>
+							  </div>
+							  <div class="visible content">Adicionar</div>
+						</button>
+					</div>
+					
+					<div class="ui hidden divider"></div>
+					<h4 class="ui horizontal divider header">
+					  <i class="table icon"></i>
+					  Insumos do Produto
+					</h4>
+					
+					<table class="ui selectable celled table font-12">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nome Insumo</th>
+								<th>Gasto por unidade do produto</th>
+								<th>Medida</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-if="produto.composicoes.length === 0" 
+								class="ui negative" >
+								<td colspan="5" >
+									Nenhum insumo adicionado
+								</td>
+							</tr>
+							<tr ng-if="produto.composicoes.length > 0" 
+								ng-repeat="composicao in produto.composicoes">
+								<td>{{composicao.id}}</td>
+								<td>{{composicao.insumo.nome}}</td>
+								<td>{{composicao.gasto}}</td>
+								<td>{{composicao.insumo.medida}}</td>
+								<td>
+									<div class="ui right aligned grid" >
+										<div class="sixteen wide column" >
+											<a	href="" 
+												ng-click="removerComposicao(composicao)" 
+												data-tooltip="Excluir" 
+												data-position="left center"
+												class="ui float-right btnExcluir">
+												<i class="material-icons md-red" >cancel</i>
+											</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr ng-if="produtosPage.totalPages > 1" >
+								<th colspan="3">
+									<div class="ui pagination menu font-12">
+								        <a ng-click="findAllProductsPage(produtosPage.number-1)" class="icon item">
+								          <i class="left chevron icon"></i>
+								        </a>
+								        <a ng-repeat="pagina in getPages(produtosPage.totalPages) track by $index"
+								        	ng-click="findAllProductsPage($index)"
+								        	ng-class=" $index == produtosPage.number ? 'active' : ''"
+								        	class="item">{{$index + 1}}</a>
+								        <a ng-click="findAllProductsPage(produtosPage.number+1)" class="icon item">
+								          <i class="right chevron icon"></i>
+								        </a>
+							      </div>
+								</th>
+							</tr>
+						</tfoot>
+					</table>
+					
+					<div class="text-align-right" >
+					
+						<div class="ui right aligned grid" >
+							<div class="right floated sixteen wide column" >
+								<button ng-click="limparCampos()"
+									class="ui button font-12">
+									Limpar
+								</button>
+								<button ng-click="save()" type="submit"
+									class="ui inverted green animated button font-12">
+									  <div class="hidden content">
+									    <i style="position: relative; bottom: 2px;" class="material-icons md-18">add_circle_outline</i>
+									  </div>
+									  <div class="visible content">Salvar</div>
+								</button>
+							</div>
+						</div>
+						
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" >
+		$('#insumoSelection').dropdown();
+
+	
+	</script>
+</div>
