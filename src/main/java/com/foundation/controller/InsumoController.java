@@ -41,7 +41,7 @@ public class InsumoController {
 	public ResponseEntity<?> save(@RequestBody Insumo insumo) {
 		try {
 			BasicResponseDTO basicResponse = new BasicResponseDTO(insumoService.save(insumo), "Registro Salvo com sucesso.");
-			return new ResponseEntity<BasicResponseDTO>(basicResponse, HttpStatus.CREATED);
+			return ResponseEntity.status(HttpStatus.CREATED).body(basicResponse);
 		} catch (ValidacaoException e) {
 			return new ResponseEntity<Validacoes>(e.getValidacoes(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
