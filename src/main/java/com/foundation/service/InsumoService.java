@@ -11,7 +11,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.foundation.dao.InsumoDAO;
 import com.foundation.model.Insumo;
 import com.foundation.utils.CollectionUtils;
-import com.foundation.validador.ValidacoesInsumo;
+import com.foundation.validador.ValidadorInsumo;
 
 @Service
 @RequestScope
@@ -21,7 +21,7 @@ public class InsumoService {
 	private InsumoDAO insumoDAO;
 	
 	@Autowired
-	private ValidacoesInsumo validacoes;
+	private ValidadorInsumo validacoes;
 	
 	public Page<Insumo> findAll(Pageable page) {
 		return insumoDAO.findAll(page);

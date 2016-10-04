@@ -11,7 +11,7 @@ import com.foundation.validacao.Validacoes;
 
 @Component
 @RequestScope
-public class ValidacoesInsumo extends Validacoes {
+public class ValidadorInsumo extends Validacoes {
 
 	private static final long serialVersionUID = 1L;
 

@@ -9,18 +9,18 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.foundation.dao.ProdutoDAO;
 import com.foundation.model.Composicao;
 import com.foundation.model.Produto;
-import com.foundation.validador.ValidacoesComposicao;
-import com.foundation.validador.ValidacoesProduto;
+import com.foundation.validador.ValidadorComposicao;
+import com.foundation.validador.ValidadorProduto;
 
 @Service
 @RequestScope
 public class ProdutoService {
 
 	@Autowired
-	private ValidacoesProduto validacoesProduto;
+	private ValidadorProduto validacoesProduto;
 	
 	@Autowired
-	private ValidacoesComposicao validacoesComposicao;
+	private ValidadorComposicao validacoesComposicao;
 	
 	@Autowired
 	private ProdutoDAO produtoDAO;

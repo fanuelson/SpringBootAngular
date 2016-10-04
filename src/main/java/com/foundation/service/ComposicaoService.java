@@ -8,7 +8,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dao.ComposicaoDAO;
 import com.foundation.model.Composicao;
-import com.foundation.validador.ValidacoesComposicao;
+import com.foundation.validador.ValidadorComposicao;
 
 @Service
 @RequestScope
@@ -18,7 +18,7 @@ public class ComposicaoService {
 	private ComposicaoDAO composicaoDAO;
 	
 	@Autowired
-	private ValidacoesComposicao validacoesComposicao;
+	private ValidadorComposicao validacoesComposicao;
 	
 	public void save(List<Composicao> composicoes) {
 		validacoesComposicao.validarSalvar(composicoes);
