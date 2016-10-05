@@ -50,6 +50,7 @@ function cadastroInsumoController($scope, APP_CONFIG, insumoService, medidaServi
 	}
 	
 	$scope.limparCampos = function() {
+		$scope.insumo.medida = null;
 		$scope.insumo = {};
 		$scope.error = {};
 		$scope.findAllMedidas();

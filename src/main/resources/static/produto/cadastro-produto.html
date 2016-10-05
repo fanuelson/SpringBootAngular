@@ -1,10 +1,10 @@
 <div ng-controller="cadastroProdutoController" class="ui basic segment" >
 	<div class="ui grid" >
-		<div class="sixteen wide mobile nine sixteen tablet column twelve wide computer" >
+		<div class="sixteen wide mobile nine sixteen tablet column twelve wide computer" style="margin: auto">
 			 <div ng-class="{ 'loading' : formProdutoLoading }" 
 			 	class="ui raised segment">
 			 
-				<a class="ui blue ribbon label">Cadastro de Produto</a>
+				<a class="ui blue large ribbon label">Cadastro de Produto</a>
 				<div class="ui hidden divider"></div>
 				
 					<div ng-if="retornoSucesso.mensagem" 
@@ -45,7 +45,7 @@
 					
 					<div class="three fields" >
 						
-						<div ng-class ="{'error': getValidatorMessageFor('insumo')}" class="five wide field" >
+						<div ng-class ="{'error': getValidatorMessageFor('insumo')}" class="five  field" >
 							<label>Insumo *</label>
 
 							<div ng-if="getValidatorMessageFor('insumo')" class="ui pointing below red basic label">
@@ -56,7 +56,7 @@
 							  <i class="filter icon"></i>
 							  <span class="text">Selecionar Insumo...</span>
 							  <div class="menu">
-							    <div class="ui icon search input">
+							    <div class="ui icon search input" style="width: 89%;">
 							      <i class="search icon"></i>
 							      <input ng-model="insumoSelecionado" type="text" placeholder="Search tags...">
 							    </div>
@@ -103,7 +103,7 @@
 					</div>
 					<div class="field text-align-right" >
 						<label>  </label>
-						<button ng-click="adicionarComposicao()" class="ui inverted green animated button font-12">
+						<button ng-click="adicionarComposicao()" class="ui green animated button font-12">
 							  <div class="hidden content">
 							    <i style="position: relative; bottom: 2px;" class="material-icons md-18">add_circle_outline</i>
 							  </div>
@@ -184,7 +184,7 @@
 									Limpar
 								</button>
 								<button ng-click="save()" type="submit"
-									class="ui inverted green animated button font-12">
+									class="ui green animated button font-12">
 									  <div class="hidden content">
 									    <i style="position: relative; bottom: 2px;" class="material-icons md-18">add_circle_outline</i>
 									  </div>
