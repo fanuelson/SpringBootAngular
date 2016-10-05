@@ -4,7 +4,8 @@
 			 <div ng-class="{ 'loading' : formProdutoLoading }" 
 			 	class="ui raised segment">
 			 
-				<a class="ui blue large ribbon label">Cadastro de Produto</a>
+				<h1>Cadastro de Produto</h1>	
+				
 				<div class="ui hidden divider"></div>
 				
 					<div ng-if="retornoSucesso.mensagem" 
@@ -23,20 +24,23 @@
 					name="formCadastroProduto" 
 					class="ui form" >
 					
-					<div ng-class="{ 'error' : getValidatorMessageFor('nome') }" class="field" >
-					
-						<label>Nome *</label>
-						
-						<div ng-if="getValidatorMessageFor('nome')" class="ui pointing below red basic label">
-					      {{getValidatorMessageFor('nome')}}
-					    </div>
-					    <div>
-							<input type="text" 
-								placeholder="Nome" 
-								ng-model="produto.nome" />
+					<div class="ui grid" >
+						<div class="sixteen wide mobile eight wide tablet eight wide computer column">
+							<div ng-class="{ 'error' : getValidatorMessageFor('nome') }" class="field" >
+							
+								<label>Nome do Produto *</label>
+								
+								<div ng-if="getValidatorMessageFor('nome')" class="ui pointing below red basic label">
+							      {{getValidatorMessageFor('nome')}}
+							    </div>
+							    <div>
+									<input type="text" 
+										placeholder="Nome" 
+										ng-model="produto.nome" />
+								</div>
+							</div>
 						</div>
 					</div>
-					
 					<div class="ui hidden divider"></div>
 					<h4 class="ui horizontal divider header">
 					  <i class="add square icon"></i>
@@ -103,7 +107,7 @@
 					</div>
 					<div class="field text-align-right" >
 						<label>  </label>
-						<button ng-click="adicionarComposicao()" class="ui green animated button font-12">
+						<button ng-click="adicionarComposicao()" class="ui green animated button">
 							  <div class="hidden content">
 							    <i style="position: relative; bottom: 2px;" class="material-icons md-18">add_circle_outline</i>
 							  </div>
@@ -112,12 +116,13 @@
 					</div>
 					
 					<div class="ui hidden divider"></div>
-					<h4 class="ui horizontal divider header">
+					
+					<h4 ng-if="produto.composicoes.length > 0" class="ui horizontal divider header">
 					  <i class="table icon"></i>
-					  Insumos do Produto
+					  Insumos Adicionados
 					</h4>
 					
-					<table class="ui selectable celled table font-12">
+					<table ng-if="produto.composicoes.length > 0" class="ui selectable celled table font-12">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -179,12 +184,10 @@
 					
 						<div class="ui right aligned grid" >
 							<div class="right floated sixteen wide column" >
-								<button ng-click="limparCampos()"
-									class="ui button font-12">
-									Limpar
-								</button>
-								<button ng-click="save()" type="submit"
-									class="ui green animated button font-12">
+								<button ng-if="produto.composicoes.length > 0" 
+									ng-click="save()" 
+									type="submit"
+									class="ui green animated button">
 									  <div class="hidden content">
 									    <i style="position: relative; bottom: 2px;" class="material-icons md-18">add_circle_outline</i>
 									  </div>
