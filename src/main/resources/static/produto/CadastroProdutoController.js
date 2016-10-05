@@ -23,7 +23,6 @@ function cadastroProdutoController($scope, APP_CONFIG ,produtoService, insumoSer
 				$scope.error = null;
 			})
 			.error(function(data){
-				$scope.limparCampos();
 				$scope.error = data;
 				$scope.formProdutoLoading = false;
 			});
