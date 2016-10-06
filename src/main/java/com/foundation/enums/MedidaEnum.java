@@ -1,8 +1,14 @@
 package com.foundation.enums;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum MedidaEnum {
 
-	ML("ml", "Mililitro"),
+	ml("ml", "Mililitro"),
 	L("L", "Litro"),
 	g("g","Grama"),
 	kg("kg", "Kilograma"),
@@ -31,5 +37,22 @@ public enum MedidaEnum {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public static MedidaEnum getByAbreviacao(String abreviacao) {
+		if(StringUtils.isNotBlank(abreviacao)){
+			for (MedidaEnum medida : values()) {
+				if(medida.getAbreviacao().equals(abreviacao)) {
+					return medida;
+				}
+			}
+		}
+	
+		return null;
+	}
+	
+	@JsonCreator
+    public static MedidaEnum forValue(String value) {
+		return getByAbreviacao(value);
+    }
 	
 }

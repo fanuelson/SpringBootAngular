@@ -17,7 +17,6 @@ function cadastroInsumoController($scope, APP_CONFIG, insumoService, medidaServi
 			$scope.insumo = {};
 			$scope.retornoSucesso = data;
 		}).error(function(data) {
-			$scope.limparCampos();
 			$scope.formInsumoLoading = false;
 			$scope.error = data;
 		});
@@ -50,7 +49,6 @@ function cadastroInsumoController($scope, APP_CONFIG, insumoService, medidaServi
 	}
 	
 	$scope.limparCampos = function() {
-		$scope.insumo.medida = null;
 		$scope.insumo = {};
 		$scope.error = {};
 		$scope.findAllMedidas();

@@ -46,74 +46,77 @@
 					  <i class="add square icon"></i>
 					  Adicionar Insumo
 					</h4>
-					
-					<div class="four fields" >
-						
-						<div ng-class ="{'error': getValidatorMessageFor('insumo')}" class="five  field" >
-							<label>Insumo *</label>
-
-							<div ng-if="getValidatorMessageFor('insumo')" class="ui pointing below red basic label">
-						      {{getValidatorMessageFor('insumo')}}
-						    </div>
-							
-							<div id="insumoSelection" class="ui dropdown labeled icon button">
-							  <i class="filter icon"></i>
-							  <span class="text">Selecionar Insumo...</span>
-							  <div class="menu">
-							    <div class="ui icon search input" style="width: 89%;">
-							      <i class="search icon"></i>
-							      <input ng-model="insumoSelecionado" type="text" placeholder="Search tags...">
-							    </div>
-							    <div class="divider"></div>
-							    <div class="header">
-							      <i class="tags icon"></i>
-							      Insumos
-							    </div>
-							    <div class="scrolling menu">
-							      <div ng-repeat="insumo in insumos track by insumo.id"
-							      	ng-click="setInsumoSelecionado(insumo)"
-							      	class="item" >
-							        <div class="ui red empty circular label"></div>
-							        	{{insumo.nome}}
-							      </div>
-							    </div>
-							  </div>
-							</div>
-						</div>
-						
-						<div ng-class="{'error' : getValidatorMessageFor('gasto')}" class="four wide field" >
-							<label>Gasto por unidade do produto *</label>
-						
-							<div ng-if="getValidatorMessageFor('gasto')" class="ui pointing below red basic label">
-						      {{getValidatorMessageFor('gasto')}}
-						    </div>
-						    
-						    <div class="ui right labeled input">
-						    
-							  <input type="text" 
-							  	placeholder="Gasto" 
-								ng-model="composicao.gasto" 
-								maxlength="10" 
-								ui-number-mask>
+					<div class="ui hidden divider"></div>
+					<div class="ui hidden divider"></div>
+					<div class="ui grid" >
+							<div ng-class ="{'error': getValidatorMessageFor('insumo')}" class="field" >
+								<label>Insumo *</label>
+	
+								<div ng-if="getValidatorMessageFor('insumo')">
+									<div  class="ui pointing below red basic label">
+								      {{getValidatorMessageFor('insumo')}}
+								    </div>
+									<br/>
+								</div>
 								
-							  <div class="ui basic label">
-							   {{composicao.insumo.medida}}
-							  </div>
-							</div>
-						    
-						</div>
-						
-						<div class="field text-align-left" >
-							<button ng-click="adicionarComposicao()" class="ui green animated button m-a-25">
-								  <div class="hidden content">
-								    <i style="position: relative; bottom: 2px;" class="material-icons md-18">add_circle_outline</i>
+								<div id="insumoSelection" 
+									class="ui dropdown labeled icon button"
+									ng-model="composicao.insumo"
+									value-resettable>
+								  <i class="filter icon"></i>
+								  <span class="text">Selecionar Insumo...</span>
+								  <div class="menu">
+								    <div class="ui icon search input" style="width: 89%;">
+								      <i class="search icon"></i>
+								      <input type="text" placeholder="Search tags...">
+								    </div>
+								    <div class="divider"></div>
+								    <div class="header">
+								      <i class="tags icon"></i>
+								      Insumos
+								    </div>
+								    <div class="scrolling menu">
+								      <div ng-repeat="insumo in insumos track by insumo.id"
+								      	ng-click="setInsumoSelecionado(insumo)"
+								      	class="item" >
+								        <div class="ui red empty circular label"></div>
+								        	{{insumo.nome}}
+								      </div>
+								    </div>
 								  </div>
-								  <div class="visible content">Adicionar</div>
-							</button>
-						</div>
+								</div>
+							</div>
+						
+							<div ng-class="{'error' : getValidatorMessageFor('gasto')}" class=" field" >
+								<label>Gasto por unidade do produto *</label>
+							
+								<div ng-if="getValidatorMessageFor('gasto')" class="ui pointing below red basic label">{{getValidatorMessageFor('gasto')}}</div>
+							    
+							    <div class="ui right labeled input">
+							    
+								  <input type="text" 
+								  	placeholder="Gasto" 
+									ng-model="composicao.gasto" 
+									maxlength="10" 
+									ui-number-mask>
+									
+								  <div class="ui basic label">
+									   <label ng-if="composicao.insumo.medida" >{{composicao.insumo.medida}}</label>
+								  </div>
+								</div>
+							    
+							</div>
+						
+							<div class="field text-align-left" >
+								<button ng-click="adicionarComposicao()" class="ui green animated button m-a-20">
+									  <div class="hidden content">
+									    <i style="position: relative; bottom: 2px;" class="material-icons md-18">add_circle_outline</i>
+									  </div>
+									  <div class="visible content">Adicionar</div>
+								</button>
+							</div>
 						
 					</div>
-					
 					
 					<div class="ui hidden divider"></div>
 					

@@ -59,12 +59,13 @@
 							<div >
 								<select id="medidaSelection" 
 									class="ui fluid dropdown" 
-									ng-model="insumo.medida">
+									ng-model="insumo.medida"
+									value-resettable>
 						          <option value="" class="default text">Selecione...</option>
 					              <option ng-repeat="medida in medidas" 
 					              	class="item" 
-					              	value="{{medida}}">
-					              		{{medida}}
+					              	ng-value="medida.abreviacao">
+					              		{{medida.abreviacao}} ({{medida.descricao}})
 					              </option>
 						      </select>
 							</div>

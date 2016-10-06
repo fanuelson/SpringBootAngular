@@ -57,6 +57,7 @@ function cadastroProdutoController($scope, APP_CONFIG ,produtoService, insumoSer
 	}
 	
 	$scope.setInsumoSelecionado = function(insumo) {
+		insumo.medida = insumo.medida.abreviacao;
 		$scope.composicao.insumo = insumo;
 	}
 	

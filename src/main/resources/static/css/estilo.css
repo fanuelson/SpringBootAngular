@@ -1,9 +1,9 @@
 /* Margins */
-.m-a-1
+.m-a-10
 {
 	margin: 10px 0 !important;
 }
-.m-a-2
+.m-a-20
 {
 	margin: 20px 0 !important;
 }
@@ -11,11 +11,11 @@
 {
 	margin: 25px 0 !important;
 }
-.m-a-3
+.m-a-30
 {
 	margin: 30px 0 !important;
 }
-.m-a-4
+.m-a-40
 {
 	margin: 40px 0 !important;
 }

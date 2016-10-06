@@ -39,6 +39,19 @@ app.filter("brDecimalNumber",function(){
 	
 });
 
+app.directive('valueResettable', function() {
+  return {
+	restrict: 'A',
+    link: function (scope, element, attrs) {
+        scope.$watch(attrs.ngModel, function (v) {
+            if(!v) {
+            	$(element).dropdown('restore defaults');
+            }
+        });
+    }
+  };
+});
+
 app.constant(
 	"APP_CONFIG", {
 		"REST_BASE_URL" : "http://localhost:8080/SpringAngularApp",
