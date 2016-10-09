@@ -5,6 +5,8 @@ var depends = [
 
 var app = angular.module('demoApp', depends);
 
+/* -- BEGIN FILTERs -- */
+
 var colocarPontosMilhar = function(num) {
 	var numAux = ""+num;
 	var i;
@@ -21,7 +23,7 @@ var colocarPontosMilhar = function(num) {
 	return result.split('').reverse().join('');
 }
 
-app.filter("brDecimalNumber",function(){
+var brDecimalNumberFilter = function(){
 	return function(input) {
 		if(angular.isNumber(input)){
 			var inputAux = ""+input;
@@ -37,9 +39,15 @@ app.filter("brDecimalNumber",function(){
 		}
 	};
 	
-});
+}
 
-app.directive('valueResettable', function() {
+app.filter("brDecimalNumber", brDecimalNumberFilter);
+
+/* -- END FILTERs -- */
+
+/* -- BEGIN DIRECTIVEs -- */
+
+var resetSelectItemsDirective = function() {
   return {
 	restrict: 'A',
     link: function (scope, element, attrs) {
@@ -50,7 +58,11 @@ app.directive('valueResettable', function() {
         });
     }
   };
-});
+}
+
+app.directive('valueResettable', resetSelectItemsDirective);
+
+/* -- END DIRECTIVEs -- */
 
 app.constant(
 	"APP_CONFIG", {
@@ -61,60 +73,51 @@ app.constant(
 
 var routeConfig = function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
+    
+    var footerContent = {
+		"footerContent":{
+              templateUrl: "footer.html"
+          }
+    };
     $stateProvider
 	    .state("home", {
 		      url: "/",
 		      views: {
 		          "starterContent":{
-		              template: "<h1>HELLO<h1/>",
-		          },
-		          "footerContent":{
-		              templateUrl: "footer.html",
-		          },
+		              template: "<h1>HELLO<h1/>"
+		          }
 		      }     
 	    })
 	    .state("cadastro-insumo", {
 		      url: "/cadastro-insumo",
 		      views: {
 		          "starterContent":{
-		        	  templateUrl: "insumo/cadastro-insumo.html",
-		          },
-		          "footerContent":{
-		              templateUrl: "footer.html",
-		          },
+		        	  templateUrl: "insumo/cadastro-insumo.html"
+		          }
 		      }     
 	    })
 	    .state("consulta-insumos", {
 		      url: "/consulta-insumo",
 		      views: {
 		          "starterContent":{
-		        	  templateUrl: "insumo/consulta-insumos.html",
-		          },
-		          "footerContent":{
-		              templateUrl: "footer.html",
-		          },
+		        	  templateUrl: "insumo/consulta-insumos.html"
+		          }
 		      }     
 	    })
 	    .state("cadastro-produto", {
 	      url: "/cadastro-produto",
 	      views: {
 	          "starterContent":{
-	              templateUrl: "produto/cadastro-produto.html",
-	          },
-	          "footerContent":{
-	              templateUrl: "footer.html",
-	          },
+	              templateUrl: "produto/cadastro-produto.html"
+	          }
 	      }     
 	    })
 	    .state("consulta-produtos", {
 	      url: "/consulta-produtos",
 	      views: {
 	          "starterContent":{
-	              templateUrl: "produto/consulta-produtos.html",
-	          },
-	          "footerContent":{
-	              templateUrl: "footer.html",
-	          },
+	              templateUrl: "produto/consulta-produtos.html"
+	          }
 	      }     
 	    });
 }

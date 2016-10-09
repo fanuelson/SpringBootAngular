@@ -1,5 +1,5 @@
 <div class="item">
-	<a class="header menu" ui-sref="home" >
+	<a class="header menu menuItem" ui-sref="home" >
 		<i class="home large blue icon"></i>
 		Home
 	</a>
@@ -7,13 +7,13 @@
 <div class="item">
 	<div class="header">Insumos</div>
 	<div class="menu">
-		<a class="item" ui-sref="cadastro-insumo" >
+		<a class="item menuItem" ui-sref="cadastro-insumo" >
 			<div>
 				<i class="blue large angle double right icon"></i>
 				Cadastrar
 			</div>
 		</a> 
-		<a class="item" ui-sref="consulta-insumos">
+		<a class="item menuItem" ui-sref="consulta-insumos">
 			<div>
 				<i class="blue large angle double right icon"></i>
 				Consultar
@@ -24,13 +24,13 @@
 <div class="item">
 	<div class="header">Produtos</div>
 	<div class="menu">
-		<a class="item" ui-sref="consulta-produtos" >
+		<a class="item menuItem" ui-sref="consulta-produtos" >
 			<div>
 				<i class="blue large angle double right icon"></i>
 				Consultar
 			</div>
 		</a> 
-		<a class="item" ui-sref="cadastro-produto">
+		<a class="item menuItem" ui-sref="cadastro-produto">
 			<div>
 				<i class="blue large angle double right icon"></i>
 				Cadastrar
@@ -60,11 +60,25 @@
 		<a class="item">FAQs</a>
 	</div>
 </div>
+
 <script>
 	$(document).ready(function(){
-		$('.ui.sidebar')
-		  .sidebar({
-		    context: $(' .bottom.segment')
-		  }).sidebar('attach events', ' a.item, a.menu');
+
+		/* MENU */
+		
+			$('.menuItem').click(function(){
+				$('.menuItem').removeClass("menuSelected");
+				$(this).toggleClass("menuSelected");
+			});
+	
+			var speed = 100;
+			$('.menuItem').hover(function(){
+				$(this).animate({ left: '10px' }, speed);
+			},function(){
+				$(this).animate({ left: '-2px' }, speed);
+			});
+		
+		/* END MENU */
 	});
+			
 </script>

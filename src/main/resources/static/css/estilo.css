@@ -1,4 +1,15 @@
+/* MENU */
+.menuSelected {
+	background-color: yellow!important;
+    border-color: #FBBD08!important;
+	color: black !important;
+}
+
+
+/* END MENU */
+
 /* Margins */
+
 .m-a-10
 {
 	margin: 10px 0 !important;
@@ -20,6 +31,7 @@
 	margin: 40px 0 !important;
 }
 
+/* End Margins */
 
 .font-12 {
 	font-size: 12px !important;

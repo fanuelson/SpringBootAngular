@@ -31,7 +31,7 @@
 	<div class="ui bottom attached segment pushable">
 		
 		<!-- MENU -->
-		<div class="ui inverted labeled left inline vertical sidebar menu menu-closer">
+		<div class="ui visible inverted labeled left inline vertical sidebar menu menu-closer">
 			<div ng-include="'menu.html'" ></div>
 		</div>
 		
@@ -45,17 +45,7 @@
 		</div>
 	</div>
 	
-	<script>
-	$(document).ready(function(){
-		$('.ui.sidebar')
-		  .sidebar({
-		    context: $('.bottom.segment')
-		  });
-	});
-	</script>
-
-		
-	<div ui-view="footerContent" ></div>
+	<div ng-include="'footer.html'"></div>
 
 	<!-- Modules -->
 	<script src="app.js"></script>
