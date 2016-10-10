@@ -66,7 +66,7 @@ var app = angular.module('demoApp', depends);
 
 app.constant(
 	"APP_CONFIG", {
-		"REST_BASE_URL" : "http://localhost:8080",
+		"REST_BASE_URL" : "http://localhost:8080/SpringAngularApp",
 		"DEFAULT_PAGE_SIZE": 10
 	}
 );
@@ -75,13 +75,9 @@ app.constant(
 /* -- ROUTE CONFIG -- */
 
 	var routeConfig = function($stateProvider, $urlRouterProvider) {
-	    $urlRouterProvider.otherwise('/');
 	    
-	    var footerContent = {
-			"footerContent":{
-	              templateUrl: "footer.html"
-	          }
-	    };
+		$urlRouterProvider.otherwise('/');
+	    
 	    $stateProvider
 		    .state("home", {
 		    	url: "/",

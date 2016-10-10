@@ -25,7 +25,7 @@ public class DemoApplication extends SpringBootServletInitializer {
     public FilterRegistrationBean jwtFilter() {
         final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new JwtFilter());
-        registrationBean.addUrlPatterns("/usuarios/*");
+        registrationBean.addUrlPatterns("/usuarios/testeeee/*");
 
         return registrationBean;
     }
