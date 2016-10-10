@@ -7,126 +7,201 @@ var app = angular.module('demoApp', depends);
 
 /* -- BEGIN FILTERs -- */
 
-var colocarPontosMilhar = function(num) {
-	var numAux = ""+num;
-	var i;
-	var casa3 = 0;
-	var result = "";
-	for(i = numAux.length - 1; i >= 0; i-- ){
-		if(casa3 == 3){
-			result = result + ".";
-			casa3 = -1;
-		}
-		result = result + numAux[i];
-		casa3++;
-	}
-	return result.split('').reverse().join('');
-}
-
-var brDecimalNumberFilter = function(){
-	return function(input) {
-		if(angular.isNumber(input)){
-			var inputAux = ""+input;
-			var inputPartes = inputAux.split(".");
-			var result = inputPartes[0].replace(/,/g, ".");
-			result = colocarPontosMilhar(result);
-			if(inputPartes[1]) {
-				result = result + "," + inputPartes[1];
+	var colocarPontosMilhar = function(num) {
+		var numAux = ""+num;
+		var i;
+		var casa3 = 0;
+		var result = "";
+		for(i = numAux.length - 1; i >= 0; i-- ){
+			if(casa3 == 3){
+				result = result + ".";
+				casa3 = -1;
 			}
-			return result;
-		} else {
-			return null;
+			result = result + numAux[i];
+			casa3++;
 		}
-	};
+		return result.split('').reverse().join('');
+	}
 	
-}
-
-app.filter("brDecimalNumber", brDecimalNumberFilter);
+	var brDecimalNumberFilter = function(){
+		return function(input) {
+			if(angular.isNumber(input)){
+				var inputAux = ""+input;
+				var inputPartes = inputAux.split(".");
+				var result = inputPartes[0].replace(/,/g, ".");
+				result = colocarPontosMilhar(result);
+				if(inputPartes[1]) {
+					result = result + "," + inputPartes[1];
+				}
+				return result;
+			} else {
+				return null;
+			}
+		};
+		
+	}
+	
+	app.filter("brDecimalNumber", brDecimalNumberFilter);
 
 /* -- END FILTERs -- */
 
 /* -- BEGIN DIRECTIVEs -- */
 
-var resetSelectItemsDirective = function() {
-  return {
-	restrict: 'A',
-    link: function (scope, element, attrs) {
-        scope.$watch(attrs.ngModel, function (v) {
-            if(!v) {
-            	$(element).dropdown('restore defaults');
-            }
-        });
-    }
-  };
-}
-
-app.directive('valueResettable', resetSelectItemsDirective);
+	var resetSelectItemsDirective = function() {
+	  return {
+		restrict: 'A',
+	    link: function (scope, element, attrs) {
+	        scope.$watch(attrs.ngModel, function (v) {
+	            if(!v) {
+	            	$(element).dropdown('restore defaults');
+	            }
+	        });
+	    }
+	  };
+	}
+	
+	app.directive('valueResettable', resetSelectItemsDirective);
 
 /* -- END DIRECTIVEs -- */
 
 app.constant(
 	"APP_CONFIG", {
-		"REST_BASE_URL" : "http://localhost:8080/SpringAngularApp",
+		"REST_BASE_URL" : "http://localhost:8080",
 		"DEFAULT_PAGE_SIZE": 10
 	}
 );
 
-var routeConfig = function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
-    
-    var footerContent = {
-		"footerContent":{
-              templateUrl: "footer.html"
-          }
-    };
-    $stateProvider
-	    .state("home", {
-		      url: "/",
-		      views: {
-		          "starterContent":{
-		              template: "<h1>HELLO<h1/>"
-		          }
-		      }     
-	    })
-	    .state("cadastro-insumo", {
-		      url: "/cadastro-insumo",
-		      views: {
-		          "starterContent":{
-		        	  templateUrl: "insumo/cadastro-insumo.html"
-		          }
-		      }     
-	    })
-	    .state("consulta-insumos", {
-		      url: "/consulta-insumo",
-		      views: {
-		          "starterContent":{
-		        	  templateUrl: "insumo/consulta-insumos.html"
-		          }
-		      }     
-	    })
-	    .state("cadastro-produto", {
-	      url: "/cadastro-produto",
-	      views: {
-	          "starterContent":{
-	              templateUrl: "produto/cadastro-produto.html"
+
+/* -- ROUTE CONFIG -- */
+
+	var routeConfig = function($stateProvider, $urlRouterProvider) {
+	    $urlRouterProvider.otherwise('/');
+	    
+	    var footerContent = {
+			"footerContent":{
+	              templateUrl: "footer.html"
 	          }
-	      }     
-	    })
-	    .state("consulta-produtos", {
-	      url: "/consulta-produtos",
-	      views: {
-	          "starterContent":{
-	              templateUrl: "produto/consulta-produtos.html"
-	          }
-	      }     
-	    });
-}
+	    };
+	    $stateProvider
+		    .state("home", {
+		    	url: "/",
+		    	views: {
+		    		"starterContent":{
+		    			template: "<h1>HELLO<h1/>"
+		    		}
+		    	}     
+		    })
+		    .state("login", {
+		    	url: "/login",
+		    	views: {
+		    		"starterContent":{
+			        	  templateUrl: "login/login.html"
+			        }
+		    	}     
+		    })
+		    .state("cadastro-insumo", {
+			      url: "/cadastro-insumo",
+			      views: {
+			          "starterContent":{
+			        	  templateUrl: "insumo/cadastro-insumo.html"
+			          }
+			      }     
+		    })
+		    .state("consulta-insumos", {
+			      url: "/consulta-insumo",
+			      views: {
+			          "starterContent":{
+			        	  templateUrl: "insumo/consulta-insumos.html"
+			          }
+			      }     
+		    })
+		    .state("cadastro-produto", {
+			      url: "/cadastro-produto",
+			      views: {
+			          "starterContent":{
+			              templateUrl: "produto/cadastro-produto.html"
+			          }
+			      }     
+		    })
+		    .state("consulta-produtos", {
+			      url: "/consulta-produtos",
+			      views: {
+			          "starterContent":{
+			              templateUrl: "produto/consulta-produtos.html"
+			          }
+			      }     
+		    });
+	}
+	
+	var configRoute = [
+		'$stateProvider', 
+		'$urlRouterProvider',
+		routeConfig
+	]
+	
+	app.config(configRoute);
 
-var configRoute = [
-	'$stateProvider', 
-	'$urlRouterProvider',
-	routeConfig
-]
+/* -- END ROUTE CONFIG -- */
+	
+/* -- AUTH SERVICE -- */
+	
+	function authService($window) {
+		var self = this;
+		
+		self.saveToken = function(token) {
+			$window.localStorage['jwtToken'] = token;
+		}
+		
+		self.removeToken = function() {
+			$window.localStorage.removeItem['jwtToken'];
+		}
+		
+		self.getToken = function() {
+			return $window.localStorage['jwtToken'];
+		}
+	}
+	
+	var depends = [
+ 	  '$window',
+ 	  authService
+ 	];
+	
+	app.service('authService', depends);
 
+/* -- END AUTH SERVICE -- */
 
-app.config(configRoute);
+/* -- AUTH INTERCEPTOR -- */
+
+	function authInterceptor(APP_CONFIG, authService) {
+		return {
+			// automatically attach Authorization header
+			request : function(config) {
+				var token = authService.getToken();
+				if(token) {
+					config.headers.Authorization = 'Bearer ' + token;
+				}
+				
+				return config;
+			},
+	
+			// If a token was sent back, save it
+			response : function(res) {
+				return res;
+			}
+		}
+	}
+	
+
+	var depends = [
+	  'APP_CONFIG',
+	  'authService',
+	  authInterceptor
+	];
+	
+	app.factory('authInterceptor', depends);
+	
+	app.config(function($httpProvider) {
+	  $httpProvider.interceptors.push('authInterceptor');
+	});
+
+/* -- END AUTH INTERCEPTOR -- */
