@@ -1,55 +1,60 @@
 <div ng-controller="consultaInsumoController" class="ui basic segment" >
+	<h1>Insumos</h1>
 	<div class="ui grid" >
 		<div class="sixteen wide mobile eight wide computer eight wide tablet column" >
 			 <div ng-class="{ 'loading' : tabelaInsumosLoading }" 
 			 	class="ui raised segment">
-  					<a class="ui blue ribbon label">Insumos</a>
   					<div class="ui hidden divider"></div>
-				<table class="ui selectable celled table font-12">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Nome</th>
-							<th>Descrição</th>
-							<th>Quantidade</th>
-							<th>Medida</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-if="insumosPage.totalElements === 0" 
-							class="ui negative" >
-							<td colspan="5" >
-								Nenhum registro encontrado
-							</td>
-						</tr>
-						<tr ng-if="insumosPage.totalElements > 0" 
-							ng-repeat="insumo in insumosPage.content">
-							<td>{{insumo.id}}</td>
-							<td>{{insumo.nome}}</td>
-							<td>{{insumo.descricao}}</td>
-							<td>{{insumo.quantidade | brDecimalNumber}}</td>
-							<td>{{insumo.medida.abreviacao}} ({{insumo.medida.descricao}})</td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr ng-if="insumosPage.totalPages > 1" >
-							<th colspan="5">
-								<div class="ui pagination menu font-12">
-							        <a ng-click="findAllInsumosPage(insumosPage.number-1)" class="icon item">
-							          <i class="left chevron icon"></i>
-							        </a>
-							        <a ng-repeat="pagina in getPages(insumosPage.totalPages) track by $index"
-							        	ng-click="findAllInsumosPage($index)"
-							        	ng-class=" $index == produtosPage.number ? 'active' : ''"
-							        	class="item">{{$index + 1}}</a>
-							        <a ng-click="findAllInsumosPage(insumosPage.number+1)" class="icon item">
-							          <i class="right chevron icon"></i>
-							        </a>
-						      </div>
-							</th>
-						</tr>
-					</tfoot>
-				</table>
+					<table class="ui selectable celled table font-12">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>Descrição</th>
+								<th>Quantidade</th>
+								<th>Medida</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-if="insumosPage.totalElements === 0" 
+								class="ui negative" >
+								<td colspan="5" >
+									Nenhum registro encontrado
+								</td>
+							</tr>
+							<tr ng-if="insumosPage.totalElements > 0" 
+								ng-repeat="insumo in insumosPage.content">
+								<td>{{insumo.id}}</td>
+								<td>{{insumo.nome}}</td>
+								<td>{{insumo.descricao}}</td>
+								<td>{{insumo.quantidade | brDecimalNumber}}</td>
+								<td>{{insumo.medida.abreviacao}} ({{insumo.medida.descricao}})</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr ng-if="insumosPage.totalPages > 1" >
+								<th colspan="5">
+									<div class="ui pagination menu font-12">
+								        <a ng-click="findAllInsumosPage(insumosPage.number-1)" class="icon item">
+								          <i class="left chevron icon"></i>
+								        </a>
+								        <a ng-repeat="pagina in getPages(insumosPage.totalPages) track by $index"
+								        	ng-click="findAllInsumosPage($index)"
+								        	ng-class=" $index == produtosPage.number ? 'active' : ''"
+								        	class="item">{{$index + 1}}</a>
+								        <a ng-click="findAllInsumosPage(insumosPage.number+1)" class="icon item">
+								          <i class="right chevron icon"></i>
+								        </a>
+							      </div>
+								</th>
+							</tr>
+						</tfoot>
+					</table>
+					<div>
+						<a ng-href="pdf/test" >
+							<img class="ui mini image" src="img/pdfIcon.png">
+						</a>
+					</div>
   				</div>
 		</div>
 	</div>
