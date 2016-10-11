@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
 
 </head>
-<body>
+<body ng-controller="mainController" >
 	
 	<header>
 		<div  class="ui top attached inverted demo menu">
@@ -57,14 +57,19 @@
 	<script src="produto/ProdutoService.js"></script>
 	<script src="insumo/InsumoService.js"></script>
 	<script src="medida/MedidaService.js"></script>
+	<script src="auth/AuthService.js"></script>
 
 	<!-- Controllers -->
+	<script src="main/MainController.js"></script>
 	<script src="usuario/UsuarioController.js"></script>
 	<script src="produto/CadastroProdutoController.js"></script>
 	<script src="produto/ConsultaProdutoController.js"></script>
 	<script src="insumo/CadastroInsumoController.js"></script>
 	<script src="insumo/ConsultaInsumoController.js"></script>
 	<script src="login/LoginController.js"></script>
+	
+	<!-- INTERCEPTOR -->
+	<script src="auth/AuthInterceptor.js"></script>
 	
 	<script src="ui-framework/node_modules/angular-input-masks/releases/angular-input-masks-standalone.min.js"></script>
 	
