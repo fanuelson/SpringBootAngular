@@ -9,3 +9,4 @@
 /.settings
 /.tern-project
 src/test/java/**
+/bin/
