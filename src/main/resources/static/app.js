@@ -139,3 +139,88 @@ app.constant(
 
 /* -- END ROUTE CONFIG -- */
 	
+<<<<<<< Updated upstream
+=======
+/* -- AUTH SERVICE -- */
+	
+	function authService($window) {
+		var self = this;
+		
+		self.saveToken = function(token) {
+			$window.localStorage['jwtToken'] = token;
+		}
+		
+		self.removeToken = function() {
+			$window.localStorage.removeItem['jwtToken'];
+		}
+		
+		self.getToken = function() {
+			return $window.localStorage['jwtToken'];
+		}
+	}
+	
+	var depends = [
+ 	  '$window',
+ 	  authService
+ 	];
+	
+	app.service('authService', depends);
+
+/* -- END AUTH SERVICE -- */
+
+/* -- AUTH INTERCEPTOR -- */
+
+	function authInterceptor(APP_CONFIG, authService, $injector, $q) {
+		return {
+			// automatically attach Authorization header
+			request : function(config) {
+				var token = authService.getToken();
+				if(token) {
+					config.headers.Authorization = 'Bearer ' + token;
+				}
+				
+				return config;
+			},
+			 // optional method
+			requestError: function(rejection) {
+		      // do something on error
+		      if (canRecover(rejection)) {
+		        return responseOrNewPromise
+		      }
+		      return $q.reject(rejection);
+		    },
+	
+			// If a token was sent back, save it
+			response : function(res) {
+				var refreshToken = res.headers('refresh-token');
+				if(refreshToken) {
+					authService.saveToken(refreshToken);
+				}
+				return res;
+			},
+			
+			responseError : function(res) {
+				authService.removeToken();
+				$injector.get('$state').transitionTo('login');
+				return $q.reject(res);
+			}
+		}
+	}
+	
+
+	var depends = [
+	  'APP_CONFIG',
+	  'authService',
+	  '$injector',
+	  '$q',
+	  authInterceptor
+	];
+	
+	app.factory('authInterceptor', depends);
+	
+	app.config(function($httpProvider) {
+	  $httpProvider.interceptors.push('authInterceptor');
+	});
+
+/* -- END AUTH INTERCEPTOR -- */
+>>>>>>> Stashed changes
