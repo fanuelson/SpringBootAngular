@@ -17,7 +17,7 @@ import com.foundation.service.ComposicaoService;
 import com.foundation.validacao.Validacoes;
 
 @RestController
-@RequestMapping("composicoes")
+@RequestMapping("/api/composicoes")
 @RequestScope
 public class ComposicaoController {
 

@@ -4,6 +4,7 @@ public class BasicResponseDTO {
 
 	private Object obj;
 	private String mensagem;
+	private int codigoErroInterno;
 	
 	public BasicResponseDTO() { }
 
@@ -22,6 +23,11 @@ public class BasicResponseDTO {
 		this.obj = obj;
 		this.mensagem = mensagem;
 	}
+	
+	public BasicResponseDTO(Object obj, int codigoErroInterno, String mensagem) {
+		this(obj, mensagem);
+		this.codigoErroInterno = codigoErroInterno;
+	}
 
 	public Object getObj() {
 		return obj;
@@ -39,4 +45,12 @@ public class BasicResponseDTO {
 		this.mensagem = mensagem;
 	}
 
+	public int getCodigoErroInterno() {
+		return codigoErroInterno;
+	}
+
+	public void setCodigoErroInterno(int codigoErroInterno) {
+		this.codigoErroInterno = codigoErroInterno;
+	}
+	
 }

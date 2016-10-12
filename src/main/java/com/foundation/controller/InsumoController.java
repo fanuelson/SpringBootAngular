@@ -20,7 +20,7 @@ import com.foundation.service.InsumoService;
 import com.foundation.validacao.Validacoes;
 
 @RestController
-@RequestMapping("insumos")
+@RequestMapping("/api/insumos")
 @RequestScope
 public class InsumoController {
 

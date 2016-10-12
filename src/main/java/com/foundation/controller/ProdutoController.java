@@ -19,7 +19,7 @@ import com.foundation.service.ProdutoService;
 import com.foundation.validacao.Validacoes;
 
 @RestController
-@RequestMapping("produtos")
+@RequestMapping("/api/produtos")
 @RequestScope
 public class ProdutoController {
 	

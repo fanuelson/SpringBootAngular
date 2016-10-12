@@ -7,7 +7,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.foundation.enums.MedidaEnum;
 
 @RestController
-@RequestMapping("medidas")
+@RequestMapping("/api/medidas")
 @RequestScope
 public class MedidaController {
 

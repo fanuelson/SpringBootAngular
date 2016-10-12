@@ -2,7 +2,7 @@ function authService($http, APP_CONFIG) {
 	var self = this;
 	
 	self.login = function(user) {
-		return $http.post(APP_CONFIG.REST_BASE_URL + '/auth/login', user);
+		return $http.post('http://localhost:8080/SpringAngularApp/auth/login', user);
 	}
 	
 }

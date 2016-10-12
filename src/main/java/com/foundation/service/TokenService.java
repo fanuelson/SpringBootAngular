@@ -8,7 +8,10 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.foundation.SecretConfig;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -19,6 +22,9 @@ import io.jsonwebtoken.SignatureException;
 public class TokenService implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	@Autowired
+	private SecretConfig secretConfig;
 	
 	public String generateToken(Long id, String login, List<String> roles) {
 		
@@ -32,7 +38,7 @@ public class TokenService implements Serializable{
 			.setIssuedAt(dataAtual)
 			.setExpiration(expireDate)
 			.claim("roles", Arrays.asList("GERENTE"))
-			.signWith(SignatureAlgorithm.HS256, "secretkey")
+			.signWith(SignatureAlgorithm.HS256, secretConfig.getSecretKey())
 			.compact();
 	}
 	
@@ -47,19 +53,19 @@ public class TokenService implements Serializable{
 			.setIssuedAt(dataAtual)
 			.setExpiration(expireDate)
 			.claim("roles", claims.get("roles"))
-			.signWith(SignatureAlgorithm.HS256, "secretkey")
+			.signWith(SignatureAlgorithm.HS256, secretConfig.getSecretKey())
 			.compact();
 	}
 	
 	public Claims getClaims(String token) throws ServletException {
 		try {
             final Claims claims = Jwts.parser()
-            		.setSigningKey("secretkey")
+            		.setSigningKey(secretConfig.getSecretKey())
             		.parseClaimsJws(token)
             		.getBody();
             return claims;
         } catch (final SignatureException e) {
-            throw new ServletException("Invalid token.");
+            throw new ServletException("Invalid token");
         }
 	}
 
