@@ -1,10 +1,33 @@
+/* LOGIN PAGE */
+	
+	.form-holder {
+		background: rgba(23, 21, 21, 0.07);
+		margin-top: 10%;
+		border-radius: 3px;
+	}
+	
+	.form-head {
+		font-size: 30px;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: #fff;
+		text-shadow: 0 0 30px #000;
+		margin: 15px auto 30px auto;
+	}
+
+/* END LOGIN PAGE */
+
+
+#appContent {
+	background: none;
+}
+
 /* MENU */
 .menuSelected {
 	background-color: yellow!important;
     border-color: #FBBD08!important;
 	color: black !important;
 }
-
 
 /* END MENU */
 

@@ -48,7 +48,7 @@ public class JwtFilter extends GenericFilterBean {
 			}
 			response.addHeader("minutes-remaining", new Integer(standardMinutesRemaining).toString());
 		} catch (final SignatureException e) {
-			throw new ServletException("Invalid token.");
+			throw new ServletException("Invalid token");
 		}
 
 		chain.doFilter(req, res);

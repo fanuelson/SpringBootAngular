@@ -88,8 +88,7 @@ function cadastroProdutoController($scope, APP_CONFIG ,produtoService, insumoSer
 		}
 	}
 	
-	$scope.removerComposicao = function(composicao) {
-		var index = $scope.produto.composicoes.indexOf(composicao);
+	$scope.removerComposicao = function(index) {
 		$scope.produto.composicoes.splice(index, 1);
 	}
 	

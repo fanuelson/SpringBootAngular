@@ -17,7 +17,7 @@ import com.foundation.service.TokenService;
 import com.foundation.service.UsuarioService;
 
 @RestController
-@RequestMapping("login")
+@RequestMapping("auth")
 @RequestScope
 public class LoginController {
 

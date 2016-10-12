@@ -22,24 +22,28 @@
 <body ng-controller="mainController" >
 	
 	<header>
-		<div  class="ui top attached inverted demo menu">
+		<div ng-if="userLogged.isLoggedIn" class="ui top attached inverted menu">
 			<a id="menuOpener" class="item">
 		    	<i class="sidebar icon"></i>
 		    	Menu
 		    </a>
+
+			<div class="right menu">
+				<a ng-click="logout()" class="active red item"> Logout </a>
+			</div>
 		</div>
 	</header>
 	
 	<div class="ui bottom attached segment pushable">
 		
 		<!-- MENU -->
-		<div class="ui visible inverted labeled left inline vertical sidebar menu menu-closer">
-			<div ng-include="'menu.html'" ></div>
+		<div ng-if="userLogged.isLoggedIn" class="ui visible inverted labeled left inline vertical sidebar menu menu-closer">
+			<div  ng-include="'menu.html'" ></div>
 		</div>
 		
 		<!-- CONTENT -->
 		<div class="pusher">
-			<div class="ui basic segment">
+			<div class="">
 				<div ui-view="starterContent" >
 						Carregando...
 				</div>
@@ -58,6 +62,7 @@
 	<script src="insumo/InsumoService.js"></script>
 	<script src="medida/MedidaService.js"></script>
 	<script src="auth/AuthService.js"></script>
+	<script src="auth/TokenService.js"></script>
 
 	<!-- Controllers -->
 	<script src="main/MainController.js"></script>
@@ -69,7 +74,7 @@
 	<script src="login/LoginController.js"></script>
 	
 	<!-- INTERCEPTOR -->
-	<script src="auth/AuthInterceptor.js"></script>
+	<script src="auth/TokenInterceptor.js"></script>
 	
 	<script src="ui-framework/node_modules/angular-input-masks/releases/angular-input-masks-standalone.min.js"></script>
 	

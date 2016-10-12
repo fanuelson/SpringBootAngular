@@ -1,21 +1,15 @@
-function authService($window) {
+function authService($http, APP_CONFIG) {
 	var self = this;
 	
-	self.saveToken = function(token) {
-		$window.localStorage['jwtToken'] = token;
+	self.login = function(user) {
+		return $http.post(APP_CONFIG.REST_BASE_URL + '/auth/login', user);
 	}
 	
-	self.removeToken = function() {
-		$window.localStorage.removeItem['jwtToken'];
-	}
-	
-	self.getToken = function() {
-		return $window.localStorage['jwtToken'];
-	}
 }
 	
 var depends = [
-  '$window',
+  '$http',
+  'APP_CONFIG',
   authService
 ];
 	
