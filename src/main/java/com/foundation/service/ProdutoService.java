@@ -1,5 +1,6 @@
 package com.foundation.service;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,10 +31,14 @@ public class ProdutoService {
 	}
 
 	public Produto save(Produto produto) {
-		montarParametros(produto);
+		montarComposicoes(produto);
+		validar(produto);
+		return produtoDAO.save(produto);
+	}
+
+	private void validar(Produto produto) {
 		validacoesProduto.validarSalvar(produto);
 		validacoesComposicao.validarSalvar(produto.getComposicoes());
-		return produtoDAO.save(produto);
 	}
 
 	public void delete(Long id) {
@@ -44,8 +49,8 @@ public class ProdutoService {
 		produtoDAO.delete(produto);
 	}
 	
-	private void montarParametros(Produto produto) {
-		if(produto.getComposicoes() != null) {
+	private void montarComposicoes(Produto produto) {
+		if(CollectionUtils.isNotEmpty(produto.getComposicoes())) {
 			for (Composicao composicao : produto.getComposicoes()) {
 				composicao.setProduto(produto);
 			}

@@ -22,4 +22,8 @@ public class UsuarioService {
 	public Usuario findByLogin(String login) {
 		return usuarioDAO.findByLogin(login);
 	}
+	
+	public Usuario save(Usuario usuario) {
+		return usuarioDAO.save(usuario);
+	}
 }

@@ -1,7 +1,7 @@
 package com.foundation.validador;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.exception.ValidacaoException;
@@ -15,8 +15,8 @@ public class ValidadorProduto extends Validacoes {
 
 	private static final long serialVersionUID = 1L;
 
-	public void validarSalvar(Produto produto) {
-		if (produto.getNome() == null || StringUtils.isEmpty(produto.getNome().trim())) {
+	public void validarSalvar(final Produto produto) {
+		if (StringUtils.isBlank(produto.getNome())) {
 			adicionarValidacao(new ValidacaoCampoObrigatorio("nome", "Campo Nome Obrigatório."));
 		}
 		

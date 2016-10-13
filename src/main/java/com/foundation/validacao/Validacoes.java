@@ -2,8 +2,10 @@ package com.foundation.validacao;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,12 +23,16 @@ public abstract class Validacoes implements Serializable{
 		getValidacoes().add(validacao);
 	}
 	
+	public void adicionarValidacoes(List<Validacao> validacoes) {
+		getValidacoes().addAll(validacoes);
+	}
+	
 	public void limparValidacoes() {
 		getValidacoes().clear();
 	}
 	
 	public boolean hasValidacoes() {
-		return !getValidacoes().isEmpty();
+		return CollectionUtils.isNotEmpty(getValidacoes());
 	}
 	
 }
