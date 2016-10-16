@@ -9,8 +9,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
+		configRequestAuthorization(http);
+		configCsrf(http);
+		configCors(http);
+	}
+
+	private void configRequestAuthorization(HttpSecurity http) throws Exception {
 		http.authorizeRequests().anyRequest().permitAll();
+	}
+
+	private void configCsrf(HttpSecurity http) throws Exception {
+		http.csrf().disable();
+	}
+
+	private void configCors(HttpSecurity http) throws Exception {
+		http.cors().disable();
 	}
 
 }
