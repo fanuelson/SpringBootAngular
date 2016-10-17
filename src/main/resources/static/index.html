@@ -43,7 +43,7 @@
 		
 		<!-- CONTENT -->
 		<div class="pusher">
-			<div class="">
+			<div class="ui basic segment">
 				<div ui-view="starterContent" >
 						Carregando...
 				</div>
@@ -52,6 +52,12 @@
 	</div>
 	
 	<div ng-include="'footer.html'"></div>
+	<script type="text/javascript">
+	$('.context.example .ui.sidebar')
+	  .sidebar({
+	    context: $('.context.example .bottom.segment')
+	  }).sidebar('attach events', '.context.example .menu .item');
+	</script>
 
 	<!-- Modules -->
 	<script src="app.js"></script>
