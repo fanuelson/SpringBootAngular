@@ -1,0 +1,83 @@
+<div ng-controller="cadastroFornecedorController" class="ui basic segment">
+	<div class="ui grid">
+		<div class="sixteen wide mobile twelve wide tablet nine wide computer column">
+			<div ng-class="{'loading': formFornecedorLoading }" class="ui raised segment">
+
+				<h1>{{headerMessage}}</h1>
+				
+				<div class="ui hidden divider"></div>
+				
+				<div ng-if="retornoSucesso.mensagem" 
+					class="ui success message">
+				  <p>{{retornoSucesso.mensagem}}</p>
+				</div>
+				
+				<div class="ui hidden divider"></div>
+
+				<form id="formCadastro" name="formCadastro" class="ui form">
+					
+					<div ng-class="{'error': getValidatorMessageForCampoObrigatorio('nome')}" class="field">
+						
+						<label>Nome *</label>
+
+						<div ng-if="getValidatorMessageForCampoObrigatorio('nome')"
+							ng-class="{'error': getValidatorMessageForCampoObrigatorio('nome')}" 
+							class="ui pointing below red basic label">
+								{{getValidatorMessageForCampoObrigatorio('nome')}}
+						</div>
+						
+						<div>
+							<input type="text" placeholder="Nome" ng-model="fornecedor.nome" />
+						</div>
+					</div>
+					
+					<div ng-class="{'error': getValidatorMessageForCampoObrigatorio('cpfCnpj')}" class="field">
+						
+						<label>CPF/CNPJ</label>
+
+						<div ng-if="getValidatorMessageForCampoObrigatorio('cpfCnpj')"
+							ng-class="{'error': getValidatorMessageForCampoObrigatorio('cpfCnpj')}" 
+							class="ui pointing below red basic label">
+								{{getValidatorMessageForCampoObrigatorio('cpfCnpj')}}
+						</div>
+						
+						<div>
+							<input type="text" 
+								placeholder="CPF/CNPJ" 
+								ng-model="fornecedor.cpfCnpj" 
+								ui-br-cpfcnpj-mask />
+						</div>
+					</div>
+					
+					<div class="field">
+						<label>Celular</label>
+
+						<input placeholder="Celular" ng-model="fornecedor.celular" ui-br-phone-number></input>
+					</div>
+					<div class="field">
+						<label>Telefone</label>
+
+						<input placeholder="Telefone" ng-model="fornecedor.telefone" ui-br-phone-number></input>
+					</div>
+					
+					<div class="text-align-right">
+
+						<div class="ui right aligned grid">
+							<div class="right floated sixteen wide column">
+								<button ng-click="limparCampos()" class="ui button">Limpar</button>
+								<button ng-click="save()" type="submit" class="ui green animated button">
+									<div class="hidden content">
+										<i style="position: relative; bottom: 2px;" class="material-icons md-18">add_circle_outline</i>
+									</div>
+									<div class="visible content">Cadastrar</div>
+								</button>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</div>

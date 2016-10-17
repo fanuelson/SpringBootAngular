@@ -1,7 +1,5 @@
 package com.foundation.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,22 +11,22 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dto.BasicResponseDTO;
 import com.foundation.exception.ValidacaoException;
-import com.foundation.model.Composicao;
-import com.foundation.service.ComposicaoService;
+import com.foundation.model.Fornecedor;
+import com.foundation.service.FornecedorService;
 import com.foundation.validacao.Validacoes;
 
 @RestController
-@RequestMapping("/api/composicoes")
+@RequestMapping("/api/fornecedores")
 @RequestScope
-public class ComposicaoController {
+public class FornecedorController {
 
 	@Autowired
-	private ComposicaoService composicaoService;
+	private FornecedorService fornecedorService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> save(@RequestBody List<Composicao> composicoes) {
+	public ResponseEntity<?> save(@RequestBody Fornecedor fornecedor) {
 		try {
-			BasicResponseDTO basicResponse = new BasicResponseDTO(composicaoService.save(composicoes), "Registros Salvos com sucesso.");
+			BasicResponseDTO basicResponse = new BasicResponseDTO(fornecedorService.save(fornecedor), "Registro Salvo com sucesso.");
 			return ResponseEntity.status(HttpStatus.CREATED).body(basicResponse);
 		} catch (ValidacaoException e) {
 			return new ResponseEntity<Validacoes>(e.getValidacoes(), HttpStatus.INTERNAL_SERVER_ERROR);
