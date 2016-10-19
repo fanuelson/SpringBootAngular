@@ -13,9 +13,11 @@ public interface FornecedorDAO extends CrudRepository<Fornecedor, Long> {
 
 	Fornecedor findByCpfCnpj(Long cpfCnpj);
 
-	@Query(" SELECT f " + " FROM Fornecedor f "
-			+ " WHERE (:#{#filtro.nomeLike} IS NULL OR LOWER(f.nome) LIKE :#{#filtro.nomeLike}) "
-			+ " AND (:#{#filtro.cpfCnpjLike} IS NULL OR STR(f.cpfCnpj) LIKE :#{#filtro.cpfCnpjLike}) ")
 	@SuppressWarnings("all")
+	@Query(" SELECT f FROM Fornecedor f "
+			+ " WHERE (:#{#filtro.nomeLike} IS NULL OR LOWER(f.nome) LIKE :#{#filtro.nomeLike}) "
+			+ " AND (:#{#filtro.cpfCnpjLike} IS NULL OR STR(f.cpfCnpj) LIKE :#{#filtro.cpfCnpjLike}) "
+			+ " AND (:#{#filtro.celular} IS NULL OR STR(f.celular) LIKE :#{#filtro.celularLike}) "
+			+ " AND (:#{#filtro.telefone} IS NULL OR STR(f.telefone) LIKE :#{#filtro.telefoneLike}) ")
 	Page<Fornecedor> findByFilter(@Param("filtro") FiltroConsultaFornecedor filtro, Pageable page);
 }
