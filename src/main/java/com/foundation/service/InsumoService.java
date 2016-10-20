@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dao.InsumoDAO;
+import com.foundation.filtroConsulta.FiltroConsultaInsumo;
 import com.foundation.model.Insumo;
 import com.foundation.utils.CollectionUtils;
 import com.foundation.validador.ValidadorInsumo;
@@ -25,6 +26,10 @@ public class InsumoService {
 	
 	public Page<Insumo> findAll(Pageable page) {
 		return insumoDAO.findAll(page);
+	}
+	
+	public Page<Insumo> findByFilter(FiltroConsultaInsumo filtro, Pageable page) {
+		return insumoDAO.findByFilter(filtro, page);
 	}
 	
 	public Insumo save(Insumo insumo) {

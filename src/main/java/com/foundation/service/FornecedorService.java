@@ -30,7 +30,7 @@ public class FornecedorService {
 		return fornecedorDAO.findByCpfCnpj(cpfCnpj);
 	}
 	
-	public Page<Fornecedor> findByFiltro(FiltroConsultaFornecedor filro, Pageable page) {
+	public Page<Fornecedor> findByFilter(FiltroConsultaFornecedor filro, Pageable page) {
 		return fornecedorDAO.findByFilter(filro, page);
 	}
 	

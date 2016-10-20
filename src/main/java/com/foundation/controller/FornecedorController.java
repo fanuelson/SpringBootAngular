@@ -38,7 +38,7 @@ public class FornecedorController {
 	
 	@RequestMapping(path = "/page/filterBy", method = RequestMethod.POST)
 	public Page<Fornecedor> findByFiltro(@RequestBody FiltroConsultaFornecedor filtro, Pageable page) {
-		return fornecedorService.findByFiltro(filtro, page);
+		return fornecedorService.findByFilter(filtro, page);
 	}
 	
 }

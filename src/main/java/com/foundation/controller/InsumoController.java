@@ -15,6 +15,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dto.BasicResponseDTO;
 import com.foundation.exception.ValidacaoException;
+import com.foundation.filtroConsulta.FiltroConsultaInsumo;
 import com.foundation.model.Insumo;
 import com.foundation.service.InsumoService;
 import com.foundation.validacao.Validacoes;
@@ -35,6 +36,11 @@ public class InsumoController {
 	@RequestMapping(path = "/page", method = RequestMethod.GET)
 	public Page<Insumo> findAll(Pageable page) {
 		return insumoService.findAll(page);
+	}
+	
+	@RequestMapping(path = "/page/filterBy", method = RequestMethod.POST)
+	public Page<Insumo> findByFiltro(@RequestBody FiltroConsultaInsumo filtro, Pageable page) {
+		return insumoService.findByFilter(filtro, page);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
