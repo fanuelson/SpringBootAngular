@@ -1,11 +1,65 @@
 <div ng-controller="consultaInsumoController" class="ui basic segment" >
 	<h1>Insumos</h1>
 	<div class="ui grid" >
-		<div class="sixteen wide mobile eight wide computer eight wide tablet column" >
+		<div class="sixteen wide mobile twelve wide computer twelve wide tablet column" >
 			 <div ng-class="{ 'loading' : tabelaInsumosLoading }" 
 			 	class="ui raised segment">
+  					
+  					<h3>Filtro</h3>
+  					<div class="ui divider" ></div>
+  					<div class="ui grid form" >
+	  					<div class="sixteen wide mobile sixteen wide computer sixteen wide tablet column" >
+							<div class="field">
+							    <label>Nome/Descrição</label>
+							    <input type="text" ng-model="filtroPesquisa.nomeOrDescricao" />
+							  </div>  					
+	  					</div>
+	  					<div class="sixteen wide mobile four wide computer four wide tablet column" >
+							<div class="field">
+							    <label>Quantidade Min.</label>
+							    <input type="text" ng-model="filtroPesquisa.quantidadeMin"  ui-number-mask />
+							  </div>  					
+	  					</div>
+	  					<div class="sixteen wide mobile four wide computer four wide tablet column" >
+							<div class="field">
+							    <label>Quantidade Máx.</label>
+							    <input type="text" ng-model="filtroPesquisa.quantidadeMax" ui-number-mask />
+							  </div>  					
+	  					</div>
+	  					<div class="sixteen wide mobile four wide computer four wide tablet column" >
+							<div class="field">
+							  <label>Medida *</label>
+							
+							<div>
+								<select id="medidaSelection" 
+									class="ui fluid dropdown" 
+									ng-model="filtroPesquisa.medida"
+									value-resettable>
+						          <option value="todas" >Todas</option>
+					              <option ng-repeat="medida in medidas" 
+					              	class="item" 
+					              	ng-value="medida.abreviacao">
+					              		{{medida.abreviacao}} ({{medida.descricao}})
+					              </option>
+						      </select>
+							</div>
+							  </div>  					
+	  					</div>
+	  					<div class="text-align-right sixteen wide column">
+									<button ng-click="limparFiltroPesquisa()" class="ui button">Limpar</button>
+									<button ng-click="pesquisar()" type="submit" class="ui blue animated button">
+										<div class="hidden content">
+											<i style="position: relative; bottom: 2px;" class="material-icons md-18">search</i>
+										</div>
+										<div class="visible content">Pesquisar</div>
+									</button>
+	
+						</div>
+  					</div>
+				 	
   					<div class="ui hidden divider"></div>
-					<table class="ui selectable celled table font-12">
+  					<div class="ui divider"></div>
+					<table class="ui selectable celled table">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -50,10 +104,12 @@
 							</tr>
 						</tfoot>
 					</table>
-					<div>
-						<a ng-href="pdf/test" >
-							<img class="ui mini image" src="img/pdfIcon.png">
-						</a>
+					<div class="ui grid" >
+						<div class="sixteen wide column" >
+							<a ng-href="pdf/test" >
+								<img class="ui mini image" style="float: right"  src="img/pdfIcon.png">
+							</a>
+						</div>
 					</div>
   				</div>
 		</div>

@@ -11,6 +11,11 @@ function insumoService($http, APP_CONFIG) {
 		return $http.get(rest_url + '/insumos/page' + pageParams);
 	};
 	
+	this.findAllPageFilterBy = function(filtro, page, size) {
+		var pageParams = "?page="+page+"&size="+size;
+		return $http.post(rest_url + '/insumos/page/filterBy' + pageParams, filtro);
+	};
+	
 	this.save = function(insumo) {
 		return $http.post(rest_url + '/insumos', insumo);
 	};

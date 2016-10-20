@@ -19,7 +19,7 @@ public class FiltroConsultaInsumo {
 	private MedidaEnum medida;
 
 	public String getNomeOrDescricaoLike() {
-		return StringUtils.wrap(this.nomeOrDescricao, ASPAS);
+		return StringUtils.wrap(StringUtils.trimToNull(this.nomeOrDescricao), ASPAS);
 	}
 
 	public String getNomeOrDescricao() {

@@ -49,7 +49,7 @@ public class FiltroConsultaFornecedor {
 	}
 
 	public String getNomeLike() {
-		return StringUtils.wrap(this.nome, ASPAS);
+		return StringUtils.wrap(StringUtils.trimToNull(this.nome), ASPAS);
 	}
 
 	public String getCpfCnpjLike() {

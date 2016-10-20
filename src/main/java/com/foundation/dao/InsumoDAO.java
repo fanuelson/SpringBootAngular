@@ -16,8 +16,8 @@ public interface InsumoDAO extends CrudRepository<Insumo, Long> {
 	@SuppressWarnings("all")
 	@Query(" SELECT i FROM Insumo i "
 			+ " WHERE (:#{#filtro.nomeOrDescricaoLike} IS NULL "
-				+ "OR LOWER(i.nome) LIKE :#{#filtro.nomeOrDescricaoLike} "
-				+ "OR LOWER(i.descricao) LIKE :#{#filtro.nomeOrDescricaoLike}) "
+				+ " OR LOWER(i.nome) LIKE :#{#filtro.nomeOrDescricaoLike} "
+				+ " OR LOWER(i.descricao) LIKE :#{#filtro.nomeOrDescricaoLike}) "
 			+ " AND (:#{#filtro.quantidadeMin} IS NULL OR i.quantidade >= :#{#filtro.quantidadeMin}) "
 			+ " AND (:#{#filtro.quantidadeMax} IS NULL OR i.quantidade <= :#{#filtro.quantidadeMax}) "
 			+ " AND (:#{#filtro.medida} IS NULL OR i.medida = :#{#filtro.medida}) ")
