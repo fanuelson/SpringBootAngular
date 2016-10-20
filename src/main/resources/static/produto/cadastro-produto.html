@@ -1,12 +1,10 @@
 <div ng-controller="cadastroProdutoController" class="ui basic segment" >
+	<h1>Cadastro de Produto</h1>	
 	<div class="ui grid" >
-		<div class="sixteen wide mobile nine sixteen tablet column twelve wide computer" style="margin: auto">
+		<div class="sixteen wide mobile nine sixteen tablet column twelve wide computer" >
 			 <div ng-class="{ 'loading' : formProdutoLoading }" 
 			 	class="ui raised segment">
 			 
-				<h1>Cadastro de Produto</h1>	
-				
-				<div class="ui hidden divider"></div>
 				
 					<div ng-if="retornoSucesso.mensagem" 
 						class="ui success message">

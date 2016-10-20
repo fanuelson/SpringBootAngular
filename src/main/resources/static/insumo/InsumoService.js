@@ -20,6 +20,10 @@ function insumoService($http, APP_CONFIG) {
 		return $http.post(rest_url + '/insumos', insumo);
 	};
 	
+	this.del = function(idInsumo) {
+		return $http.delete(rest_url + '/insumos/' + idInsumo);
+	};
+	
 };
 
 var depends = [

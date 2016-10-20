@@ -8,6 +8,8 @@ function consultaInsumoController($scope, APP_CONFIG, insumoService, medidaServi
 	
 	$scope.filtroPesquisa = {};
 	
+	$scope.insumoExclusao = {};
+	
 	$scope.findAllInsumosPage = function(page) {
 		if(page == $scope.insumosPage.totalPages) {
 			return;
@@ -57,6 +59,23 @@ function consultaInsumoController($scope, APP_CONFIG, insumoService, medidaServi
 	
 	$scope.limparFiltroPesquisa = function() {
 		$scope.filtroPesquisa = {};
+	}
+	
+	$scope.setInsumoExclusao = function(insumo) {
+		$scope.insumoExclusao = insumo;
+	}
+	
+	$scope.del = function() {
+		console.log(JSON.stringify($scope.insumoExclusao));
+		$scope.formInsumoLoading = true;
+		$promiseDelete = insumoService.del($scope.insumoExclusao.id);
+		$promiseDelete
+			.success(function(data) {
+				$scope.findAllInsumosPageFilterBy($scope.page);
+			})
+			.error(function(data){
+				$scope.messageError = data.message;
+			});
 	}
 	
 	$scope.getPages = function(num) {

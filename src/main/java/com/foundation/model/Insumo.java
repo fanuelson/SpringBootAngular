@@ -1,7 +1,10 @@
 package com.foundation.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,7 +12,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.foundation.enums.MedidaEnum;
 
 @Entity
@@ -31,6 +36,10 @@ public class Insumo {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "medida")
 	private MedidaEnum medida;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "insumo", cascade = {CascadeType.ALL}, orphanRemoval = true)
+	private List<Composicao> composicoes = new ArrayList<>();
 	
 	public boolean possuiQuantidade(BigDecimal quantidade) {
 		return this.quantidade!=null && this.quantidade.compareTo(quantidade) >= 0;
@@ -74,6 +83,14 @@ public class Insumo {
 
 	public void setMedida(MedidaEnum medida) {
 		this.medida = medida;
+	}
+	
+	public List<Composicao> getComposicoes() {
+		return composicoes;
+	}
+
+	public void setComposicoes(List<Composicao> composicoes) {
+		this.composicoes = composicoes;
 	}
 
 	@Override

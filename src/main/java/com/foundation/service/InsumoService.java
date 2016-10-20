@@ -41,4 +41,12 @@ public class InsumoService {
 		return CollectionUtils.toList(insumoDAO.findAll());
 	}
 	
+	public void delete(Insumo insumo) {
+		insumoDAO.delete(insumo);
+	}
+
+	public void delete(Long id) {
+		insumoDAO.delete(id);
+	}
+	
 }
