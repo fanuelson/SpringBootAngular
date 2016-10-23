@@ -10,7 +10,7 @@ public class FiltroConsultaFornecedor {
 
 	private String nome;
 
-	private Long cpfCnpj;
+	private String cpfCnpj;
 
 	private Long celular;
 
@@ -24,11 +24,11 @@ public class FiltroConsultaFornecedor {
 		this.nome = nome;
 	}
 
-	public Long getCpfCnpj() {
+	public String getCpfCnpj() {
 		return cpfCnpj;
 	}
 
-	public void setCpfCnpj(Long cpfCnpj) {
+	public void setCpfCnpj(String cpfCnpj) {
 		this.cpfCnpj = cpfCnpj;
 	}
 
@@ -53,7 +53,7 @@ public class FiltroConsultaFornecedor {
 	}
 
 	public String getCpfCnpjLike() {
-		return StringUtils.wrap(Objects.toString(this.cpfCnpj, null), PERCENT);
+		return StringUtils.wrap(StringUtils.trimToNull(this.cpfCnpj), PERCENT);
 	}
 
 	public String getCelularLike() {

@@ -17,7 +17,7 @@ public class Fornecedor {
 	private String nome;
 	
 	@Column(name = "cpf_cnpj")
-	private Long cpfCnpj;
+	private String cpfCnpj;
 	
 	@Column(name = "celular")
 	private Long celular;
@@ -41,11 +41,11 @@ public class Fornecedor {
 		this.nome = nome;
 	}
 
-	public Long getCpfCnpj() {
+	public String getCpfCnpj() {
 		return cpfCnpj;
 	}
 
-	public void setCpfCnpj(Long cpfCnpj) {
+	public void setCpfCnpj(String cpfCnpj) {
 		this.cpfCnpj = cpfCnpj;
 	}
 

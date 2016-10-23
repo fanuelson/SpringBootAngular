@@ -1,5 +1,6 @@
 package com.foundation.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,14 +24,20 @@ public class FornecedorService {
 
 	public Fornecedor save(Fornecedor fornecedor) {
 		validadorFornecedor.validarSalvar(fornecedor, this);
+		ajustarCpfCnpj(fornecedor);
 		return fornecedorDAO.save(fornecedor);
 	}
 	
+	private void ajustarCpfCnpj(Fornecedor fornecedor) {
+		String cpfCnpj = fornecedor.getCpfCnpj();
+		fornecedor.setCpfCnpj(StringUtils.trimToNull(cpfCnpj));
+	}
+
 	public void delete(Long idForn) {
 		fornecedorDAO.delete(idForn);
 	}
 	
-	public Fornecedor findByCpfCnpj(Long cpfCnpj) {
+	public Fornecedor findByCpfCnpj(String cpfCnpj) {
 		return fornecedorDAO.findByCpfCnpj(cpfCnpj);
 	}
 	
@@ -38,12 +45,8 @@ public class FornecedorService {
 		return fornecedorDAO.findByFilter(filtro, page);
 	}
 	
-	public boolean existsFornecedorWithCpfCnpj(Long cpfCnpj) {
-		return findByCpfCnpj(cpfCnpj) != null;
-	}
-	
 	public boolean existsFornecedorWithCpfCnpj(String cpfCnpj) {
-		return findByCpfCnpj(new Long(cpfCnpj)) != null;
+		return findByCpfCnpj(cpfCnpj) != null;
 	}
 
 	public Page<Fornecedor> findAll(Pageable page) {

@@ -1,6 +1,7 @@
 var depends = [
 	'ui.router',
-	'ui.utils.masks'
+	'ui.utils.masks',
+	'idf.br-filters'
 ];
 
 var app = angular.module('demoApp', depends);

@@ -30,8 +30,8 @@ public class ValidadorFornecedor extends Validacoes {
 	}
 
 	private void validarCpfCnpj(Fornecedor fornecedor, FornecedorService fornecedorService) {
-		if(fornecedor.getCpfCnpj()!=null){
-			String cpfCnpj = fornecedor.getCpfCnpj().toString();
+		String cpfCnpj = fornecedor.getCpfCnpj();
+		if(StringUtils.isNotEmpty(cpfCnpj)){
 			if (fornecedorService.existsFornecedorWithCpfCnpj(cpfCnpj)) {
 				adicionarValidacao(new ValidacaoRegraNegocio("CPF/CNPJ já cadastrado."));
 			} else if (!ValidadorUtils.isCNPJ(cpfCnpj) && !ValidadorUtils.isCPF(cpfCnpj)) {

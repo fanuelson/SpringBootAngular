@@ -12,25 +12,7 @@ function consultaFornecedorController($scope, APP_CONFIG, fornecedorService) {
 	
 	$scope.fornecedorExclusao = {};
 	
-	$scope.findAllPage = function(page) {
-		if(page == $scope.fornecedorPage.totalPages) {
-			return;
-		}
-		startTabelaLoading();
-		$promisePage = fornecedorService.findAllPage(page, $scope.pageSize);
-		$promisePage.success(function(data) {
-			$scope.fornecedorPage = data;
-			stopTabelaLoading();
-		}).error(function(data){
-			stopTabelaLoading();
-		});
-		
-	}
-	
 	$scope.findAllPageFilterBy = function(page) {
-		if(page == $scope.fornecedorPage.totalPages) {
-			return;
-		}
 		startTabelaLoading();
 		$promisePage = fornecedorService.findAllPageFilterBy($scope.filtroPesquisa, page, $scope.pageSize);
 		$promisePage.success(function(data) {
@@ -84,7 +66,7 @@ function consultaFornecedorController($scope, APP_CONFIG, fornecedorService) {
 		$scope.tabelaLoading = false;
 	}
 	
-	$scope.findAllPage(0);
+	$scope.findAllPageFilterBy(0);
 	
 }
 

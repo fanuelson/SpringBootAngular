@@ -17,7 +17,7 @@
 	  					<div class="sixteen wide mobile four wide computer four wide tablet column" >
 							<div class="field">
 							    <label>CPF/CNPJ</label>
-							    <input type="text" ng-model="filtroPesquisa.cpfCnpj" ui-number-mask="0" />
+							    <input type="text" ng-model="filtroPesquisa.cpfCnpj" />
 							  </div>  					
 	  					</div>
 	  					<div class="sixteen wide mobile four wide computer four wide tablet column" >
@@ -69,9 +69,9 @@
 								ng-repeat="forn in fornecedorPage.content track by forn.id">
 								<td>{{forn.id}}</td>
 								<td>{{forn.nome}}</td>
-								<td>{{forn.cpfCnpj}}</td>
-								<td>{{forn.celular}}</td>
-								<td>{{forn.telefone}}</td>
+								<td>{{forn.cpfCnpj | brCpfCnpj}}</td>
+								<td>{{forn.celular | brPhoneNumber}}</td>
+								<td>{{forn.telefone | brPhoneNumber}}</td>
 								<td>
 									<div class="ui right aligned grid" >
 										<div class="sixteen wide column" >
@@ -92,14 +92,16 @@
 							<tr ng-if="fornecedorPage.totalPages > 1" >
 								<th colspan="6">
 									<div class="ui pagination menu font-12">
-								        <a ng-click="findAllPage(fornecedorPage.number-1)" class="icon item">
+								        <a ng-if="fornecedorPage.number > 0"
+								        	ng-click="findAllPageFilterBy(fornecedorPage.number-1)" class="icon item">
 								          <i class="left chevron icon"></i>
 								        </a>
 								        <a ng-repeat="pagina in getPages(fornecedorPage.totalPages) track by $index"
-								        	ng-click="findAllPage($index)"
+								        	ng-click="findAllPageFilterBy($index)"
 								        	ng-class=" $index == fornecedorPage.number ? 'active' : ''"
 								        	class="item">{{$index + 1}}</a>
-								        <a ng-click="findAllPage(fornecedorPage.number+1)" class="icon item">
+								        <a ng-if="fornecedorPage.number < fornecedorPage.totalPages - 1" 
+								        ng-click="findAllPageFilterBy(fornecedorPage.number+1)" class="icon item">
 								          <i class="right chevron icon"></i>
 								        </a>
 							      </div>
