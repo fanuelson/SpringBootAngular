@@ -9,6 +9,12 @@
 				  <p>{{retornoSucesso.mensagem}}</p>
 				</div>
 				
+				<div ng-if="error.validacoes" class="ui error message">
+				  <ul class="list">
+				    <li ng-repeat="validacao in error.validacoes" >{{validacao.mensagem}}</li>
+				  </ul>
+				</div>
+				
 				<div class="ui hidden divider"></div>
 
 				<form id="formCadastro" name="formCadastro" class="ui form">
