@@ -7,6 +7,7 @@ function cadastroFornecedorController($scope, fornecedorService) {
 	$scope.fornecedor = {};
 	
 	$scope.save = function() {
+		$scope.retornoSucesso = {};
 		$scope.formFornecedorLoading = true;
 		
 		$scope.fornecedor.cpfCnpj = parseInt($scope.fornecedor.cpfCnpj);

@@ -8,7 +8,7 @@ import com.foundation.enums.MedidaEnum;
 
 public class FiltroConsultaInsumo {
 
-	private static final String ASPAS = "%";
+	private static final String PERCENT = "%";
 
 	private String nomeOrDescricao;
 
@@ -19,7 +19,7 @@ public class FiltroConsultaInsumo {
 	private MedidaEnum medida;
 
 	public String getNomeOrDescricaoLike() {
-		return StringUtils.wrap(StringUtils.trimToNull(this.nomeOrDescricao), ASPAS);
+		return StringUtils.wrap(StringUtils.trimToNull(this.nomeOrDescricao), PERCENT);
 	}
 
 	public String getNomeOrDescricao() {

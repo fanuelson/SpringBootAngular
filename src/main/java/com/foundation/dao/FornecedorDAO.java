@@ -11,13 +11,15 @@ import com.foundation.model.Fornecedor;
 
 public interface FornecedorDAO extends CrudRepository<Fornecedor, Long> {
 
+	Page<Fornecedor> findAll(Pageable pageable);
+	
 	Fornecedor findByCpfCnpj(Long cpfCnpj);
 
 	@SuppressWarnings("all")
 	@Query(" SELECT f FROM Fornecedor f "
-			+ " WHERE (:#{#filtro.nomeLike} IS NULL OR LOWER(f.nome) LIKE :#{#filtro.nomeLike}) "
+			+ " WHERE (:#{#filtro.nomeLike} IS NULL OR LOWER(f.nome) LIKE LOWER(:#{#filtro.nomeLike}) ) "
 			+ " AND (:#{#filtro.cpfCnpjLike} IS NULL OR STR(f.cpfCnpj) LIKE :#{#filtro.cpfCnpjLike}) "
-			+ " AND (:#{#filtro.celular} IS NULL OR STR(f.celular) LIKE :#{#filtro.celularLike}) "
-			+ " AND (:#{#filtro.telefone} IS NULL OR STR(f.telefone) LIKE :#{#filtro.telefoneLike}) ")
+			+ " AND (:#{#filtro.celularLike} IS NULL OR STR(f.celular) LIKE :#{#filtro.celularLike}) "
+			+ " AND (:#{#filtro.telefoneLike} IS NULL OR STR(f.telefone) LIKE :#{#filtro.telefoneLike}) ")
 	Page<Fornecedor> findByFilter(@Param("filtro") FiltroConsultaFornecedor filtro, Pageable page);
 }

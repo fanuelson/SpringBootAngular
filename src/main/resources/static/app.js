@@ -103,6 +103,14 @@ app.constant(
 		    		}
 		    	}     
 		    })
+		    .state("consulta-fornecedor", {
+		    	url: "/consulta-fornecedor",
+		    	views: {
+		    		"starterContent":{
+		    			templateUrl: "fornecedor/consulta-fornecedor.html"
+		    		}
+		    	}     
+		    })
 		    .state("cadastro-insumo", {
 			      url: "/cadastro-insumo",
 			      views: {

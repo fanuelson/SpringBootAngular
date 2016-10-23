@@ -1,8 +1,8 @@
-<div ng-controller="consultaInsumoController" class="ui basic segment" >
-	<h1>Insumos</h1>
+<div ng-controller="consultaFornecedorController" class="ui basic segment" >
+	<h1>{{headerPage}}</h1>
 	<div class="ui grid" >
 		<div class="sixteen wide mobile twelve wide computer twelve wide tablet column" >
-			 <div ng-class="{ 'loading' : tabelaInsumosLoading }" 
+			 <div ng-class="{ 'loading' : tabelaLoading }" 
 			 	class="ui raised segment">
   					
   					<h3>Filtro</h3>
@@ -10,41 +10,29 @@
   					<div class="ui grid form" >
 	  					<div class="sixteen wide mobile sixteen wide computer sixteen wide tablet column" >
 							<div class="field">
-							    <label>Nome/Descrição</label>
-							    <input type="text" ng-model="filtroPesquisa.nomeOrDescricao" />
+							    <label>Nome</label>
+							    <input type="text" ng-model="filtroPesquisa.nome" />
 							  </div>  					
 	  					</div>
 	  					<div class="sixteen wide mobile four wide computer four wide tablet column" >
 							<div class="field">
-							    <label>Quantidade Min.</label>
-							    <input type="text" ng-model="filtroPesquisa.quantidadeMin"  ui-number-mask />
+							    <label>CPF/CNPJ</label>
+							    <input type="text" ng-model="filtroPesquisa.cpfCnpj" ui-number-mask="0" />
 							  </div>  					
 	  					</div>
 	  					<div class="sixteen wide mobile four wide computer four wide tablet column" >
 							<div class="field">
-							    <label>Quantidade Máx.</label>
-							    <input type="text" ng-model="filtroPesquisa.quantidadeMax" ui-number-mask />
+							    <label>Celular</label>
+							    <input type="text" ng-model="filtroPesquisa.celular" ui-number-mask="0"/>
 							  </div>  					
 	  					</div>
 	  					<div class="sixteen wide mobile four wide computer four wide tablet column" >
 							<div class="field">
-							  <label>Medida *</label>
-							
-							<div>
-								<select id="medidaSelection" 
-									class="ui fluid dropdown" 
-									ng-model="filtroPesquisa.medida"
-									value-resettable>
-						          <option value="todas" >Todas</option>
-					              <option ng-repeat="medida in medidas" 
-					              	class="item" 
-					              	ng-value="medida.abreviacao">
-					              		{{medida.abreviacao}} ({{medida.descricao}})
-					              </option>
-						      </select>
-							</div>
+							    <label>Telefone</label>
+							    <input type="text" ng-model="filtroPesquisa.telefone" ui-number-mask="0" />
 							  </div>  					
 	  					</div>
+	  					
 	  					<div class="text-align-right sixteen wide column">
 									<button ng-click="limparFiltroPesquisa()" class="ui button">Limpar</button>
 									<button ng-click="pesquisar()" type="submit" class="ui blue animated button">
@@ -59,36 +47,36 @@
 				 	
   					<div class="ui hidden divider"></div>
   					<div class="ui divider"></div>
-					<table class="ui selectable celled table">
+					<table class="ui selectable celled striped table">
 						<thead>
 							<tr>
 								<th>ID</th>
 								<th>Nome</th>
-								<th>Descrição</th>
-								<th>Quantidade</th>
-								<th>Medida</th>
+								<th>CPF/CNPJ</th>
+								<th>Celular</th>
+								<th>Telefone</th>
 								<th>Acões</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-if="insumosPage.totalElements === 0" 
+							<tr ng-if="fornecedorPage.totalElements === 0" 
 								class="ui negative" >
 								<td colspan="6" >
 									Nenhum registro encontrado
 								</td>
 							</tr>
-							<tr ng-if="insumosPage.totalElements > 0" 
-								ng-repeat="insumo in insumosPage.content track by insumo.id">
-								<td>{{insumo.id}}</td>
-								<td>{{insumo.nome}}</td>
-								<td>{{insumo.descricao}}</td>
-								<td>{{insumo.quantidade | brDecimalNumber}}</td>
-								<td>{{insumo.medida.abreviacao}} ({{insumo.medida.descricao}})</td>
+							<tr ng-if="fornecedorPage.totalElements > 0" 
+								ng-repeat="forn in fornecedorPage.content track by forn.id">
+								<td>{{forn.id}}</td>
+								<td>{{forn.nome}}</td>
+								<td>{{forn.cpfCnpj}}</td>
+								<td>{{forn.celular}}</td>
+								<td>{{forn.telefone}}</td>
 								<td>
 									<div class="ui right aligned grid" >
 										<div class="sixteen wide column" >
 											<a	href="" 
-												ng-click="setInsumoExclusao(insumo)" 
+												ng-click="setFornecedorExclusao(forn)" 
 												onclick="abrirModalConfirmacao()" 
 												data-tooltip="Excluir" 
 												data-position="left center"
@@ -101,17 +89,17 @@
 							</tr>
 						</tbody>
 						<tfoot>
-							<tr ng-if="insumosPage.totalPages > 1" >
+							<tr ng-if="fornecedorPage.totalPages > 1" >
 								<th colspan="6">
 									<div class="ui pagination menu font-12">
-								        <a ng-click="findAllInsumosPage(insumosPage.number-1)" class="icon item">
+								        <a ng-click="findAllPage(fornecedorPage.number-1)" class="icon item">
 								          <i class="left chevron icon"></i>
 								        </a>
-								        <a ng-repeat="pagina in getPages(insumosPage.totalPages) track by $index"
-								        	ng-click="findAllInsumosPage($index)"
-								        	ng-class=" $index == produtosPage.number ? 'active' : ''"
+								        <a ng-repeat="pagina in getPages(fornecedorPage.totalPages) track by $index"
+								        	ng-click="findAllPage($index)"
+								        	ng-class=" $index == fornecedorPage.number ? 'active' : ''"
 								        	class="item">{{$index + 1}}</a>
-								        <a ng-click="findAllInsumosPage(insumosPage.number+1)" class="icon item">
+								        <a ng-click="findAllPage(fornecedorPage.number+1)" class="icon item">
 								          <i class="right chevron icon"></i>
 								        </a>
 							      </div>

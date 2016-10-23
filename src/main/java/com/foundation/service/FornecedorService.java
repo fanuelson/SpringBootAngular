@@ -26,12 +26,16 @@ public class FornecedorService {
 		return fornecedorDAO.save(fornecedor);
 	}
 	
+	public void delete(Long idForn) {
+		fornecedorDAO.delete(idForn);
+	}
+	
 	public Fornecedor findByCpfCnpj(Long cpfCnpj) {
 		return fornecedorDAO.findByCpfCnpj(cpfCnpj);
 	}
 	
-	public Page<Fornecedor> findByFilter(FiltroConsultaFornecedor filro, Pageable page) {
-		return fornecedorDAO.findByFilter(filro, page);
+	public Page<Fornecedor> findByFilter(FiltroConsultaFornecedor filtro, Pageable page) {
+		return fornecedorDAO.findByFilter(filtro, page);
 	}
 	
 	public boolean existsFornecedorWithCpfCnpj(Long cpfCnpj) {
@@ -40,6 +44,10 @@ public class FornecedorService {
 	
 	public boolean existsFornecedorWithCpfCnpj(String cpfCnpj) {
 		return findByCpfCnpj(new Long(cpfCnpj)) != null;
+	}
+
+	public Page<Fornecedor> findAll(Pageable page) {
+		return fornecedorDAO.findAll(page);
 	}
 	
 }
