@@ -47,12 +47,24 @@
 				 	
   					<div class="ui hidden divider"></div>
   					<div class="ui divider"></div>
-					<table class="ui selectable celled striped table">
+					<table class="ui selectable celled striped sortable table">
 						<thead>
 							<tr>
-								<th>ID</th>
-								<th>Nome</th>
-								<th>CPF/CNPJ</th>
+								<th class="sorted" ng-click="findAllPageFilterBySortBy('id')" >
+									ID
+									<i ng-if="isDesc('id')" class="material-icons">keyboard_arrow_up</i>
+									<i ng-if="isAsc('id')" class="material-icons">keyboard_arrow_down</i>
+								</th>
+								<th class="sorted" ng-click="findAllPageFilterBySortBy('nome')" >
+									Nome
+									<i ng-if="isDesc('nome')" class="material-icons">keyboard_arrow_up</i>
+									<i ng-if="isAsc('nome')" class="material-icons">keyboard_arrow_down</i>
+								</th>
+								<th class="sorted" ng-click="findAllPageFilterBySortBy('cpfCnpj')" >
+									CPF/CNPJ
+									<i ng-if="isDesc('cpfCnpj')" class="material-icons">keyboard_arrow_up</i>
+									<i ng-if="isAsc('cpfCnpj')" class="material-icons">keyboard_arrow_down</i>
+								</th>
 								<th>Celular</th>
 								<th>Telefone</th>
 								<th>Acões</th>
@@ -99,7 +111,7 @@
 								        <a ng-repeat="pagina in getPages(fornecedorPage.totalPages) track by $index"
 								        	ng-click="findAllPageFilterBy($index)"
 								        	ng-class=" $index == fornecedorPage.number ? 'active' : ''"
-								        	class="item">{{$index + 1}}</a>
+								        	class="item ">{{$index + 1}}</a>
 								        <a ng-if="fornecedorPage.number < fornecedorPage.totalPages - 1" 
 								        ng-click="findAllPageFilterBy(fornecedorPage.number+1)" class="icon item">
 								          <i class="right chevron icon"></i>

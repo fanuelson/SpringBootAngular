@@ -11,8 +11,8 @@ function fornecedorService($http, APP_CONFIG) {
 		return $http.get(rest_url + '/fornecedores/page' + pageParams);
 	};
 	
-	this.findAllPageFilterBy = function(filtro, page, size) {
-		var pageParams = "?page="+page+"&size="+size;
+	this.findAllPageFilterBy = function(filtro, page, size, sort) {
+		var pageParams = "?page="+page+"&size="+size+"&sort="+sort;
 		return $http.post(rest_url + '/fornecedores/page/filterBy' + pageParams, filtro);
 	};
 	

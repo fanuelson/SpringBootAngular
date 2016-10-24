@@ -12,9 +12,40 @@ function consultaFornecedorController($scope, APP_CONFIG, fornecedorService) {
 	
 	$scope.fornecedorExclusao = {};
 	
+	$scope.sortBy = {
+		field: null,
+		order: null
+	};
+	
+	$scope.isAsc = function(field){
+		return $scope.sortBy.order && $scope.sortBy.field == field &&  $scope.sortBy.order == 'ASC' ;
+	}
+	
+	$scope.isDesc = function(field){
+		return $scope.sortBy.order && $scope.sortBy.field == field && $scope.sortBy.order == 'DESC' ;
+	}
+	
+	$scope.findAllPageFilterBySortBy = function(field) {
+		console.log(field);
+		$scope.sortBy.field = field;
+		if($scope.sortBy.order  && $scope.sortBy.order == 'ASC') {
+			$scope.sortBy.order = 'DESC'; 
+		}else{
+			$scope.sortBy.order = 'ASC'; 
+		}
+		$scope.findAllPageFilterBy($scope.fornecedorPage.number);
+	}
+	
+	var getSortByQuery = function () {
+		if($scope.sortBy.field && $scope.sortBy.order){
+			return $scope.sortBy.field + "," + $scope.sortBy.order;
+		}
+		return "";
+	}
+	
 	$scope.findAllPageFilterBy = function(page) {
 		startTabelaLoading();
-		$promisePage = fornecedorService.findAllPageFilterBy($scope.filtroPesquisa, page, $scope.pageSize);
+		$promisePage = fornecedorService.findAllPageFilterBy($scope.filtroPesquisa, page, $scope.pageSize, getSortByQuery());
 		$promisePage.success(function(data) {
 			$scope.fornecedorPage = data;
 			stopTabelaLoading();
@@ -31,6 +62,7 @@ function consultaFornecedorController($scope, APP_CONFIG, fornecedorService) {
 	
 	$scope.limparFiltroPesquisa = function() {
 		$scope.filtroPesquisa = {};
+		$scope.sortBy = {};
 	}
 	
 	$scope.setFornecedorExclusao = function(forn) {
