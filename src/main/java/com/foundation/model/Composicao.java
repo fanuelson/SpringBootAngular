@@ -32,6 +32,14 @@ public class Composicao {
 	@Column(name = "gasto")
 	private BigDecimal gasto;
 
+	public void gastarInsumo() {
+		this.insumo.diminuirQuantidade(gasto);
+	}
+	
+	public boolean possuiInsumoSuficiente() {
+		return this.insumo.possuiQuantidade(this.gasto);
+	}
+	
 	public Long getId() {
 		return id;
 	}

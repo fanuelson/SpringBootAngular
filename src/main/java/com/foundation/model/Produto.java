@@ -1,5 +1,6 @@
 package com.foundation.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,8 +25,23 @@ public class Produto extends ResourceSupport {
 	private String nome;
 	
 	@OneToMany(mappedBy = "produto", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
-	private List<Composicao> composicoes;
+	private List<Composicao> composicoes = new ArrayList<>();
 
+	public void gastarInsumos(){
+		for (Composicao composicao : composicoes) {
+			composicao.gastarInsumo();
+		}
+	}
+	
+	public boolean possuiInsumosSuficientes() {
+		for (Composicao composicao : composicoes) {
+			if(!composicao.possuiInsumoSuficiente()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public Long getIdProduto() {
 		return idProduto;
 	}

@@ -42,7 +42,11 @@ public class Insumo {
 	private List<Composicao> composicoes = new ArrayList<>();
 	
 	public boolean possuiQuantidade(BigDecimal quantidade) {
-		return this.quantidade!=null && this.quantidade.compareTo(quantidade) >= 0;
+		return this.quantidade.compareTo(quantidade) >= 0;
+	}
+	
+	public void diminuirQuantidade(BigDecimal qtd){
+		this.quantidade = this.quantidade.subtract(qtd);
 	}
 	
 	public Long getId() {
