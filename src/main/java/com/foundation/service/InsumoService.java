@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dao.InsumoDAO;
@@ -24,10 +26,12 @@ public class InsumoService extends AbstractService {
 	@Autowired
 	private ValidadorInsumo validacoes;
 	
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Page<Insumo> findAll(Pageable page) {
 		return insumoDAO.findAll(page);
 	}
 	
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Page<Insumo> findByFilter(FiltroConsultaInsumo filtro, Pageable page) {
 		return insumoDAO.findByFilter(filtro, page);
 	}
@@ -39,6 +43,7 @@ public class InsumoService extends AbstractService {
 		return insumoDAO.save(insumo);
 	}
 
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public List<Insumo> findAll() {
 		return CollectionUtils.toList(insumoDAO.findAll());
 	}
