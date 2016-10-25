@@ -16,7 +16,7 @@ import com.foundation.validador.ValidadorInsumo;
 
 @Service
 @RequestScope
-public class InsumoService {
+public class InsumoService extends AbstractService {
 
 	@Autowired
 	private InsumoDAO insumoDAO;
@@ -33,7 +33,9 @@ public class InsumoService {
 	}
 	
 	public Insumo save(Insumo insumo) {
-		validacoes.validarSalvar(insumo);
+		limparValidacoes();
+		validacoes.validarSalvar(insumo, this);
+		assertValid();
 		return insumoDAO.save(insumo);
 	}
 

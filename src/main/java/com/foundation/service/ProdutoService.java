@@ -15,7 +15,7 @@ import com.foundation.validador.ValidadorProduto;
 
 @Service
 @RequestScope
-public class ProdutoService {
+public class ProdutoService extends AbstractService {
 
 	@Autowired
 	private ValidadorProduto validacoesProduto;
@@ -31,14 +31,16 @@ public class ProdutoService {
 	}
 
 	public Produto save(Produto produto) {
+		limparValidacoes();
 		montarComposicoes(produto);
 		validar(produto);
 		return produtoDAO.save(produto);
 	}
 
 	private void validar(Produto produto) {
-		validacoesProduto.validarSalvar(produto);
-		validacoesComposicao.validarSalvar(produto.getComposicoes());
+		validacoesProduto.validarSalvar(produto, this);
+		validacoesComposicao.validarSalvar(produto.getComposicoes(), getValidacoes());
+		assertValid();
 	}
 
 	public void delete(Long id) {

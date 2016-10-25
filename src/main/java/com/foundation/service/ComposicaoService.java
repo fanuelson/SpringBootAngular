@@ -13,16 +13,18 @@ import com.foundation.validador.ValidadorComposicao;
 
 @Service
 @RequestScope
-public class ComposicaoService {
+public class ComposicaoService extends AbstractService {
 
 	@Autowired
 	private ComposicaoDAO composicaoDAO;
 	
 	@Autowired
-	private ValidadorComposicao validacoesComposicao;
+	private ValidadorComposicao validadorComposicao;
 	
 	public List<Composicao> save(List<Composicao> composicoes) {
-		validacoesComposicao.validarSalvar(composicoes);
+		limparValidacoes();
+		validadorComposicao.validarSalvar(composicoes, getValidacoes());
+		assertValid();
 		return CollectionUtils.toList(composicaoDAO.save(composicoes));
 	}
 	

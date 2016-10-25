@@ -9,7 +9,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public abstract class Validacoes implements Serializable{
+public class Validacoes implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

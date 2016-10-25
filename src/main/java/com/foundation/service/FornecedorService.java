@@ -14,16 +14,18 @@ import com.foundation.validador.ValidadorFornecedor;
 
 @Service
 @RequestScope
-public class FornecedorService {
+public class FornecedorService extends AbstractService {
 
-	@Autowired
-	private FornecedorDAO fornecedorDAO;
-	
 	@Autowired
 	private ValidadorFornecedor validadorFornecedor;
 
+	@Autowired
+	private FornecedorDAO fornecedorDAO;
+
 	public Fornecedor save(Fornecedor fornecedor) {
+		limparValidacoes();
 		validadorFornecedor.validarSalvar(fornecedor, this);
+		assertValid();
 		ajustarCpfCnpj(fornecedor);
 		return fornecedorDAO.save(fornecedor);
 	}
