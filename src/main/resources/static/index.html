@@ -23,7 +23,7 @@
 	
 	<header>
 		<div ng-if="userLogged.isLoggedIn" class="ui top attached inverted menu">
-			<a id="menuOpener" class="item">
+			<a id="menuOpener" class="item" menu-toggle>
 		    	<i class="sidebar icon"></i>
 		    	Menu
 		    </a>
@@ -37,7 +37,7 @@
 	<div class="ui bottom attached segment pushable">
 		
 		<!-- MENU -->
-		<div ng-if="userLogged.isLoggedIn" class="ui visible inverted labeled left inline vertical sidebar menu menu-closer">
+		<div ng-if="userLogged.isLoggedIn" class="ui visible inverted labeled left inline vertical sidebar menu">
 			<div  ng-include="'menu.html'" ></div>
 		</div>
 		
@@ -52,12 +52,6 @@
 	</div>
 	
 	<div ng-include="'footer.html'"></div>
-	<script type="text/javascript">
-	$('.context.example .ui.sidebar')
-	  .sidebar({
-	    context: $('.context.example .bottom.segment')
-	  }).sidebar('attach events', '.menu .item');
-	</script>
 
 	<!-- Modules -->
 	<script src="app.js"></script>
@@ -65,6 +59,7 @@
 	<!-- Custom Directives -->
 	<script src="directives/btnSalvar/btnSalvarDirective.js"></script>
 	<script src="directives/btnPesquisar/btnPesquisarDirective.js"></script>
+	<script src="directives/menuToggle/menuToggleDirective.js"></script>
 
 	<!-- Services -->
 	<script src="usuario/UsuarioService.js"></script>
