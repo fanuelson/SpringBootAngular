@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dao.ProdutoDAO;
@@ -26,6 +28,7 @@ public class ProdutoService extends AbstractService {
 	@Autowired
 	private ProdutoDAO produtoDAO;
 
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Page<Produto> findAll(Pageable page) {
 		return produtoDAO.findAll(page);
 	}

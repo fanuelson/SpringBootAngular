@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dao.FornecedorDAO;
@@ -39,18 +41,21 @@ public class FornecedorService extends AbstractService {
 		fornecedorDAO.delete(idForn);
 	}
 	
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Fornecedor findByCpfCnpj(String cpfCnpj) {
 		return fornecedorDAO.findByCpfCnpj(cpfCnpj);
 	}
 	
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Page<Fornecedor> findByFilter(FiltroConsultaFornecedor filtro, Pageable page) {
 		return fornecedorDAO.findByFilter(filtro, page);
 	}
-	
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public boolean existsFornecedorWithCpfCnpj(String cpfCnpj) {
 		return findByCpfCnpj(cpfCnpj) != null;
 	}
 
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Page<Fornecedor> findAll(Pageable page) {
 		return fornecedorDAO.findAll(page);
 	}

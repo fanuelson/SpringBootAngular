@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dao.UsuarioDAO;
@@ -21,10 +23,12 @@ public class UsuarioService extends AbstractService{
 	@Autowired
 	private ValidadorUsuario validadorUsuario;
 
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public List<Usuario> findAll() {
 		return CollectionUtils.toList(usuarioDAO.findAll());
 	}
 	
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Usuario findByLogin(String login) {
 		return usuarioDAO.findByLogin(login);
 	}

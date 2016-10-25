@@ -22,6 +22,8 @@ import io.jsonwebtoken.SignatureException;
 public class TokenService implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+
+	private static final int TOKEN_EXPIRATION_MINUTES = 15;
 	
 	@Autowired
 	private SecretConfig secretConfig;
@@ -29,7 +31,9 @@ public class TokenService implements Serializable{
 	public String generateToken(Long id, String login, List<String> roles) {
 		
 		Date dataAtual = new Date();
-		Date expireDate = new DateTime(dataAtual).plusMinutes(15).toDate();
+		Date expireDate = new DateTime(dataAtual)
+							.plusMinutes(TOKEN_EXPIRATION_MINUTES)
+							.toDate();
 		
 		return Jwts.builder()
 			.setId(id.toString())
@@ -44,7 +48,9 @@ public class TokenService implements Serializable{
 	
 	public String refreshToken(Claims claims) {
 		Date dataAtual = new Date();
-		Date expireDate = new DateTime(dataAtual).plusMinutes(15).toDate();
+		Date expireDate = new DateTime(dataAtual)
+							.plusMinutes(TOKEN_EXPIRATION_MINUTES)
+							.toDate();
 		
 		return Jwts.builder()
 			.setId(claims.getId())
