@@ -6,8 +6,6 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.model.Fornecedor;
 import com.foundation.service.FornecedorService;
-import com.foundation.validacao.ValidacaoCampoInvalido;
-import com.foundation.validacao.ValidacaoCampoObrigatorio;
 import com.foundation.validacao.ValidacaoRegraNegocio;
 
 import br.com.any.utils.ValidadorUtils;
@@ -27,7 +25,7 @@ public class ValidadorFornecedor {
 			if (fornecedorService.existsFornecedorWithCpfCnpj(cpfCnpj)) {
 				fornecedorService.getValidacoes().adicionarValidacao(new ValidacaoRegraNegocio("CPF/CNPJ já cadastrado."));
 			} else if (!ValidadorUtils.isCNPJ(cpfCnpj) && !ValidadorUtils.isCPF(cpfCnpj)) {
-				fornecedorService.getValidacoes().adicionarValidacao(new ValidacaoCampoInvalido("cpfCnpj", "CPF/CNPJ Inválido"));
+				fornecedorService.getValidacoes().adicionarValidacaoCampoInvalido("cpfCnpj", "CPF/CNPJ Inválido");
 			}
 			
 		}
@@ -35,7 +33,7 @@ public class ValidadorFornecedor {
 
 	private void validarCamposObrigatorios(Fornecedor fornecedor, FornecedorService fornecedorService) {
 		if(StringUtils.isBlank(fornecedor.getNome())) {
-			fornecedorService.getValidacoes().adicionarValidacao(new ValidacaoCampoObrigatorio("nome", "Campo Nome obrigatório."));
+			fornecedorService.getValidacoes().adicionarValidacaoCampoObrigatorio("nome", "Campo Nome obrigatório.");
 		}
 	}
 }

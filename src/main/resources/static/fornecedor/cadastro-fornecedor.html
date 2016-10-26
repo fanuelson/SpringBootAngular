@@ -20,14 +20,14 @@
 				<form id="formCadastro" name="formCadastro" class="ui form">
 					
 					<div class="two fields" >
-						<div ng-class="{'error': getValidatorMessageForCampoObrigatorio('nome')}" class="field">
+						<div ng-class="{'error': error.camposObrigatorios.nome}" class="field">
 							
 							<label>Nome *</label>
 	
-							<div ng-if="getValidatorMessageForCampoObrigatorio('nome')"
-								ng-class="{'error': getValidatorMessageForCampoObrigatorio('nome')}" 
+							<div ng-if="error.camposObrigatorios.nome"
+								ng-class="{'error': error.camposObrigatorios.nome}" 
 								class="ui pointing below red basic label">
-									{{getValidatorMessageForCampoObrigatorio('nome')}}
+									{{error.camposObrigatorios.nome}}
 							</div>
 							
 							<div>
@@ -35,14 +35,14 @@
 							</div>
 						</div>
 						
-						<div ng-class="{'error': getValidatorMessageForCampoObrigatorio('cpfCnpj')}" class="field">
+						<div ng-class="{'error': error.camposInvalidos.cpfCnpj}" class="field">
 							
 							<label>CPF/CNPJ</label>
 	
-							<div ng-if="getValidatorMessageForCampoObrigatorio('cpfCnpj')"
-								ng-class="{'error': getValidatorMessageForCampoObrigatorio('cpfCnpj')}" 
+							<div ng-if="error.camposInvalidos.cpfCnpj"
+								ng-class="{'error': error.camposInvalidos.cpfCnpj}" 
 								class="ui pointing below red basic label">
-									{{getValidatorMessageForCampoObrigatorio('cpfCnpj')}}
+									{{error.camposInvalidos.cpfCnpj}}
 							</div>
 							
 							<div>
