@@ -3,16 +3,16 @@ function cadastroFornecedorController($scope, fornecedorService) {
 	$scope.headerMessage = "Cadastro de Fornecedor";
 
 	$scope.formFornecedorLoading = false;
-	
+
 	$scope.fornecedor = {};
-	
+
 	$scope.save = function() {
 		$scope.retornoSucesso = {};
 		$scope.formFornecedorLoading = true;
-		
+
 		$scope.fornecedor.celular = parseInt($scope.fornecedor.celular);
 		$scope.fornecedor.telefone = parseInt($scope.fornecedor.telefone);
-		
+
 		$promiseSave = fornecedorService.save($scope.fornecedor);
 
 		$promiseSave.success(function(data) {
@@ -25,7 +25,7 @@ function cadastroFornecedorController($scope, fornecedorService) {
 			$scope.error = data;
 		});
 	}
-	
+
 	$scope.getValidatorMessageForCampoObrigatorio = function(campo) {
 		if ($scope.error) {
 			var validacoes = $scope.error.validacoes;
@@ -39,18 +39,18 @@ function cadastroFornecedorController($scope, fornecedorService) {
 		}
 		return null;
 	}
-	
+
 	$scope.limparCampos = function() {
 		$scope.insumo = {};
 		$scope.error = {};
 		$scope.formFornecedorLoading = false;
 		$scope.retornoSucesso = {};
 	}
-	
+
 }
 
-var depends = [ 
-    '$scope', 
+var depends = [
+    '$scope',
     'fornecedorService',
     cadastroFornecedorController ]
 

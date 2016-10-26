@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<title>Cook</title>
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-	
+
 	<script src="webjars/jquery/3.1.0/jquery.min.js"></script>
 	<script src="webjars/angularjs/1.2.25/angular.min.js"></script>
 	<script src="webjars/angularjs/1.2.25/i18n/angular-locale_pt-br.js"></script>
@@ -20,7 +20,7 @@
 
 </head>
 <body ng-controller="mainController" >
-	
+
 	<header>
 		<div ng-if="userLogged.isLoggedIn" class="ui top attached inverted menu">
 			<a id="menuOpener" class="item" menu-toggle>
@@ -33,14 +33,14 @@
 			</div>
 		</div>
 	</header>
-	
+
 	<div class="ui bottom attached segment pushable">
-		
+
 		<!-- MENU -->
 		<div ng-if="userLogged.isLoggedIn" class="ui visible inverted labeled left inline vertical sidebar menu">
 			<div  ng-include="'menu.html'" ></div>
 		</div>
-		
+
 		<!-- CONTENT -->
 		<div class="pusher">
 			<div class="ui basic segment">
@@ -50,16 +50,20 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div ng-include="'footer.html'"></div>
 
 	<!-- Modules -->
 	<script src="app.js"></script>
-	
+
+	<!-- Custom FILTERs -->
+	<script src="filters/BrDecimalNumberFilter.js"></script>
+
 	<!-- Custom Directives -->
 	<script src="directives/btnSalvar/btnSalvarDirective.js"></script>
 	<script src="directives/btnPesquisar/btnPesquisarDirective.js"></script>
 	<script src="directives/menuToggle/menuToggleDirective.js"></script>
+	<script src="directives/resetSelectItems/ResetSelectItemsDirective.js"></script>
 
 	<!-- Services -->
 	<script src="usuario/UsuarioService.js"></script>
@@ -80,13 +84,13 @@
 	<script src="fornecedor/CadastroFornecedorController.js"></script>
 	<script src="fornecedor/ConsultaFornecedorController.js"></script>
 	<script src="login/LoginController.js"></script>
-	
+
 	<!-- INTERCEPTOR -->
 	<script src="auth/TokenInterceptor.js"></script>
-	
+
 	<script src="ui-framework/node_modules/angular-input-masks/releases/angular-input-masks-standalone.min.js"></script>
 	<script src="js/angular-br-filters.min.js"></script>
-	
+
 	<script src="js/global.js"></script>
 
 </body>
