@@ -23,7 +23,7 @@ public class ComposicaoService extends AbstractService {
 	
 	public List<Composicao> save(List<Composicao> composicoes) {
 		limparValidacoes();
-		validadorComposicao.validarSalvar(composicoes, getValidacoes());
+		validadorComposicao.validarSalvar(composicoes, this);
 		assertValid();
 		return CollectionUtils.toList(composicaoDAO.save(composicoes));
 	}

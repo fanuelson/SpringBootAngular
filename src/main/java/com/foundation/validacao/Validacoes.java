@@ -15,11 +15,11 @@ public class Validacoes implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Set<Validacao> validacoes = new HashSet<>();
+	private Set<String> validacoes = new HashSet<>();
 	private HashMap<String, String> camposObrigatorios = new HashMap<>();
 	private HashMap<String, String> camposInvalidos = new HashMap<>();
 	
-	public void adicionarValidacao(Validacao validacao) {
+	public void adicionarValidacao(String validacao) {
 		getValidacoes().add(validacao);
 	}
 	
@@ -31,7 +31,7 @@ public class Validacoes implements Serializable{
 		camposInvalidos.put(nomeCampo, mensagem);
 	}
 	
-	public void adicionarValidacoes(List<Validacao> validacoes) {
+	public void adicionarValidacoes(List<String> validacoes) {
 		getValidacoes().addAll(validacoes);
 	}
 	
@@ -47,7 +47,7 @@ public class Validacoes implements Serializable{
 				|| MapUtils.isNotEmpty(camposInvalidos);
 	}
 	
-	private Set<Validacao> getValidacoes() {
+	private Set<String> getValidacoes() {
 		return validacoes;
 	}
 	

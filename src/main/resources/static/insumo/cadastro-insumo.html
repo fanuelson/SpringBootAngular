@@ -16,14 +16,14 @@
 
 				<form id="formCadastroInsumo" name="formCadastroInsumo" class="ui form">
 					
-					<div ng-class="{'error': getValidatorMessageForCampoObrigatorio('nome')}" class="field">
+					<div ng-class="{'error': error.camposObrigatorios.nome}" class="field">
 						
 						<label>Nome *</label>
 
-						<div ng-if="getValidatorMessageForCampoObrigatorio('nome')"
-							ng-class="{'error': getValidatorMessageForCampoObrigatorio('nome')}" 
+						<div ng-if="error.camposObrigatorios.nome"
+							ng-class="{'error': error.camposObrigatorios.nome}" 
 							class="ui pointing below red basic label">
-								{{getValidatorMessageForCampoObrigatorio('nome')}}
+								{{error.camposObrigatorios.nome}}
 						</div>
 						
 						<div>
@@ -38,22 +38,22 @@
 					</div>
 					
 					<div class="two fields" >
-						<div ng-class="{'error': getValidatorMessageForCampoObrigatorio('quantidade')}" class="field five wide computer column">
+						<div ng-class="{'error': error.camposObrigatorios.quantidade}" class="field five wide computer column">
 							<label>Quantidade *</label>
 	
 							<div>
 								<input type="text" placeholder="Quantidade" ng-model="insumo.quantidade" ui-number-mask />
 							</div>
 							
-							<div ng-if="getValidatorMessageForCampoObrigatorio('quantidade')"
-								ng-class="{'error': getValidatorMessageForCampoObrigatorio('quantidade')}" 
+							<div ng-if="error.camposObrigatorios.quantidade"
+								ng-class="{'error': error.camposObrigatorios.quantidade}" 
 								class="ui pointing under red basic label">
-									{{getValidatorMessageForCampoObrigatorio('quantidade')}}
+									{{error.camposObrigatorios.quantidade}}
 							</div>
 							
 						</div>
 						
-						<div ng-class="{'error': getValidatorMessageForCampoObrigatorio('medida')}" class="field six wide computer column">
+						<div ng-class="{'error': error.camposObrigatorios.medida}" class="field six wide computer column">
 							<label>Medida *</label>
 							
 							<div >
@@ -70,10 +70,10 @@
 						      </select>
 							</div>
 							
-							<div ng-if="getValidatorMessageForCampoObrigatorio('medida')"
-								ng-class="{'error': getValidatorMessageForCampoObrigatorio('medida')}" 
+							<div ng-if="error.camposObrigatorios.medida"
+								ng-class="{'error': error.camposObrigatorios.medida}" 
 								class="ui pointing under red basic label">
-									{{getValidatorMessageForCampoObrigatorio('medida')}}
+									{{error.camposObrigatorios.medida}}
 							</div>
 							
 						</div>

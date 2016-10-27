@@ -6,7 +6,6 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.model.Fornecedor;
 import com.foundation.service.FornecedorService;
-import com.foundation.validacao.ValidacaoRegraNegocio;
 
 import br.com.any.utils.ValidadorUtils;
 
@@ -23,7 +22,7 @@ public class ValidadorFornecedor {
 		String cpfCnpj = fornecedor.getCpfCnpj();
 		if(StringUtils.isNotEmpty(cpfCnpj)){
 			if (fornecedorService.existsFornecedorWithCpfCnpj(cpfCnpj)) {
-				fornecedorService.getValidacoes().adicionarValidacao(new ValidacaoRegraNegocio("CPF/CNPJ já cadastrado."));
+				fornecedorService.getValidacoes().adicionarValidacao("CPF/CNPJ já cadastrado.");
 			} else if (!ValidadorUtils.isCNPJ(cpfCnpj) && !ValidadorUtils.isCPF(cpfCnpj)) {
 				fornecedorService.getValidacoes().adicionarValidacaoCampoInvalido("cpfCnpj", "CPF/CNPJ Inválido");
 			}

@@ -34,20 +34,6 @@ function cadastroInsumoController($scope, APP_CONFIG, insumoService, medidaServi
 		});
 	}
 	
-	$scope.getValidatorMessageForCampoObrigatorio = function(campo) {
-		if ($scope.error) {
-			var validacoes = $scope.error.validacoes;
-			if (validacoes) {
-				for (var i = 0; i < validacoes.length; i++) {
-					if (validacoes[i].nomeCampo == campo) {
-						return validacoes[i].mensagem;
-					}
-				}
-			}
-		}
-		return null;
-	}
-	
 	$scope.limparCampos = function() {
 		$scope.insumo = {};
 		$scope.error = {};

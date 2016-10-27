@@ -24,12 +24,12 @@
 					
 					<div class="ui grid" >
 						<div class="sixteen wide mobile eight wide tablet eight wide computer column">
-							<div ng-class="{ 'error' : getValidatorMessageFor('nome') }" class="field" >
+							<div ng-class="{ 'error' : error.camposObrigatorios.nome }" class="field" >
 							
 								<label>Nome do Produto *</label>
 								
-								<div ng-if="getValidatorMessageFor('nome')" class="ui pointing below red basic label">
-							      {{getValidatorMessageFor('nome')}}
+								<div ng-if="error.camposObrigatorios.nome" class="ui pointing below red basic label">
+							      {{error.camposObrigatorios.nome}}
 							    </div>
 							    <div>
 									<input type="text" 

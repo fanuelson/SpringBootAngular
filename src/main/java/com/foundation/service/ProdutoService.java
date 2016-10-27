@@ -34,15 +34,15 @@ public class ProdutoService extends AbstractService {
 	}
 
 	public Produto save(Produto produto) {
-		limparValidacoes();
 		montarComposicoes(produto);
 		validar(produto);
 		return produtoDAO.save(produto);
 	}
 
 	private void validar(Produto produto) {
+		limparValidacoes();
 		validacoesProduto.validarSalvar(produto, this);
-		validacoesComposicao.validarSalvar(produto.getComposicoes(), getValidacoes());
+		validacoesComposicao.validarSalvar(produto.getComposicoes(), this);
 		assertValid();
 	}
 
