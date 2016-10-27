@@ -15,12 +15,12 @@ public class Validacoes implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Set<String> validacoes = new HashSet<>();
+	private Set<String> validacoesRegraNegocio = new HashSet<>();
 	private HashMap<String, String> camposObrigatorios = new HashMap<>();
 	private HashMap<String, String> camposInvalidos = new HashMap<>();
 	
 	public void adicionarValidacao(String validacao) {
-		getValidacoes().add(validacao);
+		validacoesRegraNegocio.add(validacao);
 	}
 	
 	public void adicionarValidacaoCampoObrigatorio(String nomeCampo, String mensagem) {
@@ -32,23 +32,21 @@ public class Validacoes implements Serializable{
 	}
 	
 	public void adicionarValidacoes(List<String> validacoes) {
-		getValidacoes().addAll(validacoes);
+		for (String string : validacoes) {
+			validacoesRegraNegocio.add(string);
+		}
 	}
 	
 	public void limparValidacoes() {
-		getValidacoes().clear();
+		validacoesRegraNegocio.clear();
 		camposObrigatorios.clear();
 		camposInvalidos.clear();
 	}
 	
 	public boolean hasValidacoes() {
-		return CollectionUtils.isNotEmpty(getValidacoes())
+		return CollectionUtils.isNotEmpty(validacoesRegraNegocio)
 				|| MapUtils.isNotEmpty(camposObrigatorios)
 				|| MapUtils.isNotEmpty(camposInvalidos);
-	}
-	
-	private Set<String> getValidacoes() {
-		return validacoes;
 	}
 	
 	public HashMap<String, String> getCamposObrigatorios() {
@@ -59,5 +57,8 @@ public class Validacoes implements Serializable{
 		return camposInvalidos;
 	}
 
-	
+	public Set<String> getValidacoesRegraNegocio() {
+		return validacoesRegraNegocio;
+	}
+
 }

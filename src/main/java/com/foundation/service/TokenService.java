@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.foundation.SecretConfig;
 
@@ -18,7 +18,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 
-@Component
+@Service
 public class TokenService implements Serializable{
 
 	private static final long serialVersionUID = 1L;
