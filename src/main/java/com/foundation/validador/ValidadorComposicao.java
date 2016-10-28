@@ -11,7 +11,7 @@ import com.foundation.service.AbstractService;
 
 @Component
 @RequestScope
-public class ValidadorComposicao {
+public class ValidadorComposicao extends AbstractValidador {
 
 	public void validarSalvar(List<Composicao> composicoes, AbstractService abstractService) {
 		if(composicoes==null || composicoes.isEmpty()) {

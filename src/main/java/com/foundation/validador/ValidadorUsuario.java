@@ -10,7 +10,7 @@ import com.foundation.validacao.Validacoes;
 
 @Component
 @RequestScope
-public class ValidadorUsuario {
+public class ValidadorUsuario extends AbstractValidador {
 
 	public void validarSalvar(Usuario usuario, UsuarioService usuarioService) {
 		Validacoes validacoes = usuarioService.getValidacoes();

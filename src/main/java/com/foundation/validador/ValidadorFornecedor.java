@@ -11,7 +11,7 @@ import br.com.any.utils.ValidadorUtils;
 
 @Component
 @RequestScope
-public class ValidadorFornecedor {
+public class ValidadorFornecedor extends AbstractValidador {
 
 	public void validarSalvar(Fornecedor fornecedor, FornecedorService fornecedorService) {
 		validarCamposObrigatorios(fornecedor, fornecedorService);

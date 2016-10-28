@@ -9,7 +9,7 @@ import com.foundation.service.ProdutoService;
 
 @Component
 @RequestScope
-public class ValidadorProduto {
+public class ValidadorProduto extends AbstractValidador {
 
 	public void validarSalvar(final Produto produto, ProdutoService produtoService) {
 		if (StringUtils.isBlank(produto.getNome())) {
