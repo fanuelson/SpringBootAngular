@@ -42,7 +42,9 @@ public class ProdutoController {
 	}
 	
 	@RequestMapping(path="/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable Long id) {
+	public ResponseEntity<?> delete(@PathVariable Long id) {
 		produtoService.delete(id);
+		BasicResponseDTO basicResponse = new BasicResponseDTO("Registro Removido com sucesso.");
+		return ResponseEntity.status(HttpStatus.OK).body(basicResponse);
 	}
 }
