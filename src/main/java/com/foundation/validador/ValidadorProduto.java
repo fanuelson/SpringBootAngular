@@ -16,5 +16,9 @@ public class ValidadorProduto extends AbstractValidador {
 			produtoService.getValidacoes().adicionarValidacaoCampoObrigatorio("nome", "Campo Nome Obrigatório.");
 		}
 		
+		if(produto.getStatus() == null) {
+			produtoService.getValidacoes().adicionarValidacaoCampoObrigatorio("status", "Campo Status Obrigatório.");
+		}
+		
 	}
 }

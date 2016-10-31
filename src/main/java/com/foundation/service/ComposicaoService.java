@@ -28,4 +28,8 @@ public class ComposicaoService extends AbstractService {
 		return CollectionUtils.toList(composicaoDAO.save(composicoes));
 	}
 	
+	public void removeAll(List<Composicao> composicoes) {
+		composicaoDAO.delete(composicoes);
+	}
+	
 }

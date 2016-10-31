@@ -6,12 +6,16 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.springframework.hateoas.ResourceSupport;
+
+import com.foundation.enums.AtivoInativoEnum;
 
 @Entity
 public class Produto extends ResourceSupport {
@@ -24,7 +28,11 @@ public class Produto extends ResourceSupport {
 	@Column(name = "nome")
 	private String nome;
 	
-	@OneToMany(mappedBy = "produto", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private AtivoInativoEnum status;
+	
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Composicao> composicoes = new ArrayList<>();
 
 	public void gastarInsumos(){
@@ -40,6 +48,14 @@ public class Produto extends ResourceSupport {
 			}
 		}
 		return true;
+	}
+	
+	public void toggleStatus() {
+		if(this.status.equals(AtivoInativoEnum.A)){
+			this.status = AtivoInativoEnum.I;
+		} else if(this.status.equals(AtivoInativoEnum.I)){
+			this.status = AtivoInativoEnum.A;
+		}
 	}
 	
 	public Long getIdProduto() {
@@ -64,6 +80,14 @@ public class Produto extends ResourceSupport {
 
 	public void setComposicoes(List<Composicao> composicoes) {
 		this.composicoes = composicoes;
+	}
+	
+	public AtivoInativoEnum getStatus() {
+		return status;
+	}
+
+	public void setStatus(AtivoInativoEnum status) {
+		this.status = status;
 	}
 
 	@Override

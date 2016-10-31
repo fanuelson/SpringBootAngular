@@ -26,9 +26,29 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoService produtoService;
 	
+	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> findOne(@PathVariable Long id) {
+		try{
+			BasicResponseDTO basicResponse = new BasicResponseDTO(produtoService.findOne(id));
+			return new ResponseEntity<BasicResponseDTO>(basicResponse, HttpStatus.CREATED);
+		} catch (ValidacaoException e) {
+			return new ResponseEntity<Validacoes>(e.getValidacoes(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@RequestMapping(path = "/page", method = RequestMethod.GET)
 	public Page<Produto> findAll(Pageable page) {
 		return produtoService.findAll(page);
+	}
+	
+	@RequestMapping(path = "/{id}/toggleStatus", method = RequestMethod.GET)
+	public ResponseEntity<?> toggleStatus(@PathVariable Long id) {
+		try{
+			BasicResponseDTO basicResponse = new BasicResponseDTO(produtoService.toggleStatus(id), "Registro Salvo com sucesso!");
+			return new ResponseEntity<BasicResponseDTO>(basicResponse, HttpStatus.CREATED);
+		} catch (ValidacaoException e) {
+			return new ResponseEntity<Validacoes>(e.getValidacoes(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

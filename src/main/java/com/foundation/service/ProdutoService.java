@@ -27,7 +27,15 @@ public class ProdutoService extends AbstractService {
 	
 	@Autowired
 	private ProdutoDAO produtoDAO;
+	
+	@Autowired
+	private ComposicaoService composicaoService;
 
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	public Produto findOne(Long idProduto) {
+		return produtoDAO.findOne(idProduto);
+	}
+	
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Page<Produto> findAll(Pageable page) {
 		return produtoDAO.findAll(page);
@@ -36,7 +44,15 @@ public class ProdutoService extends AbstractService {
 	public Produto save(Produto produto) {
 		montarComposicoes(produto);
 		validar(produto);
+		removerComposicoesAntigas(produto);
 		return produtoDAO.save(produto);
+	}
+
+	private void removerComposicoesAntigas(Produto produto) {
+		if(produto.getIdProduto()!=null){
+			Produto p = produtoDAO.findOne(produto.getIdProduto());
+			composicaoService.removeAll(p.getComposicoes());
+		}
 	}
 
 	private void validar(Produto produto) {
@@ -44,6 +60,12 @@ public class ProdutoService extends AbstractService {
 		validacoesProduto.validarSalvar(produto, this);
 		validacoesComposicao.validarSalvar(produto.getComposicoes(), this);
 		assertValid();
+	}
+	
+	public Produto toggleStatus(Long idProduto) {
+		Produto prod = produtoDAO.findOne(idProduto);
+		prod.toggleStatus();
+		return produtoDAO.save(prod);
 	}
 
 	public void delete(Long id) {
