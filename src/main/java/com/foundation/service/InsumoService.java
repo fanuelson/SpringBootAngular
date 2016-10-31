@@ -55,5 +55,9 @@ public class InsumoService extends AbstractService {
 	public void delete(Long id) {
 		insumoDAO.delete(id);
 	}
+
+	public Insumo findOne(Long id) {
+		return insumoDAO.findOne(id);
+	}
 	
 }

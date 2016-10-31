@@ -29,6 +29,16 @@ public class InsumoController {
 	@Autowired
 	private InsumoService insumoService;
 	
+	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> findOne(@PathVariable Long id) {
+		try {
+			BasicResponseDTO basicResponse = new BasicResponseDTO(insumoService.findOne(id));
+			return ResponseEntity.status(HttpStatus.CREATED).body(basicResponse);
+		} catch (ValidacaoException e) {
+			return new ResponseEntity<Validacoes>(e.getValidacoes(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Insumo> findAll() {
 		return insumoService.findAll();
