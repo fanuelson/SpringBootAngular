@@ -8,7 +8,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dao.ComposicaoDAO;
 import com.foundation.model.Composicao;
-import com.foundation.utils.CollectionUtils;
+import com.foundation.utils.CustomCollectionUtils;
 import com.foundation.validador.ValidadorComposicao;
 
 @Service
@@ -25,11 +25,15 @@ public class ComposicaoService extends AbstractService {
 		limparValidacoes();
 		validadorComposicao.validarSalvar(composicoes, this);
 		assertValid();
-		return CollectionUtils.toList(composicaoDAO.save(composicoes));
+		return CustomCollectionUtils.toList(composicaoDAO.save(composicoes));
 	}
 	
 	public void removeAll(List<Composicao> composicoes) {
 		composicaoDAO.delete(composicoes);
+	}
+	
+	public List<Composicao> findAllByInsumo(Long idInsumo) {
+		return composicaoDAO.findAllByInsumo(idInsumo);
 	}
 	
 }

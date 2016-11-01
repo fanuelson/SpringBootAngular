@@ -10,7 +10,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dao.UsuarioDAO;
 import com.foundation.model.Usuario;
-import com.foundation.utils.CollectionUtils;
+import com.foundation.utils.CustomCollectionUtils;
 import com.foundation.validador.ValidadorUsuario;
 
 @Service
@@ -25,7 +25,7 @@ public class UsuarioService extends AbstractService{
 
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public List<Usuario> findAll() {
-		return CollectionUtils.toList(usuarioDAO.findAll());
+		return CustomCollectionUtils.toList(usuarioDAO.findAll());
 	}
 	
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)

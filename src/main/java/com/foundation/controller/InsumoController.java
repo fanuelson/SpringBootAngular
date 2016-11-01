@@ -66,8 +66,12 @@ public class InsumoController {
 	
 	@RequestMapping(path="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-		insumoService.delete(id);
-		BasicResponseDTO basicResponse = new BasicResponseDTO("Registro Removido com sucesso.");
-		return ResponseEntity.status(HttpStatus.OK).body(basicResponse);
+		try{
+			insumoService.delete(id);
+			BasicResponseDTO basicResponse = new BasicResponseDTO("Registro Removido com sucesso.");
+			return ResponseEntity.status(HttpStatus.OK).body(basicResponse);
+		} catch (ValidacaoException e) {
+			return new ResponseEntity<Validacoes>(e.getValidacoes(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

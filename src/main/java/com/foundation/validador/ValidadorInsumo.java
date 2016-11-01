@@ -25,4 +25,12 @@ public class ValidadorInsumo extends AbstractValidador {
 		}
 		
 	}
+
+	public void validarDelete(Long id, InsumoService insumoService) {
+		Validacoes validacoes = insumoService.getValidacoes();
+		if(insumoService.existeInsumoAssociadoAAlgumProduto(id)) {
+			validacoes.adicionarValidacao("Não é possível remover o Insumo pois o mesmo se encontra associado a um Produto.");
+		}
+		
+	}
 }

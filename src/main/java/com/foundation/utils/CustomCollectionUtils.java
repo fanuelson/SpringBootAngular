@@ -3,7 +3,7 @@ package com.foundation.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class CollectionUtils {
+public final class CustomCollectionUtils {
 
 	public static <E> List<E> toList(Iterable<E> iterable) {
 		if (iterable instanceof List) {
