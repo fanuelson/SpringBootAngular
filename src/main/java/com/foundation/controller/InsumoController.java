@@ -55,13 +55,9 @@ public class InsumoController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> save(@RequestBody Insumo insumo) {
-		try {
-			BasicResponseDTO basicResponse = new BasicResponseDTO(insumoService.save(insumo), "Registro Salvo com sucesso.");
-			return ResponseEntity.status(HttpStatus.CREATED).body(basicResponse);
-		} catch (ValidacaoException e) {
-			return new ResponseEntity<Validacoes>(e.getValidacoes(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	public ResponseEntity<?> save(@RequestBody Insumo insumo) throws ValidacaoException {
+		BasicResponseDTO basicResponse = new BasicResponseDTO(insumoService.save(insumo), "Registro Salvo com sucesso.");
+		return ResponseEntity.status(HttpStatus.CREATED).body(basicResponse);
 	}
 	
 	@RequestMapping(path="/{id}", method = RequestMethod.DELETE)
