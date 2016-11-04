@@ -16,6 +16,7 @@ import com.foundation.filtroConsulta.FiltroConsultaInsumo;
 import com.foundation.model.Composicao;
 import com.foundation.model.Insumo;
 import com.foundation.utils.CustomCollectionUtils;
+import com.foundation.validacao.Validacoes;
 import com.foundation.validador.ValidadorInsumo;
 
 @Service
@@ -42,9 +43,9 @@ public class InsumoService extends AbstractService {
 	}
 	
 	public Insumo save(Insumo insumo) {
-		limparValidacoes();
-		validador.validarSalvar(insumo, this);
-		assertValid();
+		Validacoes v = Validacoes.newInstance();
+		validador.validarSalvar(insumo, v);
+		v.assertValid();
 		return insumoDAO.save(insumo);
 	}
 
@@ -58,9 +59,9 @@ public class InsumoService extends AbstractService {
 	}
 
 	public void delete(Long id) {
-		limparValidacoes();
-		validador.validarDelete(id, this);
-		assertValid();
+		Validacoes v = Validacoes.newInstance();
+		validador.validarDelete(id, this, v);
+		v.assertValid();
 		insumoDAO.delete(id);
 	}
 

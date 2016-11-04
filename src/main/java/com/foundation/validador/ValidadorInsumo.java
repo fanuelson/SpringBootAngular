@@ -12,24 +12,22 @@ import com.foundation.validacao.Validacoes;
 @RequestScope
 public class ValidadorInsumo extends AbstractValidador {
 
-	public void validarSalvar(Insumo insumo, InsumoService insumoService) {
-		Validacoes validacoes = insumoService.getValidacoes();
+	public void validarSalvar(Insumo insumo, Validacoes v) {
 		if (insumo.getNome() == null || StringUtils.isEmpty(insumo.getNome().trim())) {
-			validacoes.adicionarValidacaoCampoObrigatorio("nome", "Campo Nome Obrigatório.");
+			v.adicionarValidacaoCampoObrigatorio("nome", "Campo Nome Obrigatório.");
 		}
 		if (insumo.getQuantidade() == null) {
-			validacoes.adicionarValidacaoCampoObrigatorio("quantidade", "Campo Quantidade Obrigatório.");
+			v.adicionarValidacaoCampoObrigatorio("quantidade", "Campo Quantidade Obrigatório.");
 		}
 		if (insumo.getMedida() == null) {
-			validacoes.adicionarValidacaoCampoObrigatorio("medida", "Campo Medida Obrigatório.");
+			v.adicionarValidacaoCampoObrigatorio("medida", "Campo Medida Obrigatório.");
 		}
 		
 	}
 
-	public void validarDelete(Long id, InsumoService insumoService) {
-		Validacoes validacoes = insumoService.getValidacoes();
+	public void validarDelete(Long id, InsumoService insumoService, Validacoes v) {
 		if(insumoService.existeInsumoAssociadoAAlgumProduto(id)) {
-			validacoes.adicionarValidacao("Não é possível remover o Insumo pois o mesmo se encontra associado a um Produto.");
+			v.adicionarValidacaoRegraNegocio("Não é possível remover o Insumo pois o mesmo se encontra associado a um Produto.");
 		}
 		
 	}

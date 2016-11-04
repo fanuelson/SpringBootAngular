@@ -15,7 +15,7 @@ public class ValidadorComposicao extends AbstractValidador {
 
 	public void validarSalvar(List<Composicao> composicoes, AbstractService abstractService) {
 		if(composicoes==null || composicoes.isEmpty()) {
-			abstractService.getValidacoes().adicionarValidacao("Produto deve ser composto por pelo menos 1 insumo.");
+			abstractService.getValidacoes().adicionarValidacaoRegraNegocio("Produto deve ser composto por pelo menos 1 insumo.");
 		} else {
 			for (Composicao composicao : composicoes) {
 				if (composicao.getProduto() == null) {
@@ -29,7 +29,7 @@ public class ValidadorComposicao extends AbstractValidador {
 				if (composicao.getGasto() == null) {
 					abstractService.getValidacoes().adicionarValidacaoCampoObrigatorio("gasto", "Gasto é Obrigatório.");
 				}else if (composicao.getGasto().compareTo(new BigDecimal(0)) < 0) {
-					abstractService.getValidacoes().adicionarValidacao("Gasto de insumo deve ser maior que 0.");
+					abstractService.getValidacoes().adicionarValidacaoRegraNegocio("Gasto de insumo deve ser maior que 0.");
 				} 
 				
 			}

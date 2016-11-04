@@ -22,7 +22,7 @@ public class ValidadorFornecedor extends AbstractValidador {
 		String cpfCnpj = fornecedor.getCpfCnpj();
 		if(StringUtils.isNotEmpty(cpfCnpj)){
 			if (fornecedorService.existsFornecedorWithCpfCnpj(cpfCnpj)) {
-				fornecedorService.getValidacoes().adicionarValidacao("CPF/CNPJ já cadastrado.");
+				fornecedorService.getValidacoes().adicionarValidacaoRegraNegocio("CPF/CNPJ já cadastrado.");
 			} else if (!ValidadorUtils.isCNPJ(cpfCnpj) && !ValidadorUtils.isCPF(cpfCnpj)) {
 				fornecedorService.getValidacoes().adicionarValidacaoCampoInvalido("cpfCnpj", "CPF/CNPJ Inválido");
 			}

@@ -10,6 +10,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.stereotype.Component;
 
+import com.foundation.exception.ValidacaoException;
+
 @Component
 public class Validacoes implements Serializable{
 
@@ -19,46 +21,56 @@ public class Validacoes implements Serializable{
 	private HashMap<String, String> camposObrigatorios = new HashMap<>();
 	private HashMap<String, String> camposInvalidos = new HashMap<>();
 	
-	public void adicionarValidacao(String validacao) {
-		validacoesRegraNegocio.add(validacao);
+	public static Validacoes newInstance() {
+		return new Validacoes();
+	}
+	
+	public void adicionarValidacaoRegraNegocio(String validacao) {
+		this.validacoesRegraNegocio.add(validacao);
 	}
 	
 	public void adicionarValidacaoCampoObrigatorio(String nomeCampo, String mensagem) {
-		camposObrigatorios.put(nomeCampo, mensagem);
+		this.camposObrigatorios.put(nomeCampo, mensagem);
 	}
 	
 	public void adicionarValidacaoCampoInvalido(String nomeCampo, String mensagem) {
-		camposInvalidos.put(nomeCampo, mensagem);
+		this.camposInvalidos.put(nomeCampo, mensagem);
 	}
 	
 	public void adicionarValidacoes(List<String> validacoes) {
 		for (String string : validacoes) {
-			validacoesRegraNegocio.add(string);
+			this.validacoesRegraNegocio.add(string);
 		}
 	}
 	
 	public void limparValidacoes() {
-		validacoesRegraNegocio.clear();
-		camposObrigatorios.clear();
-		camposInvalidos.clear();
+		this.validacoesRegraNegocio.clear();
+		this.camposObrigatorios.clear();
+		this.camposInvalidos.clear();
 	}
 	
 	public boolean hasValidacoes() {
-		return CollectionUtils.isNotEmpty(validacoesRegraNegocio)
-				|| MapUtils.isNotEmpty(camposObrigatorios)
-				|| MapUtils.isNotEmpty(camposInvalidos);
+		return CollectionUtils.isNotEmpty(this.validacoesRegraNegocio)
+				|| MapUtils.isNotEmpty(this.camposObrigatorios)
+				|| MapUtils.isNotEmpty(this.camposInvalidos);
 	}
 	
+	public void assertValid(){
+		if(this.hasValidacoes()) {
+			throw new ValidacaoException(this);
+		}
+	}
+
 	public HashMap<String, String> getCamposObrigatorios() {
-		return camposObrigatorios;
+		return this.camposObrigatorios;
 	}
 
 	public HashMap<String, String> getCamposInvalidos() {
-		return camposInvalidos;
+		return this.camposInvalidos;
 	}
 
 	public Set<String> getValidacoesRegraNegocio() {
-		return validacoesRegraNegocio;
+		return this.validacoesRegraNegocio;
 	}
 
 }
