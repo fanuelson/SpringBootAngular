@@ -12,19 +12,14 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.foundation.dao.ProdutoDAO;
 import com.foundation.model.Composicao;
 import com.foundation.model.Produto;
-import com.foundation.validador.ValidadorComposicao;
-import com.foundation.validador.ValidadorProduto;
+import com.foundation.validador.AbstractValidadorBuilder;
+import com.foundation.validador.ValidadorComposicaoBuilder;
+import com.foundation.validador.ValidadorProdutoBuilder;
 
 @Service
 @RequestScope
 public class ProdutoService extends AbstractService {
 
-	@Autowired
-	private ValidadorProduto validacoesProduto;
-	
-	@Autowired
-	private ValidadorComposicao validacoesComposicao;
-	
 	@Autowired
 	private ProdutoDAO produtoDAO;
 	
@@ -56,10 +51,15 @@ public class ProdutoService extends AbstractService {
 	}
 
 	private void validar(Produto produto) {
-		limparValidacoes();
-		validacoesProduto.validarSalvar(produto, this);
-		validacoesComposicao.validarSalvar(produto.getComposicoes(), this);
-		assertValid();
+
+		AbstractValidadorBuilder vpb = ValidadorProdutoBuilder.newInstance()
+			.validarCampoObrigatorio("nome", produto.getNome())
+			.validarCampoObrigatorio("status", produto.getStatus());
+		
+		ValidadorComposicaoBuilder.newInstance()
+			.validarComposicoes(produto.getComposicoes())
+			.adicionarValidacoes(vpb.getValidacoes())
+			.assertValid();
 	}
 	
 	public Produto toggleStatus(Long idProduto) {

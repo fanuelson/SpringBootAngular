@@ -12,22 +12,20 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.foundation.dao.FornecedorDAO;
 import com.foundation.filtroConsulta.FiltroConsultaFornecedor;
 import com.foundation.model.Fornecedor;
-import com.foundation.validador.ValidadorFornecedor;
+import com.foundation.validador.ValidadorFornecedorBuilder;
 
 @Service
 @RequestScope
 public class FornecedorService extends AbstractService {
 
 	@Autowired
-	private ValidadorFornecedor validadorFornecedor;
-
-	@Autowired
 	private FornecedorDAO fornecedorDAO;
 
 	public Fornecedor save(Fornecedor fornecedor) {
-		limparValidacoes();
-		validadorFornecedor.validarSalvar(fornecedor, this);
-		assertValid();
+		ValidadorFornecedorBuilder.newInstance()
+			.validarCpfCnpj(fornecedor, this)
+			.validarCampoObrigatorio("nome", fornecedor.getNome())
+			.assertValid();
 		ajustarCpfCnpj(fornecedor);
 		return fornecedorDAO.save(fornecedor);
 	}

@@ -43,6 +43,12 @@ public class Validacoes implements Serializable{
 		}
 	}
 	
+	public void adicionarValidacoes(Validacoes validacoes) {
+		CollectionUtils.addAll(this.validacoesRegraNegocio, validacoes.getValidacoesRegraNegocio());
+		this.camposInvalidos.putAll(validacoes.getCamposInvalidos());
+		this.camposObrigatorios.putAll(validacoes.getCamposObrigatorios());
+	}
+	
 	public void limparValidacoes() {
 		this.validacoesRegraNegocio.clear();
 		this.camposObrigatorios.clear();

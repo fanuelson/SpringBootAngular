@@ -16,8 +16,7 @@ import com.foundation.filtroConsulta.FiltroConsultaInsumo;
 import com.foundation.model.Composicao;
 import com.foundation.model.Insumo;
 import com.foundation.utils.CustomCollectionUtils;
-import com.foundation.validacao.Validacoes;
-import com.foundation.validador.ValidadorInsumo;
+import com.foundation.validador.ValidadorInsumoBuilder;
 
 @Service
 @RequestScope
@@ -28,9 +27,6 @@ public class InsumoService extends AbstractService {
 	
 	@Autowired
 	private ComposicaoService composicaoService;
-	
-	@Autowired
-	private ValidadorInsumo validador;
 	
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Page<Insumo> findAll(Pageable page) {
@@ -43,9 +39,11 @@ public class InsumoService extends AbstractService {
 	}
 	
 	public Insumo save(Insumo insumo) {
-		Validacoes v = Validacoes.newInstance();
-		validador.validarSalvar(insumo, v);
-		v.assertValid();
+		ValidadorInsumoBuilder.newInstance()
+			.validarCampoObrigatorio("nome", insumo.getNome())
+			.validarCampoObrigatorio("quantidade", insumo.getQuantidade())
+			.validarCampoObrigatorio("medida", insumo.getMedida())
+			.assertValid();
 		return insumoDAO.save(insumo);
 	}
 
@@ -53,15 +51,11 @@ public class InsumoService extends AbstractService {
 	public List<Insumo> findAll() {
 		return CustomCollectionUtils.toList(insumoDAO.findAll());
 	}
-	
-	public void delete(Insumo insumo) {
-		insumoDAO.delete(insumo);
-	}
 
 	public void delete(Long id) {
-		Validacoes v = Validacoes.newInstance();
-		validador.validarDelete(id, this, v);
-		v.assertValid();
+		ValidadorInsumoBuilder.newInstance()
+			.validarExisteProdutoCompostoPorInsumo(id, this)
+			.assertValid();
 		insumoDAO.delete(id);
 	}
 
@@ -69,7 +63,7 @@ public class InsumoService extends AbstractService {
 		return insumoDAO.findOne(id);
 	}
 	
-	public boolean existeInsumoAssociadoAAlgumProduto(Long idInsumo) {
+	public boolean existeProdutoCompostoPeloInsumo(Long idInsumo) {
 		List<Composicao> composicoesAssociadas = composicaoService.findAllByInsumo(idInsumo);
 		return CollectionUtils.isNotEmpty(composicoesAssociadas);
 	}

@@ -11,7 +11,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.foundation.dao.UsuarioDAO;
 import com.foundation.model.Usuario;
 import com.foundation.utils.CustomCollectionUtils;
-import com.foundation.validador.ValidadorUsuario;
+import com.foundation.validador.ValidadorUsuarioBuilder;
 
 @Service
 @RequestScope
@@ -20,9 +20,6 @@ public class UsuarioService extends AbstractService{
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	
-	@Autowired
-	private ValidadorUsuario validadorUsuario;
-
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public List<Usuario> findAll() {
 		return CustomCollectionUtils.toList(usuarioDAO.findAll());
@@ -34,9 +31,11 @@ public class UsuarioService extends AbstractService{
 	}
 	
 	public Usuario save(Usuario usuario) {
-		limparValidacoes();
-		validadorUsuario.validarSalvar(usuario, this);
-		assertValid();
+		ValidadorUsuarioBuilder.newInstance()
+			.validarCampoObrigatorio("nome", usuario.getNome())
+			.validarCampoObrigatorio("login", usuario.getLogin())
+			.validarCampoObrigatorio("senha", usuario.getSenha())
+			.assertValid();
 		return usuarioDAO.save(usuario);
 	}
 }

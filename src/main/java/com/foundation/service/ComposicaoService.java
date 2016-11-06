@@ -9,7 +9,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.foundation.dao.ComposicaoDAO;
 import com.foundation.model.Composicao;
 import com.foundation.utils.CustomCollectionUtils;
-import com.foundation.validador.ValidadorComposicao;
+import com.foundation.validador.ValidadorComposicaoBuilder;
 
 @Service
 @RequestScope
@@ -18,13 +18,10 @@ public class ComposicaoService extends AbstractService {
 	@Autowired
 	private ComposicaoDAO composicaoDAO;
 	
-	@Autowired
-	private ValidadorComposicao validadorComposicao;
-	
 	public List<Composicao> save(List<Composicao> composicoes) {
-		limparValidacoes();
-		validadorComposicao.validarSalvar(composicoes, this);
-		assertValid();
+		ValidadorComposicaoBuilder.newInstance()
+			.validarComposicoes(composicoes)
+			.assertValid();
 		return CustomCollectionUtils.toList(composicaoDAO.save(composicoes));
 	}
 	
