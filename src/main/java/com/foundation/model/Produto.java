@@ -58,6 +58,15 @@ public class Produto extends ResourceSupport {
 		}
 	}
 	
+	public boolean possuiInsumo(Insumo insumo){
+		for (Composicao composicao : this.composicoes) {
+			if(composicao.getInsumo().equals(insumo)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public Long getIdProduto() {
 		return idProduto;
 	}
