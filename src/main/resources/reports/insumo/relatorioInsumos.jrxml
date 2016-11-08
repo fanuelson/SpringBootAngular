@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioInsumos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0416f99c-4892-49bd-a7c3-e351d208d9f3">
+	<property name="ireport.zoom" value="1.1000000000000087"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="dataSetInsumos" uuid="e459dca3-4b52-4d3b-b7d9-df7a54b488ae">
+		<field name="nome" class="java.lang.String"/>
+		<field name="descricao" class="java.lang.String"/>
+		<field name="quantidadeFormatada" class="java.lang.String"/>
+		<field name="medida" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="dataGeracao" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="insumos" class="java.util.List"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/Users/fanuca/Desktop/"]]></defaultValueExpression>
+	</parameter>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<rectangle>
+				<reportElement x="9" y="10" width="100" height="47" uuid="94714003-5c21-446d-b8b0-c9909f21b8aa"/>
+			</rectangle>
+			<textField>
+				<reportElement x="119" y="10" width="315" height="47" uuid="04a2d8ba-29fc-4331-a92d-6f2e981f1c55"/>
+				<textElement>
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="444" y="22" width="95" height="13" uuid="6bc72a93-fa34-4867-b4d0-2f7a55a4684e"/>
+				<textElement>
+					<font fontName="Monaco" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataGeracao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="444" y="10" width="95" height="13" uuid="763b229a-30fd-4bb1-a6ce-cf88caac71e4"/>
+				<textElement>
+					<font fontName="Monaco" size="8"/>
+				</textElement>
+				<text><![CDATA[Data da Emissão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="24" width="62" height="20" uuid="1c134763-629b-4a91-afed-893050a74924"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[LOGO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="11" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="30">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="30" uuid="a099c912-3d95-473e-a476-3b04723abdc8"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{insumos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subReportRelatorioInsumos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement x="395" y="4" width="107" height="13" uuid="285522f7-6fc2-408d-b5ae-229a81e24eff"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="512" y="4" width="40" height="13" uuid="0cc3bfac-d459-4f61-93ef-2acbd10bf936"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

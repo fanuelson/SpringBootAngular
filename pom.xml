@@ -84,6 +84,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		    <artifactId>guava</artifactId>
 		    <version>19.0</version>
 		</dependency>
+		<!-- JASPER REPORT -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.1.0</version>
+		</dependency>
 				
 
 	</dependencies>

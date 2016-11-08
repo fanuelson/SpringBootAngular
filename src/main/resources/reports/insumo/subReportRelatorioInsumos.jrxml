@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReportRelatorioInsumos" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="fad77ecb-2647-449b-88a8-fcd96700975f">
+	<property name="ireport.zoom" value="1.3310000000000008"/>
+	<property name="ireport.x" value="7"/>
+	<property name="ireport.y" value="0"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="quantidadeFormatada" class="java.lang.String"/>
+	<field name="medida" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="24">
+			<staticText>
+				<reportElement x="6" y="5" width="100" height="15" uuid="34050ecb-3cba-4729-bfa5-44d39463e66d"/>
+				<textElement>
+					<font fontName="Monaco" size="9" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="5" width="88" height="15" uuid="dfc64b3a-5b95-476e-8fca-e8609a57c417"/>
+				<textElement textAlignment="Right">
+					<font fontName="Monaco" size="9" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="5" width="65" height="15" uuid="946fa6ee-22da-453e-9257-3d131cc858d8"/>
+				<text><![CDATA[Medida]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" backcolor="#000000" uuid="4d26f803-6dcc-42f1-97af-43c4fff72e3e"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="113" y="5" width="262" height="15" uuid="300cbc6a-27f1-451b-8a2a-c8d167cbd8f6"/>
+				<textElement>
+					<font fontName="Monaco" size="9" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Prevent">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="6" y="2" width="100" height="16" uuid="2339b8cb-f472-4d67-8dca-0014c4532351"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="113" y="2" width="262" height="16" uuid="e8eac4d8-7393-4f4d-be09-03f374f4dbd0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="379" y="2" width="88" height="16" uuid="aa0acf9b-e385-4189-be83-8fab53cdacc9"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidadeFormatada}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="2" y="19" width="550" height="1" uuid="a920dec8-cfbe-46ce-a072-26cf80675065"/>
+				<graphicElement>
+					<pen lineColor="#FF9933"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="479" y="2" width="65" height="16" uuid="0d9da255-3ec6-40af-9481-52e2e7787609"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
