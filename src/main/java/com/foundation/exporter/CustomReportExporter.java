@@ -1,10 +1,12 @@
 package com.foundation.exporter;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.OutputStream;
-import java.util.Map;
+
+import com.foundation.exception.ReportExporterException;
+import com.foundation.reportVO.AbstractReportVO;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -16,17 +18,17 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
 public class CustomReportExporter {
 
-	public static OutputStream exportReport(String templatePath, Map<String, Object> params) {
+	public static DocumentExportedVO exportReportToPdf(AbstractReportVO reportVO) {
 		try {
-			JasperPrint print = getJasperPrint(templatePath, params);
+			JasperPrint print = getJasperPrint(reportVO);
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			JRPdfExporter exporter = getJRPdfExporter(print, baos);
 			exporter.exportReport();
-			return baos;
+			return new DocumentExportedVO(baos.toByteArray(), new ByteArrayInputStream(baos.toByteArray()));
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new ReportExporterException("Ocorreu um erro ao gerar o relatório.");
 		}
-		return null;
 	}
 
 	private static JRPdfExporter getJRPdfExporter(JasperPrint print, ByteArrayOutputStream baos) {
@@ -36,10 +38,10 @@ public class CustomReportExporter {
 		return exporter;
 	}
 
-	private static JasperPrint getJasperPrint(String templatePath, Map<String, Object> params)
+	private static JasperPrint getJasperPrint(AbstractReportVO reportVO)
 			throws FileNotFoundException, JRException {
-		FileInputStream fis = new FileInputStream(templatePath);
-		JasperPrint print = JasperFillManager.fillReport(fis, params, new JREmptyDataSource());
+		FileInputStream fis = reportVO.getReportTemplate();
+		JasperPrint print = JasperFillManager.fillReport(fis, reportVO.getReportParams(), new JREmptyDataSource());
 		return print;
 	}
 	

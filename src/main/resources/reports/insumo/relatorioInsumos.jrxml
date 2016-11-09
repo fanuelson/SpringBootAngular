@@ -50,10 +50,10 @@
 		<field name="medida" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="titulo" class="java.lang.String"/>
-	<parameter name="dataGeracao" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="dataEmissao" class="java.util.Date" isForPrompting="false"/>
 	<parameter name="insumos" class="java.util.List"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/Users/fanuca/Desktop/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/Users/fanuca/Documents/workspace/SpringAngularApp/src/main/resources/reports/insumo/"]]></defaultValueExpression>
 	</parameter>
 	<background>
 		<band splitType="Stretch"/>
@@ -75,7 +75,7 @@
 				<textElement>
 					<font fontName="Monaco" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{dataGeracao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{dataEmissao}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="444" y="10" width="95" height="13" uuid="763b229a-30fd-4bb1-a6ce-cf88caac71e4"/>
@@ -109,7 +109,7 @@
 	<pageFooter>
 		<band height="19" splitType="Stretch">
 			<textField>
-				<reportElement x="395" y="4" width="107" height="13" uuid="285522f7-6fc2-408d-b5ae-229a81e24eff"/>
+				<reportElement x="405" y="4" width="107" height="13" uuid="285522f7-6fc2-408d-b5ae-229a81e24eff"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>

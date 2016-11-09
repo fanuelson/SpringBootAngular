@@ -54,7 +54,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="113" y="2" width="262" height="16" uuid="e8eac4d8-7393-4f4d-be09-03f374f4dbd0"/>
 				<textElement>
 					<font size="8"/>
