@@ -20,7 +20,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 			.allowedMethods(HttpMethod.GET.name()
 					, HttpMethod.POST.name()
 					, HttpMethod.PUT.name()
-					, HttpMethod.DELETE.name());
+					, HttpMethod.DELETE.name())
+			.exposedHeaders("minutes-remaining", "refresh-token");
 			
 	}
 	
