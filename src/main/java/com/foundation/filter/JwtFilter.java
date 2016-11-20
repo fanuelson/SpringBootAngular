@@ -18,10 +18,11 @@ import org.springframework.web.filter.GenericFilterBean;
 import com.foundation.service.TokenService;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.JwtException;
 
 public class JwtFilter extends GenericFilterBean {
+
+	private static final String ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
 
 	@Override
 	public void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain)
@@ -46,13 +47,12 @@ public class JwtFilter extends GenericFilterBean {
 				response.addHeader("refresh-token", getTokenService().refreshToken(claims));
 			}
 			response.addHeader("minutes-remaining", new Integer(standardMinutesRemaining).toString());
-		} catch (final SignatureException e) {
-			throw new ServletException("Invalid token");
-		} catch (final ExpiredJwtException e) {
-			throw new ServletException("Invalid token");
+			chain.doFilter(req, res);
+		} catch (final JwtException e) {
+			response.addHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		}
 
-		chain.doFilter(req, res);
 	}
 	
 	private boolean isLoginRequest(HttpServletRequest request) {

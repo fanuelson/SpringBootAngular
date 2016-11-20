@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.ServletException;
-
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,16 +61,12 @@ public class TokenService implements Serializable{
 			.compact();
 	}
 	
-	public Claims getClaims(String token) throws ServletException {
-		try {
-            final Claims claims = Jwts.parser()
-            		.setSigningKey(secretConfig.getSecretKey())
-            		.parseClaimsJws(token)
-            		.getBody();
-            return claims;
-        } catch (final SignatureException e) {
-            throw new ServletException("Invalid token");
-        }
+	public Claims getClaims(String token) throws SignatureException {
+        final Claims claims = Jwts.parser()
+        		.setSigningKey(secretConfig.getSecretKey())
+        		.parseClaimsJws(token)
+        		.getBody();
+        return claims;
 	}
 
 }
