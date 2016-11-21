@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioInsumos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0416f99c-4892-49bd-a7c3-e351d208d9f3">
-	<property name="ireport.zoom" value="1.1000000000000087"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.4641000000000124"/>
+	<property name="ireport.x" value="24"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
@@ -60,11 +60,8 @@
 	</background>
 	<title>
 		<band height="66" splitType="Stretch">
-			<rectangle>
-				<reportElement x="9" y="10" width="100" height="47" uuid="94714003-5c21-446d-b8b0-c9909f21b8aa"/>
-			</rectangle>
 			<textField>
-				<reportElement x="119" y="10" width="315" height="47" uuid="04a2d8ba-29fc-4331-a92d-6f2e981f1c55"/>
+				<reportElement x="138" y="10" width="296" height="47" uuid="04a2d8ba-29fc-4331-a92d-6f2e981f1c55"/>
 				<textElement>
 					<font fontName="SansSerif" size="18" isBold="true"/>
 				</textElement>
@@ -84,11 +81,10 @@
 				</textElement>
 				<text><![CDATA[Data da Emissão:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="27" y="24" width="62" height="20" uuid="1c134763-629b-4a91-afed-893050a74924"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[LOGO]]></text>
-			</staticText>
+			<image>
+				<reportElement x="3" y="6" width="127" height="50" uuid="b40503fd-d390-42bf-bac1-633f9a988507"/>
+				<imageExpression><![CDATA["/Users/fanuca/Documents/workspace/SpringAngularApp/src/main/resources/reports/logo/app_logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
