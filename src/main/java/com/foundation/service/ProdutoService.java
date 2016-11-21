@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dao.ProdutoDAO;
+import com.foundation.filtroConsulta.FiltroConsultaProduto;
 import com.foundation.model.Composicao;
 import com.foundation.model.Produto;
 import com.foundation.validador.AbstractValidadorBuilder;
@@ -34,6 +35,11 @@ public class ProdutoService extends AbstractService {
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Page<Produto> findAll(Pageable page) {
 		return produtoDAO.findAll(page);
+	}
+	
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	public Page<Produto> findByFilter(FiltroConsultaProduto filtro, Pageable page) {
+		return produtoDAO.findByFilter(filtro, page);
 	}
 
 	public Produto save(Produto produto) {

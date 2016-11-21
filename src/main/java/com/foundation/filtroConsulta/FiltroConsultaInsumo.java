@@ -4,11 +4,10 @@ import java.math.BigDecimal;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.foundation.config.Constants;
 import com.foundation.enums.MedidaEnum;
 
 public class FiltroConsultaInsumo {
-
-	private static final String PERCENT = "%";
 
 	private String nomeOrDescricao;
 
@@ -19,7 +18,7 @@ public class FiltroConsultaInsumo {
 	private MedidaEnum medida;
 
 	public String getNomeOrDescricaoLike() {
-		return StringUtils.wrap(StringUtils.trimToNull(this.nomeOrDescricao), PERCENT);
+		return StringUtils.wrap(StringUtils.trimToNull(this.nomeOrDescricao), Constants.PERCENT);
 	}
 
 	public String getNomeOrDescricao() {

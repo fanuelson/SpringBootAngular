@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.foundation.dto.BasicResponseDTO;
+import com.foundation.filtroConsulta.FiltroConsultaProduto;
 import com.foundation.model.Produto;
 import com.foundation.service.ProdutoService;
 
@@ -35,6 +36,11 @@ public class ProdutoController {
 	@GetMapping(path = "/page")
 	public Page<Produto> findAll(Pageable page) {
 		return produtoService.findAll(page);
+	}
+	
+	@PostMapping(path = "/page/filterBy")
+	public Page<Produto> findByFiltro(@RequestBody FiltroConsultaProduto filtro, Pageable page) {
+		return produtoService.findByFilter(filtro, page);
 	}
 	
 	@GetMapping(path = "/{id}/toggleStatus")

@@ -10,6 +10,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -61,11 +62,7 @@ public class JwtFilter extends GenericFilterBean {
 
 	private String getRequestToken(final HttpServletRequest request) throws ServletException {
 		final String authHeader = request.getHeader("Authorization");
-		
-		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-			throw new ServletException("Missing or invalid Authorization header.");
-		}
-		return authHeader.substring(7);
+		return StringUtils.stripToNull(StringUtils.substringAfter(authHeader, "Bearer"));
 	}
 	
 	private TokenService getTokenService() {

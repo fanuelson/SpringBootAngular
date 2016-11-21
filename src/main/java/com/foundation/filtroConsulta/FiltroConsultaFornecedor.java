@@ -4,9 +4,9 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class FiltroConsultaFornecedor {
+import com.foundation.config.Constants;
 
-	private static final String PERCENT = "%";
+public class FiltroConsultaFornecedor {
 
 	private String nome;
 
@@ -49,19 +49,19 @@ public class FiltroConsultaFornecedor {
 	}
 
 	public String getNomeLike() {
-		return StringUtils.wrap(StringUtils.trimToNull(this.nome), PERCENT);
+		return StringUtils.wrap(StringUtils.trimToNull(this.nome), Constants.PERCENT);
 	}
 
 	public String getCpfCnpjLike() {
-		return StringUtils.wrap(StringUtils.trimToNull(this.cpfCnpj), PERCENT);
+		return StringUtils.wrap(StringUtils.trimToNull(this.cpfCnpj), Constants.PERCENT);
 	}
 
 	public String getCelularLike() {
-		return StringUtils.wrap(Objects.toString(this.celular, null), PERCENT);
+		return StringUtils.wrap(Objects.toString(this.celular, null), Constants.PERCENT);
 	}
 
 	public String getTelefoneLike() {
-		return StringUtils.wrap(Objects.toString(this.telefone, null), PERCENT);
+		return StringUtils.wrap(Objects.toString(this.telefone, null), Constants.PERCENT);
 	}
 
 }
